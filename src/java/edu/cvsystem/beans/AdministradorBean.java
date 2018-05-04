@@ -130,13 +130,7 @@ public class AdministradorBean implements Serializable {
         this.usuario = usuario;
     }
 
-    public List<Usuarios> getListaUsuarios() {
-        return listaUsuarios= usuariofacade.verUsuarios();
-    }
 
-    public void setListaUsuarios(List<Usuarios> listaUsuarios) {
-        this.listaUsuarios = listaUsuarios;
-    }
 
     
     public Part getFile1() {
@@ -236,15 +230,5 @@ public class AdministradorBean implements Serializable {
         }
         return "compraventas?faces-redirect=true";
     }
-       public void enviarCorreos() throws UnsupportedEncodingException{
-        listaUsuarios = usuariofacade.verUsuarios();
-        String[] correos = new String[listaUsuarios.size()];
-        for (int i = 0; i < listaUsuarios.size(); i++) {
-          correos[i] = listaUsuarios.get(i).getCorreoElectronico();
-//            EnvioCorreos.send(listaUsuarios.get(i).getCorreoElectronico(),asunto,contenido);
-        }
-        Mailler.enviarCorreo("Alerta", "El servidor se encuentra en mantenimiento", correos);
-        asunto = "";
-        contenido = "";
-    }
+     
 }

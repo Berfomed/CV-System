@@ -138,13 +138,15 @@ public class UsuariosBean {
     }
     
     public void enviarCorreos() {
-//      List<Usuarios> usuarios = usuariosFacade.findAll();
-//      String[] correos = new String[usuarios.size()];
-//      for (int i = 0; i < correos.length; i++) {
-//        correos[i] = usuarios.get(i).getCorreoElectronico();
-//      }
-      String[] mails = {"jafp93@hotmail.com" , "msaa1003jm@gmail.com", "msavila13@misena.edu.co"};
-      Mailler.enviarCorreo("Alerta", "El servidor se encuentra en mantenimiento", mails);
+      
+        Query query = usuariosFacade.getEm().createQuery("SELECT u FROM Usuarios u WHERE u.estado = :estado");
+        query.setParameter("estado", "activo");
+        List<Usuarios> usuarios = query.getResultList();
+      String[] correos = new String[usuarios.size()];
+      for (int i = 0; i < correos.length; i++) {
+        correos[i] = usuarios.get(i).getCorreoElectronico();
+      }
+      Mailler.enviarCorreo("Alerta", "El servidor se encuentra en mantenimiento", correos);
     }
 
     public String getPathFoto() {

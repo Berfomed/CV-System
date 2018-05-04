@@ -38,19 +38,5 @@ public class UsuariosFacade extends AbstractFacade<Usuarios> {
         return em;
     }
 
-    public List<Usuarios> verUsuarios(){
-         String consulta;
-         try {
-//                consulta = "SELECT * FROM usuarios u WHERE u.estado = 'activo'";
-                Query query = em.createNativeQuery("SELECT * FROM usuarios u WHERE u.estado = 'activo'");
-                List<Usuarios> lista = query.getResultList();
-                if (!lista.isEmpty()) {
-                 informacion = lista;
-             }
-         } catch (Exception e) {
-             throw e;
-         }
-         return informacion;
-     }
 
 }
