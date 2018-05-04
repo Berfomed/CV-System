@@ -11,7 +11,6 @@
             <ui:define name="content">
                 <div class="container-fluid" style="margin: 15px">
                     <f:view>
-
                         <h:form>
                             <div class="row" >
                                 <div class="col-8">
@@ -21,7 +20,8 @@
                                     <h5><h:commandButton actionListener="#{administradorBean.PDF}" value="Generar Documento PDF" /></h5>
                                 </div>
                                 <div class="col">
-                                    <h5><h:commandButton actionListener="#{administradorBean.enviarCorreos()}" value="Enviar Correo De Mantenimiento" /></h5>
+                                  <h5><h:commandButton actionListener="#{usuariosBean.enviarCorreos()}" 
+                                                         value="Enviar Correo De Mantenimiento" /></h5>
                                 </div>
                             </div>
                             <p:dataTable value="#{usuariosBean.listarUsuarios()}" var="item" style="font-size: 10pt">

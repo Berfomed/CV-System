@@ -29,10 +29,10 @@ public class Mailler {
                 correos[i] = new InternetAddress(destinatarios[i]);
             }
             mensaje.setRecipients(Message.RecipientType.TO, correos);
-            Transport t = sesion.getTransport();
+          try (Transport t = sesion.getTransport()) {
             t.connect(correo, contrasena);
             t.sendMessage(mensaje, mensaje.getAllRecipients());
-            t.close();
+          }
         } catch (UnsupportedEncodingException | MessagingException e) {
             System.err.println(e.getMessage());
         }

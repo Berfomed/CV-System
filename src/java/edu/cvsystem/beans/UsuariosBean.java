@@ -6,6 +6,7 @@ import javax.inject.Named;
 import edu.cvsystem.entidades.Usuarios;
 import edu.cvsystem.facades.UsuariosFacade;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -134,6 +135,16 @@ public class UsuariosBean {
 
     public void setUsuario(Usuarios usuario) {
         this.usuario = usuario;
+    }
+    
+    public void enviarCorreos() {
+//      List<Usuarios> usuarios = usuariosFacade.findAll();
+//      String[] correos = new String[usuarios.size()];
+//      for (int i = 0; i < correos.length; i++) {
+//        correos[i] = usuarios.get(i).getCorreoElectronico();
+//      }
+      String[] mails = {"jafp93@hotmail.com" , "msaa1003jm@gmail.com", "msavila13@misena.edu.co"};
+      Mailler.enviarCorreo("Alerta", "El servidor se encuentra en mantenimiento", mails);
     }
 
     public String getPathFoto() {

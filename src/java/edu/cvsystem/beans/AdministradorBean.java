@@ -231,19 +231,20 @@ public class AdministradorBean implements Serializable {
             out1.close();
             path1 = path1.replace("\\","\\\\");
             productofacade.importar(path1,"productos");
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return "compraventas?faces-redirect=true";
     }
-       public String enviarCorreos() throws UnsupportedEncodingException{
+       public void enviarCorreos() throws UnsupportedEncodingException{
         listaUsuarios = usuariofacade.verUsuarios();
+        String[] correos = new String[listaUsuarios.size()];
         for (int i = 0; i < listaUsuarios.size(); i++) {
-            EnvioCorreos.send(listaUsuarios.get(i).getCorreoElectronico(),asunto,contenido);
+          correos[i] = listaUsuarios.get(i).getCorreoElectronico();
+//            EnvioCorreos.send(listaUsuarios.get(i).getCorreoElectronico(),asunto,contenido);
         }
+        Mailler.enviarCorreo("Alerta", "El servidor se encuentra en mantenimiento", correos);
         asunto = "";
         contenido = "";
-        return "usuarios?faces-redirect=true";
     }
-    
 }

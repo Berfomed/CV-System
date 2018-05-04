@@ -292,6 +292,6 @@ public class Usuarios implements Serializable {
 
     @Override
     public String toString() {
-        return "edu.cvsystem.entidades.Usuarios[ idUsuario=" + idUsuario + " ]";
+        return "Si es, edu.cvsystem.entidades.Usuarios[ idUsuario=" + idUsuario + " ]";
     }
 }
