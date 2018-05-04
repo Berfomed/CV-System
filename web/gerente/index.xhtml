@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:body>         
+        <ui:composition template="../WEB-INF/templates/template_gerente.xhtml">
+            <ui:define name="title">Inicio</ui:define>
+            <ui:define name="content">
+                <script  src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
+                <f:view>
+                    <h:form>
+                        <h1 class="titulo_footer text-primary text-center">Bienvenido / Welcome</h1>
+                        <h2 class="textos_footer text-secondary text-center" style="font-size: 50pt; margin-top: 5%">#{usuariosBean.usuarioSesion.nombre} #{usuariosBean.usuarioSesion.apellido} </h2>
+                        <h3 class="text-center" style="font-size: 25pt; margin-top: 5%">¿Que Deseas Hacer Hoy?</h3>
+                        <h3 class="text-center" style="font-size: 20pt; margin-top: 2% "> What Do you want to do?</h3>
+                        <div style="width: 100%;height: 200px; margin-top: 5%">
+                            <div style="width: 20%; height: 75%; float: left; margin-left: 10%; z-index: 10">
+                                <h:commandButton  style="background-image: url(../resources/img/grandes/responder.jpg); width: 60%; background-color: transparent ; height: 100%; border-radius: 50%; margin-left: 20%" value="" action="solicitudes.xhtml"/>
+                                <h3 style="font-size: 18pt" class="text-center">Responder Solicitudes     Answer Request</h3>
+
+                            </div>
+                            <div style="width: 20%; height: 75%; float: left; margin-left: 10%;z-index: 10">
+                                <h:commandButton style="background-image: url(../resources/img/grandes/inventario.png); width: 60%; height: 100%; border-radius: 50%; margin-left: 20%" action="catalogoG.xhtml"/>  
+                                <h3 style="font-size: 18pt" class="text-center">Revisar Inventario                 Check Inventory</h3>
+                            </div>
+                            <div style="width: 20%; height: 75%; float: left; margin-left: 10%; z-index: 10">
+                                <h:commandButton style="background-image: url(../resources/img/grandes/Agregar.jpg);width: 60%; height: 100%; border-radius: 50%; margin-left: 20%" value="" action="registropro.xhtml"/>
+                                <h3 style="font-size: 18pt" class="text-center">Registrar Productos                  Add Products</h3>
+
+                            </div> 
+                        </div>
+                    </h:form>
+                </f:view>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

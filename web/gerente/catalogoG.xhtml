@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:body>
+        <ui:composition template="../WEB-INF/templates/template_gerente.xhtml">
+            <ui:define name="title">Catalog</ui:define>
+            <ui:define name="content">
+                <nav aria-label="breadcrumb" style="left: 0; margin-top: -2%; font-size: 10pt"
+                     class="position-absolute w-100 animated slideInRight">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><h:link value="Inicio" outcome="index" class="text-primary"/></li>
+                        <li class="breadcrumb-item active" aria-current="page">Catálogo</li>
+                    </ol>
+                </nav>
+                <f:view>
+                    <h:form style="border-bottom: solid graytext 1px; border-bottom-left-radius: 20%; border-bottom-right-radius: 20%; margin-top: 2%">
+                        <h1 align="center" style="margin-bottom: 20px"><h:outputText value="Inventory" class="titulo_footer text-primary text-center" style="font-size: 50pt"/></h1>
+                        <h:dataTable value="#{gerenteBeans.listarProductos()}" var="item" style="width: 90%; margin-left: 5%;
+                                     border-top: solid graytext 1px; border-top-left-radius: 10%; border-top-right-radius: 10%">
+                            <h:column >
+                                <f:facet name="header" >
+                                    <h:outputText value="Code"/>
+                                </f:facet>
+                                <h:outputText value="#{item.idProducto}" style="margin-left: 30%; font-size: 11pt"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Name" style="margin-left: 20%"/>
+                                </f:facet>
+                                <h:outputText value="#{item.nombre}" style="font-size: 11pt"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Description" style="margin-left: 30%"/>
+                                </f:facet>
+                                <h:outputText value="#{item.descripcion}" style="font-size: 11pt"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Category" style="margin-left: 20%"/>
+                                </f:facet>
+                                <h:outputText value="#{item.categoria}" style="font-size: 10pt"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Price" style="margin-left: 20%"/>
+                                </f:facet>
+                                <h:outputText value="#{item.precio}" style="font-size: 11pt"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Image" style="margin-left: 20%"/>
+                                </f:facet>
+                                <a href="http://localhost:8080/#{item.fotos}" style="color: purple">Imagenes</a>
+
+                            </h:column>
+                            <h:column>
+                                <h:commandButton value="Edit" action="#{gerenteBeans.editarProducto(item)}" class="btn-outline-primary" style="font-size: 10pt"/>
+                            </h:column>
+                            <h:column>
+                                <h:commandButton value="Delete" action="#{gerenteBeans.eliminarProducto(item)}" class="btn-outline-danger" style="font-size: 10pt"/>
+                            </h:column>
+                        </h:dataTable>
+                        <div>
+                            <h:commandButton class="btn-outline-success" value="Add New Product" 
+                                             action="registropro.xhtml" style="margin-left: 30%; margin-top: 2%; margin-bottom: 2%; float: left"/>
+                             <h:commandButton class="btn-outline-warning" value="Download Report"  
+                                              action="#{pdfBeans.PDF(actionEvent)}" style="margin-left: 10%; margin-top: 2%; margin-bottom: 2%; "/>
+                        </div>
+                    </h:form>
+                </f:view>
+
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

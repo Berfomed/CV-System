@@ -1,0 +1,10 @@
+/* --------------------- Perfil --------------------- */
+.cn #msg_reload{
+    opacity: 0;
+    transition: 0.3s;
+}
+.cn #btn_cambiar_img{
+    cursor: pointer;
+    transition: 0.4s;
+}
+.cn #btn_cambiar_img:hover{color: rgb(0, 123, 255);}

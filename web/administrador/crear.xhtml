@@ -1,0 +1,169 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:body>
+        <ui:composition template="../WEB-INF/templates/template_administrador.xhtml">
+            <ui:define name="title">Crear cuentas</ui:define>
+            <ui:define name="content">
+                <div class="container">
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+
+                    <div class="row">
+                        <div class="col" align="center" >
+                            <figure id="img" class="vertical-align-center">
+                                <img class="rounded-circle" src="../resources/imagenes/img_administrador/cliente.jpg" alt=""/>
+                                <h3 id="textNombre" >Create Commercial Houses</h3>
+                            </figure>
+                            <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModal1">Create</button>
+                        </div>
+                        <div class="col" align="center" >
+                            <figure id="img" class="vertical-align-center">
+                                <img class="rounded-circle" src="../resources/imagenes/img_administrador/cliente.jpg" alt=""/>
+                                <h3 id="textNombre" >Create User Service</h3>
+                            </figure>
+                            <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModal3">Create</button>
+                        </div>
+                        <div class="col" align="center">
+                            <h:form enctype="multipart/form-data">
+                                <h:inputFile value="#{administradorBean.file1}" />
+                                <h:commandButton value="subir" action="#{administradorBean.upload()}" />
+                            </h:form>
+                            
+                        </div>
+                    </div> 
+                </div>
+                <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="z-index: 2000  ">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel1">Create Commercial Houses</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <f:view>
+                                    <h:form>
+                                        <h:panelGrid columns="3">
+                                            <h:outputLabel for="nombres" value="Nombres"/>
+                                            <h:inputText id="nombres" value="#{compraventasBean.usuarios.nombre}" required="true" requiredMessage="ingresa un dato"/>
+                                            <h:message for="nombres"/>
+                                            <h:outputLabel for="apellidos" value="Apellidos"/>
+                                            <h:inputText id="apellidos" value="#{compraventasBean.usuarios.apellido}" required="true" requiredMessage="ingresa un dato"/>
+                                            <h:message for="apellidos"/>
+                                            <h:outputLabel for="edad" value="Edad"/>
+                                            <h:inputText id="edad" value="#{compraventasBean.usuarios.edad}" required="true" requiredMessage="ingresa un dato"/>
+                                            <h:message for="edad"/>
+                                            <h:outputLabel value="TipoDocumento:" for="tipoDocumentoc" />
+                                            <h:selectOneMenu id="tipoDocumentoc" value="#{compraventasBean.usuarios.tipoDocumento}" title="tipoDocumento" required="true" requiredMessage="The Edad field is required.">
+                                                <f:selectItem itemValue = "cedula de ciudadania" itemLabel = "cedula de ciudadania" /> 
+                                                <f:selectItem itemValue = "cedula extranjera" itemLabel = "cedula extranjera" /> 
+                                                <f:selectItem itemValue = "pasaporte" itemLabel = "pasaporte" /> 
+                                            </h:selectOneMenu>
+                                            <h:message for="tipoDocumentoc"/>
+                                            <h:outputLabel for="numeroidentificacion" value="Numeroidentificacion"/>
+                                            <h:inputText id="numeroidentificacion" value="#{compraventasBean.usuarios.numeroDocumento}" required="true" requiredMessage="ingresa un dato"/>
+                                            <h:message for="numeroidentificacion"/>
+                                            <h:outputLabel for="genero" value="Sexo"/>
+                                            <h:selectOneMenu id="sexo" value="#{usuariosBean.usuario.sexo}">
+                                                <f:selectItem itemValue = "masculino" itemLabel = "Masculino" /> 
+                                                <f:selectItem itemValue = "femenino" itemLabel = "Femenino" /> 
+                                            </h:selectOneMenu>                                            <h:message for="genero"/>
+                                            <h:outputLabel for="direccion" value="Direccion"/>
+                                            <h:inputText id="direccion" value="#{compraventasBean.usuarios.direccion}" required="true" requiredMessage="ingresa un dato"/>
+                                            <h:message for="direccion"/>
+                                            <h:outputLabel for="telefono" value="Telefono"/>
+                                            <h:inputText id="telefono" value="#{compraventasBean.usuarios.telefono}" required="true" requiredMessage="ingresa un dato"/>
+                                            <h:message for="telefono"/>
+                                            <h:outputLabel for="celular" value="Celular"/>
+                                            <h:inputText id="celular" value="#{compraventasBean.usuarios.celular}" required="true" requiredMessage="ingresa un dato"/>
+                                            <h:message for="celular"/>
+                                            <h:outputLabel for="correoelectronico" value="Correoelectronico"/>
+                                            <h:inputText id="correoelectronico" value="#{compraventasBean.usuarios.correoElectronico}" required="true" requiredMessage="ingresa un dato"/>
+                                            <h:message for="correoelectronico"/>
+                                            <h:outputLabel for="contraseña" value="Contraseña"/>
+                                            <h:inputSecret id="contraseña" value="#{compraventasBean.usuarios.contrasena}" required="true" requiredMessage="ingresa un dato"/>
+                                            <h:message for="contraseña"/>
+                                            <h:outputLabel for="razonS" value="Razon Social"/>
+                                            <h:inputText id="razonS" value="#{compraventasBean.compraventa.nombre}" required="true" requiredMessage="ingresa un dato"/>
+                                            <h:message for="razonS"/>
+                                            <h:outputLabel for="descripcion" value="Descripcion"/>
+                                            <h:inputText id="descripcion" value="#{compraventasBean.compraventa.descripcion}" required="true" requiredMessage="ingresa un dato"/>
+                                            <h:message for="descripcion"/>
+                                            <h:outputLabel for="direccionc" value="Direccionc"/>
+                                            <h:inputText id="direccionc" value="#{compraventasBean.compraventa.direccion}" required="true" requiredMessage="ingresa un dato"/>
+                                            <h:message for="direccionc"/>
+                                            <h:outputLabel for="telefonoc" value="telefonoc"/>
+                                            <h:inputText id="telefonoc" value="#{compraventasBean.compraventa.telefono}" required="true" requiredMessage="ingresa un dato"/>
+                                            <h:message for="telefonoc"/>
+                                            <h:commandButton actionListener="#{compraventasBean.registrarCompraventa()}" value="registrar"/>
+                                            
+                                        </h:panelGrid>
+                                    </h:form>
+                                </f:view>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="z-index: 2000">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel3">Create User Service</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <f:view>
+                                    <h:form>
+                                        <h:panelGrid columns="2">
+                                            <h:outputLabel value="Nombre:" for="nombre" />
+                                            <h:inputText id="nombre" value="#{usuariosBean.usuario.nombre}" title="Nombre" required="true" requiredMessage="The Nombre field is required."/>
+                                            <h:outputLabel value="Apellido:" for="apellido" />
+                                            <h:inputText id="apellido" value="#{usuariosBean.usuario.apellido}" title="Apellido" required="true" requiredMessage="The Apellido field is required."/>
+                                            <h:outputLabel value="TipoDocumento:" for="tipoDocumento" />
+                                            <h:selectOneMenu id="tipoDocumento" value="#{usuariosBean.usuario.tipoDocumento}" title="tipoDocumento" required="true" requiredMessage="The Edad field is required.">
+                                                <f:selectItem itemValue = "cedula de ciudadania" itemLabel = "cedula de ciudadania" /> 
+                                                <f:selectItem itemValue = "cedula extranjera" itemLabel = "cedula extranjera" /> 
+                                                <f:selectItem itemValue = "pasaporte" itemLabel = "pasaporte" /> 
+                                            </h:selectOneMenu>
+                                            <h:outputLabel value="NumeroDocumento:" for="numeroDocumento" />
+                                            <h:inputText id="numeroDocumento" value="#{usuariosBean.usuario.numeroDocumento}" title="NumeroDocumento" required="true" requiredMessage="The NumeroDocumento field is required."/>
+                                            <h:outputLabel value="Edad:" for="edad" />
+                                            <h:inputText id="edad" value="#{usuariosBean.usuario.edad}" title="Edad" required="true" requiredMessage="The Edad field is required."/>
+                                            <h:outputLabel value="Sexo:" for="sexo" />
+                                            <h:selectOneMenu id="sexo" value="#{usuariosBean.usuario.sexo}">
+                                                <f:selectItem itemValue = "masculino" itemLabel = "Masculino" /> 
+                                                <f:selectItem itemValue = "femenino" itemLabel = "Femenino" /> 
+                                            </h:selectOneMenu>
+                                            <h:outputLabel value="Direccion:" for="direccion" />
+                                            <h:inputText id="direccion" value="#{usuariosBean.usuario.direccion}" title="Direccion" required="true" requiredMessage="The Direccion field is required."/>
+                                            <h:outputLabel value="Telefono:" for="telefono" />
+                                            <h:inputText id="telefono" value="#{usuariosBean.usuario.telefono}" title="Telefono" required="true" requiredMessage="The Telefono field is required."/>
+                                            <h:outputLabel value="Celular:" for="celular" />
+                                            <h:inputText id="celular" value="#{usuariosBean.usuario.celular}" title="Celular" required="true" requiredMessage="The Celular field is required."/>
+                                            <h:outputLabel value="CorreoElectronico:" for="correoElectronico" />
+                                            <h:inputText id="correoElectronico" value="#{usuariosBean.usuario.correoElectronico}" title="CorreoElectronico" required="true" requiredMessage="The CorreoElectronico field is required."/>
+                                            <h:outputLabel value="Contrasena:" for="contrasena" />
+                                            <h:inputSecret id="contrasena" value="#{usuariosBean.usuario.contrasena}" title="Contrasena" required="true" requiredMessage="The Contrasena field is required."/>
+                                            <h:commandButton actionListener="#{usuariosBean.registrarUsuarioS()}" value="registrar"/>
+                                        </h:panelGrid>
+                                    </h:form>
+
+                                </f:view>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

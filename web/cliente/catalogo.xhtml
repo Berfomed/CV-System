@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:ps="http://xmlns.jcp.org/jsf/passthrough">
+    <h:body>
+        <ui:composition template="../WEB-INF/templates/template_cliente.xhtml">
+            <ui:define name="title">Catálogo</ui:define>
+            <ui:define name="content">
+                <nav aria-label="breadcrumb" style="left: 0;"
+                     class="position-absolute w-100 animated slideInRight">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><h:link value="Inicio" outcome="index" class="text-danger"/></li>
+                        <li class="breadcrumb-item active" aria-current="page">Catálogo</li>
+                    </ol>
+                </nav>
+                <div class="container mt-5 pt-4">
+                    <nav class="navbar navbar-light bg-light justify-content-end px-5">
+                        <h:form class="form-inline">
+                            <h:inputText class="form-control mr-sm-2" size="40" required="true"
+                                         ps:placeholder="¿Qué estás buscando?"
+                                         value="#{productosCatalogoBean.filtro}"/>
+                            <h:commandButton class="btn btn-outline-success my-2 my-sm-0" value="Buscar"/>
+                        </h:form>
+                    </nav>
+                    <div id="cont_productos" align="center">
+                        <ui:repeat value="#{productosCatalogoBean.listarProductos()}" var="producto">
+                            <div class="card d-inline-block m-4" style="width: 18rem;">
+                                <div id="carouselControles#{producto.idProducto.idProducto}" class="carousel slide" data-ride="carousel">
+                                    <div class="carousel-inner bg-secondary carousel-catalogo" align="center">
+                                        <ui:repeat value="#{historialBean.getFotos(producto.idProducto.idProducto)}" var="foto">
+                                            <div class="carousel-item">
+                                                <h:graphicImage library="img" width="200" height="200"
+                                                                name="productos/Producto(#{producto.idProducto.idProducto})/#{foto}"/>
+                                            </div>
+                                        </ui:repeat>
+                                    </div>
+                                    <a class="carousel-control-prev" href="#carouselControles#{producto.idProducto.idProducto}" role="button" data-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                    <a class="carousel-control-next" href="#carouselControles#{producto.idProducto.idProducto}" role="button" data-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
+                                </div> 
+                                <div class="card-body">
+                                    <h5 class="card-title font-weight-bold">#{producto.idProducto.nombre}</h5>
+                                    <p class="card-text">$#{producto.idProducto.precio}</p>
+                                    <button type="button" class="btn btn-danger btn-lg btn-block"
+                                            data-toggle="modal" data-target="#modalProducto#{producto.idProducto.idProducto}">Ver más...</button>
+                                </div>
+                            </div>
+                            <div class="modal fade" id="modalProducto#{producto.idProducto.idProducto}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-lg pt-5" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLongTitle"><strong style="font-size: 1.3em;">#{producto.idProducto.nombre}</strong></h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <p class="font-weight-bold w-100 bg-secondary p-0">Precio</p>
+                                                        <p>#{producto.idProducto.precio}</p>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <p class="font-weight-bold w-100 bg-secondary p-0">Categoria</p>
+                                                        <p>#{producto.idProducto.categoria}</p>
+                                                    </div>
+                                                    <div class="col-12 text-left" style="height: 200px; overflow: auto;">
+                                                        <p class="font-weight-bold w-100 bg-secondary p-0">Descripción</p>
+                                                        <p>#{producto.idProducto.descripcion}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-primary">Save changes</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </ui:repeat>
+                    </div>
+                </div>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

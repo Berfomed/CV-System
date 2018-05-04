@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:body>
+        <ui:composition template="../WEB-INF/templates/template_gerente.xhtml">
+            <ui:define name="title">Edit</ui:define>
+            <ui:define name="content">
+                <nav aria-label="breadcrumb" style="left: 0;"
+                     class="position-absolute w-100 animated slideInRight">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><h:link value="Inicio" outcome="index" class="text-danger"/></li>
+                        <li class="breadcrumb-item active" aria-current="page">Edicion</li>
+                    </ol>
+                </nav>
+                <div class="container pt-5" align="center">
+                    <h1 class="titulo_footer text-primary text-center">Edit Product</h1>
+                    <p:messages globalOnly="true" showDetail="true" closable="true"/>
+                    <h:form style="margin-top: 50px">
+                        <h:panelGrid columns="3">
+                            <h:outputLabel for="nombre" value="Name" style="font-size: 20pt"/>
+                            <h:inputText id="nombre" required="true" maxlength="45" 
+                                         value="#{gerenteBeans.producto.nombre}"
+                                         requiredMessage="Information Required" size="30"/>
+                            <h:message for="nombre" styleClass="text-danger"/> 
+                            <h:outputLabel for="descripcion" value="Description" style="font-size: 20pt"/>
+                            <h:inputText id="descripcion" required="true" maxlength="45" 
+                                         value="#{gerenteBeans.producto.descripcion}"
+                                         requiredMessage="Information Required" size="30"/>
+                            <h:message for="descripcion" styleClass="text-danger"/>
+                            
+                            <h:outputLabel for="precio" value="Price" style="font-size: 20pt"/>
+                            <h:inputText id="precio" required="true" maxlength="45" 
+                                         value="#{gerenteBeans.producto.precio}"
+                                         requiredMessage="Information Required"
+                                         converterMessage="Please Insert a Correct Value"  size="30"/>
+                            <h:message for="precio" styleClass="text-danger"/>                            
+                            <h:outputLabel for="categoria" value="Category" style="font-size: 20pt"/>
+                            <h:inputText id="categoria" required="true" maxlength="45" 
+                                         value="#{gerenteBeans.producto.categoria}"
+                                         requiredMessage="Information Required" size="30"/>                           
+                        </h:panelGrid><br/>
+                        <h:commandButton class="btn btn-outline-primary" value="Edit" action="#{gerenteBeans.editarProducto()}" actionListener="catalogoG?faces-redirect=true" style="width: 200px; font-size: 15pt"/>&nbsp;
+                        <h:commandButton class="btn btn-outline-warning" value="Cancel" action="catalogoG?faces-redirect=true" style="width: 200px; font-size: 15pt"/>
+                    </h:form>
+                </div>
+            </ui:define>
+        </ui:composition>
+
+
+
+   
+           </h:body>
+</html>
+

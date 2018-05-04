@@ -1,0 +1,98 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:body>
+        <ui:composition template="../WEB-INF/templates/template_gerente.xhtml">
+            <ui:define name="title">Solicitudes</ui:define>
+            <ui:define name="content">
+                <nav aria-label="breadcrumb" style="left: 0; margin-top: -2%; font-size: 10pt"
+                     class="position-absolute w-100 animated slideInRight">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><h:link value="Inicio" outcome="index" class="text-primary"/></li>
+                        <li class="breadcrumb-item active" aria-current="page">Request</li>
+                    </ol>
+                </nav>
+                <f:view>
+                    <h:form   style="margin-top: 2%; margin-left: 10%;border-top: solid graytext 1px; border-top-left-radius: 20%; border-top-right-radius: 20%; width: 80%">
+                        <h1 align="center" style="margin-bottom: 50px; margin-top: 20px"><h:outputText class="titulo_footer text-primary text-center " style="font-size:50pt " value="Solicitud de Empeños y Ventas"/></h1>
+                        <h:dataTable value="#{gerenteBeans.listarSolicitudes()}" var="item" style="width: 90%; margin-left: 5%;
+                                     border-left:solid lavender 1px; border-right: solid plum 0.5px">
+
+                            <h:column class="col-form-label">
+                                <a href="solicitudes.xhtml"></a>
+                                <f:facet name="header">
+                                    <h:outputText style="margin-left: 30% " value="Code" />
+                                </f:facet>
+                                <h:outputText value="#{item.idSolicitudCompraventa}" style="margin-left: 50%" />
+                            </h:column>
+
+                            <h:column>
+                                <f:facet name="header" >
+                                    <h:outputText value="Veridy By" style="margin-left:20% "/>
+                                </f:facet>
+                                <h:outputText value="#{item.idUsuarioServicios}" style="margin-left: 30%"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Request" style="margin-left: 30%"/>
+                                </f:facet>
+                                <h:outputText value="#{item.idUsuario.nombre} #{item.idUsuario.apellido}" style=" ;font-size: 11pt; font-family: Garamond black; font-size: 15pt" class="col-8"/>
+                                <h:outputText value="#{item.descripcion}" style="font-size: 11pt" class="form-control col-8"/>
+                            </h:column>
+
+                            <h:column>
+                                <h:outputText value="#{item.fechaEnvio}" style="font-size: 11pt; margin-left: -140%" class="text-primary" >
+                                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                                </h:outputText>
+                            </h:column>
+                             <h:column>
+                                 <f:facet name="header">
+                                    <h:outputText value="Status" style="font-size: 11pt; margin-left: -170%"/>
+                                </f:facet>
+                                 <h:outputText value="#{item.respuesta}" style="font-size: 11pt; margin-left: -170%">
+                              
+                                </h:outputText>
+                            </h:column>
+                            <h:column>
+                                <!--      
+                                modal button-->
+                                <h:commandButton value="Answer" action="#{gerenteBeans.editarSolicitud(item)}" class="btn-outline-primary"/>
+                                <!--<button  data-target="#exampleModal" type="button"  data-toggle="modal"  style="background-color: transparent; border: none" class="text-warning">Responder</button>-->
+                                <!-- Modal -->
+                                <div  style="margin-top: 50px" class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg pt-5" role="document">
+                                        <div class="modal-content bg-dark text-light">
+                                            <div class="modal-header">
+                                                <h5 align="center" class="modal-title" id="exampleModalLabel">Casa Comercial: #{usuariosBean.usuarioSesion.correoElectronico}</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-header">
+                                                <output type="label">Usuario / E-mail : </output>
+                                                <h:outputText value="#{item.idUsuario.correoElectronico}" style="margin-right: 50%"/>
+                                            </div>
+                                            <div class="modal-body">
+                                                <h:outputText value="Message"/>
+                                                <h:inputTextarea value="#{gerenteBeans.solicitud.respuestaMsg}" style="height: 200px; width:760px "/>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+                                                <h:commandButton value="Send" action="#{gerenteBeans.editarSolicitud(item)}" class="btn btn-outline-success"/>
+                                            </div>
+                                            <!--fin modal -->                                
+                                        </div>
+                                    </div>
+                                </div>
+                            </h:column>
+                        </h:dataTable>
+                    </h:form>
+                </f:view> 
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

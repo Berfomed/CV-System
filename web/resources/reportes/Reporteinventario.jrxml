@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1f3eaec8-d9f4-49f5-abf2-d5ac390a819a">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<field name="idProducto" class="java.lang.Integer"/>
+	<field name="nombre" class="java.lang.String"/>
+	<field name="precio" class="java.lang.Float"/>
+	<field name="categoria" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="120" splitType="Stretch">
+			<staticText>
+				<reportElement x="239" y="0" width="316" height="120" uuid="8371b37c-5917-4268-af2f-cbd814bdccf3"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Calibri" size="65"/>
+				</textElement>
+				<text><![CDATA[Inventario]]></text>
+			</staticText>
+			<image>
+				<reportElement x="2" y="0" width="436" height="120" uuid="5261c2c2-acb3-4adb-9aa7-815c8e37e433"/>
+				<imageExpression><![CDATA["C:\\Users\\Jorge Amado Perdomo\\Desktop\\Proyecto CVS\\CVSystem\\web\\resources\\img\\logo.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="23">
+			<textField>
+				<reportElement x="438" y="2" width="80" height="20" forecolor="#666666" uuid="0a47300a-10e0-4d6b-80d6-c8a8822c136e"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="517" y="2" width="40" height="20" forecolor="#666666" uuid="533f9a87-74fa-4841-94a1-6e8fc4fadff2"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="2" y="2" width="125" height="40" uuid="c5d4148d-f5ef-43b6-acaa-d965a1eb6b59"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Calibri" size="24" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Codigo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="134" y="2" width="125" height="40" uuid="7514d4ea-5b3b-4106-a54d-eefe8fddc381"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Calibri" size="24" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="265" y="2" width="125" height="40" uuid="81fac684-7fef-40e4-9f72-d88beb5f495f"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Calibri" size="24" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Precio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="401" y="2" width="125" height="40" uuid="adc5ead1-c385-4cba-a6a8-4d852487e8f7"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Calibri" size="24" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Categoria]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="34" splitType="Stretch">
+			<textField>
+				<reportElement x="2" y="5" width="125" height="20" uuid="b3372511-4f05-409e-8cfb-aa2f4be16346"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Calibri" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{idProducto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="134" y="5" width="125" height="20" uuid="4d97eb08-a1f8-4b17-824c-3f4963fade88"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Calibri" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="265" y="5" width="125" height="20" uuid="ca6b7acb-5090-452a-ad9d-88d43576e841"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Calibri" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{precio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="401" y="5" width="125" height="20" uuid="ff91faab-b2a1-41b8-a4c8-c9da34064335"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Calibri" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{categoria}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="-8" y="29" width="534" height="4" forecolor="#CCCCCC" uuid="a50f262d-65d2-432b-8e90-87f80232e1c6"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="118" y="0" width="313" height="20" forecolor="#666666" uuid="baaaae55-6470-4dd3-abc2-1bbd9b6235a0"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Calibri"/>
+				</textElement>
+				<text><![CDATA[© 2018 Sevicios CV System S.A. Todos Los Rerechos Reservados]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="431" y="0" width="80" height="20" forecolor="#666666" uuid="675d7d21-d136-4b24-bec6-4ad5632ad020"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="500" y="0" width="40" height="20" forecolor="#666666" uuid="c4a749ca-8d85-4431-9781-bbd532098489"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="18" y="0" width="100" height="20" forecolor="#666666" uuid="0d045e30-7deb-47cd-bea6-c9e440663f02"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:body>
+        <ui:composition template="../WEB-INF/templates/template_administrador.xhtml">
+            <ui:define name="title">Inicio</ui:define>
+            <ui:define name="content">
+                <div class="container">
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <h1 style="size: 50px">Bienvenido Administrador </h1>
+                    <div class="row">
+                        <div class="col" align="center" >
+                            <figure id="img" class="vertical-align-center">
+                                <img class="rounded-circle" src="../resources/imagenes/img_administrador/cliente.jpg" alt=""/>
+                                <h3 id="textNombre" >Ver tu perfil</h3>
+                            </figure>
+                            <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModal1">Create</button>
+                        </div>
+                        <div class="col" align="center" >
+                            <figure id="img" class="vertical-align-center">
+                                <img class="rounded-circle" src="../resources/imagenes/img_administrador/cliente.jpg" alt=""/>
+                                <h3 id="textNombre" >Usuarios</h3>
+                            </figure>
+                            <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModal3">Create</button>
+                        </div>
+                        <div class="col" align="center" >
+                            <figure id="img" class="vertical-align-center">
+                                <img class="rounded-circle" src="../resources/imagenes/img_administrador/cliente.jpg" alt=""/>
+                                <h3 id="textNombre" >Casas Comerciales</h3>
+                            </figure>
+                            <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModal1">Create</button>
+                        </div>
+                        <div class="col" align="center" >
+                            <figure id="img" class="vertical-align-center">
+                                <img class="rounded-circle" src="../resources/imagenes/img_administrador/cliente.jpg" alt=""/>
+                                <h3 id="textNombre" >Crear</h3>
+                            </figure>
+                            <h:commandButton class="btn btn-dark" actionListener="crear" value="crear"/>
+                           
+                        </div>
+                    </div> 
+                </div>
+                
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

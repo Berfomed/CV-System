@@ -1,0 +1,424 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ps="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:body>
+        <ui:composition template="../WEB-INF/templates/template_gerente.xhtml">
+            <ui:define name="title">Mi perfil</ui:define>
+            <ui:define name="content">
+                <nav aria-label="breadcrumb" style="left: 0; margin-top: -2%; font-size: 10pt"
+                     class="position-absolute w-100 animated slideInRight">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><h:link value="Inicio" outcome="index" class="text-primary"/></li>
+                        <li class="breadcrumb-item active" aria-current="page">Request</li>
+                    </ol>
+                </nav>
+                <div class="container p-5">
+                    <div class="row">
+                        <div class="col-4">
+                            <h5 align="center" class="text-primary h3 pr-5">Datos personales</h5>
+                            <div class="card pt-3" style="width: 18rem;">
+                                <h:graphicImage library="img" class="card-img-top" name="#{usuariosBean.pathFoto}" alt="Card image cap" height="250"/>
+                                <div class="card-body pb-2">
+                                    <h5 class="card-title">#{usuariosBean.usuarioSesion.nombre} #{usuariosBean.usuarioSesion.apellido}</h5>
+                                </div>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item"><i class="fas fa-envelope text-warning"></i> #{usuariosBean.usuarioSesion.correoElectronico}</li>
+                                    <li class="list-group-item"><i class="fas fa-address-card text-primary"></i> #{usuariosBean.usuarioSesion.numeroDocumento}</li>
+                                    <li class="list-group-item"><i class="fas fa-birthday-cake text-danger"></i> #{usuariosBean.usuarioSesion.edad} años</li>
+                                    <li class="list-group-item"><i class="fas fa-map-marker text-danger"></i> #{usuariosBean.usuarioSesion.direccion}</li>
+                                    <li class="list-group-item"><i class="fas fa-phone-square text-success"></i> #{usuariosBean.usuarioSesion.celular} - #{usuariosBean.usuarioSesion.telefono}</li>
+                                </ul>
+                                <div class="card-body">
+                                    <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#modal_editar_info">Editar</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <h5 align="center" class="text-primary h3 pr-5">Historial</h5>
+                            <nav>
+                                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                    <a class="nav-item text-dark nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-compras" role="tab" aria-controls="nav-compras" aria-selected="true"><strong>Productos</strong></a>
+                                    <a class="nav-item text-dark nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-ventas" role="tab" aria-controls="nav-ventas" aria-selected="false"><strong>Registro de Productos</strong></a>
+                                    <a class="nav-item text-dark nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-empeños" role="tab" aria-controls="nav-empeños" aria-selected="false"><strong>Tienes #{gerenteBeans.conteoSolicitudes().size().toString()} Solicitudes</strong></a>
+                                </div>
+                            </nav>
+                            <div class="tab-content border-top-0 card" id="nav-tabContent" style="height: 652px">
+                                <div class="tab-pane fade show active" id="nav-compras" role="tabpanel" aria-labelledby="nav-compras-tab">
+                                    <div class="container p-4">
+                                        <p align="center" class="mt-5 pt-5">
+                                            <div style="margin-top: -100px">
+                                            <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+                                            <script type="text/javascript">
+                                                google.charts.load('current', {'packages': ['corechart']});
+                                                google.charts.setOnLoadCallback(drawChart);
+
+                                                function drawChart() {
+
+                                                    var data = google.visualization.arrayToDataTable([
+                                                        ['Task', 'Hours per Day'],
+                                                        ['Eat', #{gerenteBeans.conteoAntiguedades().size().toString()}],
+                                                        ['Computacion', #{gerenteBeans.conteoComputacion().size().toString()}],
+                                                        ['Deportes', #{gerenteBeans.conteoDeportes().size().toString()}],
+                                                        ['Electrodomesticos', #{gerenteBeans.conteoElectrodomesticos().size().toString()}],
+                                                        ['Industria', #{gerenteBeans.conteoIndustria().size().toString()}],
+                                                        ['Inmuebles', #{gerenteBeans.conteoInmuebles().size().toString()}],
+                                                        ['Joyeria', #{gerenteBeans.conteoJoyeria().size().toString()}],
+                                                        ['Jugueteria', #{gerenteBeans.conteoJugueteria().size().toString()}],
+                                                        ['Muebles', #{gerenteBeans.conteoMuebles().size().toString()}],
+                                                        ['Relojeria', #{gerenteBeans.conteoRelojeria().size().toString()}],
+                                                        ['Tecnologia', #{gerenteBeans.conteoTecnologia().size().toString()}],
+                                                        ['Vehiculos', #{gerenteBeans.conteoVehiculos().size().toString()}],
+                                                        ['Vehiculos', #{gerenteBeans.conteoArte().size().toString()}]
+                                                    ]);
+
+                                                    var options = {
+                                                        title: 'My Daily Activities'
+                                                    };
+
+                                                    var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+                                                    chart.draw(data, options);
+                                                }
+                                            </script>
+
+                                            <body>
+                                                <div id="piechart" style="width: 900px; height: 500px;"></div>
+                                            </body>
+                                            </div>
+ </p>
+                                    </div>
+                                </div>
+                                <!--                                Pestaña Productos-->
+                                <div class="tab-pane fade" id="nav-ventas" role="tabpanel" aria-labelledby="nav-ventas-tab">
+                                    <div class="container p-4">
+                                        <p align="center" class="mt-5 pt-5">
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <!--Pestaña Solicitudes-->
+                                <div class="tab-pane fade" id="nav-empeños" role="tabpanel" aria-labelledby="nav-empeños-tab">
+                                    <div class="container p-4">
+                                        <f:view>                    
+                                            <h:form>                      
+                                                <h:dataTable value="#{gerenteBeans.listarSolicitudes()}" var="item">
+                                                    <h:column>
+                                                        <f:facet name="header">
+                                                            <h:outputText value="Request" style="margin-left: 30%"/>
+                                                        </f:facet>
+                                                        <h:outputText value="#{item.idUsuario.nombre} #{item.idUsuario.apellido}" style=" ;font-size: 11pt; font-family: Garamond black; font-size: 15pt" class="col-8"/>
+                                                        <h:outputText value="#{item.descripcion}" style="font-size: 11pt" class="form-control col-8"/>
+                                                    </h:column>
+
+                                                    <h:column>
+                                                        <h:outputText value="#{item.fechaEnvio}" style="font-size: 11pt" class="text-primary" >
+                                                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                                                        </h:outputText>
+                                                    </h:column>
+                                                </h:dataTable>
+                                            </h:form>
+                                        </f:view> 
+                                        <h:link type="button" class="btn btn-outline-info btn-lg btn-block mt-2" outcome="solicitudes.xhtml"><i class="fas fa-external-link-alt"></i>Ver Solicitudes</h:link>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal Editar Información -->
+                <div class="modal fade" id="modal_editar_info" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-lg pt-5" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header bg-dark text-light">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Editar Datos</h5>
+                                <button id="bstp_close" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true" class="text-light">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="tab-content" id="nav-tabContent">
+                                            <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list" style="height: 290px; overflow: auto;">
+                                                <div class="container" align="center">
+                                                    <div class="row">
+                                                        <div class="col-6 my-4">
+                                                            <h:form id="form_nombres">
+                                                                <h:outputLabel for="inp_nombres" value="Nombres:" class="w-100 mb-0 font-weight-bold"/>
+                                                                <i class="fas fa-sign-out-alt text-primary"></i>&nbsp;
+                                                                <p:inplace id="inplace_nombres">
+                                                                    <h:inputText id="inp_nombres" required="true" maxlength="45" 
+                                                                                 value="#{usuariosBean.usuarioSesion.nombre}" 
+                                                                                 ps:placeholder="#{usuariosBean.usuarioSesion.nombre}" 
+                                                                                 requiredMessage="Debes llenar este campo"/>
+                                                                    <h:commandButton value="Guardar" actionListener="#{usuariosBean.actualizarPerfil('form_nombres','inp_nombres')}">
+                                                                        <f:ajax execute="inp_nombres" render="inplace_nombres msg_nombres_error msg_nombres"/>
+                                                                    </h:commandButton><br/>
+                                                                    <h:message id="msg_nombres_error" for="inp_nombres" style="left: 0;"
+                                                                               errorClass="text-danger position-absolute w-100 text-center" infoClass="d-none"/>
+                                                                </p:inplace><br/>
+                                                                <h:message id="msg_nombres" for="inp_nombres"
+                                                                           errorClass="d-none" infoClass="text-success"/>
+                                                            </h:form>
+                                                        </div>
+                                                        <div class="col-6 my-4">
+                                                            <h:form id="form_apellidos">
+                                                                <h:outputLabel for="inp_apellidos" value="Apellidos:" class="w-100 mb-0 font-weight-bold"/>
+                                                                <i class="fas fa-sign-out-alt text-primary"></i>&nbsp;
+                                                                <p:inplace id="inplace_apellidos">
+                                                                    <h:inputText id="inp_apellidos" required="true" maxlength="45" 
+                                                                                 value="#{usuariosBean.usuarioSesion.apellido}" 
+                                                                                 ps:placeholder="#{usuariosBean.usuarioSesion.apellido}" 
+                                                                                 requiredMessage="Debes llenar este campo"/>
+                                                                    <h:commandButton value="Guardar" actionListener="#{usuariosBean.actualizarPerfil('form_apellidos','inp_apellidos')}">
+                                                                        <f:ajax execute="inp_apellidos" render="inplace_apellidos msg_apellidos_error msg_apellidos"/>
+                                                                    </h:commandButton><br/>
+                                                                    <h:message id="msg_apellidos_error" for="inp_apellidos" style="left: 0;"
+                                                                               errorClass="text-danger position-absolute w-100 text-center" infoClass="d-none"/>
+                                                                </p:inplace><br/>
+                                                                <h:message id="msg_apellidos" for="inp_apellidos"
+                                                                           errorClass="d-none" infoClass="text-success"/>
+                                                            </h:form>
+                                                        </div>
+                                                        <div class="col-6 my-4">
+                                                            <h:form id="form_tipodocumento">
+                                                                <h:outputLabel for="inp_tipodocumento" value="Tipo de documento:" class="w-100 mb-0 font-weight-bold"/>
+                                                                <i class="fas fa-sign-out-alt text-primary"></i>&nbsp;
+                                                                <p:inplace id="inplace_tipodocumento">
+                                                                    <h:selectOneMenu id="inp_tipodocumento" value="#{usuariosBean.usuarioSesion.tipoDocumento}">
+                                                                        <f:selectItem itemLabel="Cedula de Ciudadania" itemValue="cedula de ciudadania"/>
+                                                                        <f:selectItem itemLabel="Cedula Extranjera" itemValue="cedula de extranjera"/>
+                                                                        <f:selectItem itemLabel="Pasaporte" itemValue="pasaporte"/>
+                                                                    </h:selectOneMenu>
+                                                                    <h:commandButton value="Guardar" actionListener="#{usuariosBean.actualizarPerfil('form_tipodocumento','inp_tipodocumento')}">
+                                                                        <f:ajax execute="inp_tipodocumento" render="inplace_tipodocumento msg_tipodocumento_error msg_tipodocumento"/>
+                                                                    </h:commandButton><br/>
+                                                                    <h:message id="msg_tipodocumento_error" for="inp_tipodocumento" style="left: 0;"
+                                                                               errorClass="text-danger position-absolute w-100 text-center" infoClass="d-none"/>
+                                                                </p:inplace><br/>
+                                                                <h:message id="msg_tipodocumento" for="inp_tipodocumento"
+                                                                           errorClass="d-none" infoClass="text-success"/>
+                                                            </h:form>
+                                                        </div>
+                                                        <div class="col-6 my-4">
+                                                            <h:form id="form_documento">
+                                                                <h:outputLabel for="inp_documento" value="Número de documento:" class="w-100 mb-0 font-weight-bold"/>
+                                                                <i class="fas fa-sign-out-alt text-primary"></i>&nbsp;
+                                                                <p:inplace id="inplace_documento">
+                                                                    <h:inputText id="inp_documento" required="true" maxlength="10" 
+                                                                                 value="#{usuariosBean.usuarioSesion.numeroDocumento}" 
+                                                                                 ps:placeholder="#{usuariosBean.usuarioSesion.numeroDocumento}" 
+                                                                                 requiredMessage="Debes llenar este campo">
+                                                                        <f:validator validatorId="documentoValidator"/>
+                                                                    </h:inputText>
+                                                                    <h:commandButton value="Guardar" actionListener="#{usuariosBean.actualizarPerfil('form_documento','inp_documento')}">
+                                                                        <f:ajax execute="inp_documento" render="inplace_documento msg_documento_error msg_documento"/>
+                                                                    </h:commandButton><br/>
+                                                                    <h:message id="msg_documento_error" for="inp_documento" style="left: 0;"
+                                                                               errorClass="text-danger position-absolute w-100 text-center" infoClass="d-none"/>
+                                                                </p:inplace><br/>
+                                                                <h:message id="msg_documento" for="inp_documento"
+                                                                           errorClass="d-none" infoClass="text-success"/>
+                                                            </h:form>
+                                                        </div>
+                                                        <div class="col-6 my-4">
+                                                            <h:form id="form_edad">
+                                                                <h:outputLabel for="inp_edad" value="Edad:" class="w-100 mb-0 font-weight-bold"/>
+                                                                <i class="fas fa-sign-out-alt text-primary"></i>&nbsp;
+                                                                <p:inplace id="inplace_edad">
+                                                                    <h:inputText id="inp_edad" required="true" maxlength="2" 
+                                                                                 value="#{usuariosBean.usuarioSesion.edad}" 
+                                                                                 ps:placeholder="#{usuariosBean.usuarioSesion.edad}" 
+                                                                                 requiredMessage="Debes llenar este campo"
+                                                                                 converterMessage="Debes ingresar una edad valida">
+                                                                        <f:validator validatorId="edadValidator"/>
+                                                                    </h:inputText>
+                                                                    <h:commandButton value="Guardar" actionListener="#{usuariosBean.actualizarPerfil('form_edad','inp_edad')}">
+                                                                        <f:ajax execute="inp_edad" render="inplace_edad msg_edad_error msg_edad"/>
+                                                                    </h:commandButton><br/>
+                                                                    <h:message id="msg_edad_error" for="inp_edad" style="left: 0;"
+                                                                               errorClass="text-danger position-absolute w-100 text-center" infoClass="d-none"/>
+                                                                </p:inplace><br/>
+                                                                <h:message id="msg_edad" for="inp_edad"
+                                                                           errorClass="d-none" infoClass="text-success"/>
+                                                            </h:form>
+                                                        </div>
+                                                        <div class="col-6 my-4">
+                                                            <h:form id="form_sexo">
+                                                                <h:outputLabel for="inp_sexo" value="Genero:" class="w-100 mb-0 font-weight-bold"/>
+                                                                <i class="fas fa-sign-out-alt text-primary"></i>&nbsp;
+                                                                <p:inplace id="inplace_sexo">
+                                                                    <h:selectOneMenu id="inp_sexo" value="#{usuariosBean.usuarioSesion.sexo}">
+                                                                        <f:selectItem itemLabel="Masculino" itemValue="masculino"/>
+                                                                        <f:selectItem itemLabel="Femenino" itemValue="femenino"/>
+                                                                    </h:selectOneMenu>
+                                                                    <h:commandButton value="Guardar" actionListener="#{usuariosBean.actualizarPerfil('form_sexo','inp_sexo')}">
+                                                                        <f:ajax execute="inp_sexo" render="inplace_sexo msg_sexo_error msg_sexo"/>
+                                                                    </h:commandButton><br/>
+                                                                    <h:message id="msg_sexo_error" for="inp_sexo" style="left: 0;"
+                                                                               errorClass="text-danger position-absolute w-100 text-center" infoClass="d-none"/>
+                                                                </p:inplace><br/>
+                                                                <h:message id="msg_sexo" for="inp_sexo"
+                                                                           errorClass="d-none" infoClass="text-success"/>
+                                                            </h:form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list" style="height: 290px; overflow: auto;">
+                                                <div class="container" align="center">
+                                                    <div class="row">
+                                                        <div class="col-6 my-4">
+                                                            <h:form id="form_direccion">
+                                                                <h:outputLabel for="inp_direccion" value="Dirección:" class="w-100 mb-0 font-weight-bold"/>
+                                                                <i class="fas fa-sign-out-alt text-primary"></i>&nbsp;
+                                                                <p:inplace id="inplace_direccion">
+                                                                    <h:inputText id="inp_direccion" required="true" maxlength="100" 
+                                                                                 value="#{usuariosBean.usuarioSesion.direccion}" 
+                                                                                 ps:placeholder="#{usuariosBean.usuarioSesion.direccion}" 
+                                                                                 requiredMessage="Debes llenar este campo"/>
+                                                                    <h:commandButton value="Guardar" actionListener="#{usuariosBean.actualizarPerfil('form_direccion','inp_direccion')}">
+                                                                        <f:ajax execute="inp_direccion" render="inplace_direccion msg_direccion_error msg_direccion"/>
+                                                                    </h:commandButton><br/>
+                                                                    <h:message id="msg_direccion_error" for="inp_direccion" style="left: 0;"
+                                                                               errorClass="text-danger position-absolute w-100 text-center" infoClass="d-none"/>
+                                                                </p:inplace><br/>
+                                                                <h:message id="msg_direccion" for="inp_direccion"
+                                                                           errorClass="d-none" infoClass="text-success"/>
+                                                            </h:form>
+                                                        </div>
+                                                        <div class="col-6 my-4">
+                                                            <h:form id="form_celular">
+                                                                <h:outputLabel for="inp_celular" value="Celular:" class="w-100 mb-0 font-weight-bold"/>
+                                                                <i class="fas fa-sign-out-alt text-primary"></i>&nbsp;
+                                                                <p:inplace id="inplace_celular">
+                                                                    <h:inputText id="inp_celular" required="true" maxlength="10" 
+                                                                                 ps:placeholder="#{usuariosBean.usuarioSesion.celular}" 
+                                                                                 value="#{usuariosBean.usuarioSesion.celular}" 
+                                                                                 requiredMessage="Debes llenar este campo">
+                                                                        <f:validator validatorId="celularValidator"/>
+                                                                    </h:inputText>
+                                                                    <h:commandButton value="Guardar" action="#{usuariosBean.actualizarPerfil('form_celular','inp_celular')}">
+                                                                        <f:ajax execute="inp_celular" render="inplace_celular msg_celular_error msg_celular"/>
+                                                                    </h:commandButton><br/>
+                                                                    <h:message id="msg_celular_error" for="inp_celular" style="left: 0;"
+                                                                               errorClass="text-danger position-absolute w-100 text-center" infoClass="d-none"/>
+                                                                </p:inplace><br/>
+                                                                <h:message id="msg_celular" for="inp_celular"
+                                                                           errorClass="d-none" infoClass="text-success"/>
+                                                            </h:form>
+                                                        </div>
+                                                        <div class="col-6 my-4">
+                                                            <h:form id="form_telefono">
+                                                                <h:outputLabel for="inp_telefono" value="Telefono:" class="w-100 mb-0 font-weight-bold"/>
+                                                                <i class="fas fa-sign-out-alt text-primary"></i>&nbsp;
+                                                                <p:inplace id="inplace_telefono">
+                                                                    <h:inputText id="inp_telefono" required="true" maxlength="7" 
+                                                                                 ps:placeholder="#{usuariosBean.usuarioSesion.telefono}" 
+                                                                                 value="#{usuariosBean.usuarioSesion.telefono}" 
+                                                                                 requiredMessage="Debes llenar este campo">
+                                                                        <f:validator validatorId="telefonoValidator"/>
+                                                                    </h:inputText>
+                                                                    <h:commandButton value="Guardar" action="#{usuariosBean.actualizarPerfil('form_telefono','inp_telefono')}">
+                                                                        <f:ajax execute="inp_telefono" render="inplace_telefono msg_telefono_error msg_telefono"/>
+                                                                    </h:commandButton><br/>
+                                                                    <h:message id="msg_telefono_error" for="inp_telefono" style="left: 0;"
+                                                                               errorClass="text-danger position-absolute w-100 text-center" infoClass="d-none"/>
+                                                                </p:inplace><br/>
+                                                                <h:message id="msg_telefono" for="inp_telefono"
+                                                                           errorClass="d-none" infoClass="text-success"/>
+                                                            </h:form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list" style="height: 290px; overflow: auto;">
+                                                <div class="container" align="center">
+                                                    <div class="row">
+                                                        <div class="col-6 my-4">
+                                                            <h:form id="form_email">
+                                                                <h:outputLabel for="inp_email" value="Correo Electronico:" 
+                                                                               class="w-100 mb-0 font-weight-bold"/>
+                                                                <i class="fas fa-sign-out-alt text-primary"></i>&nbsp;
+                                                                <p:inplace id="inplace_email">
+                                                                    <h:inputText id="inp_email" required="true"
+                                                                                 ps:placeholder="#{usuariosBean.usuarioSesion.correoElectronico}" 
+                                                                                 value="#{usuariosBean.usuarioSesion.correoElectronico}" 
+                                                                                 requiredMessage="Debes llenar este campo" maxlength="45">
+                                                                        <f:validator validatorId="emailValidator"/>
+                                                                    </h:inputText>
+                                                                    <h:commandButton value="Guardar" actionListener="#{usuariosBean.actualizarPerfil('form_email','inp_email')}">
+                                                                        <f:ajax execute="inp_email" render="msg_email_error msg_email inplace_email"/>
+                                                                    </h:commandButton><br/>
+                                                                    <h:message id="msg_email_error" for="inp_email" style="left: 0;"
+                                                                               errorClass="text-danger position-absolute w-100 text-center" infoClass="d-none"/>
+                                                                </p:inplace><br/>
+                                                                <h:message id="msg_email" for="inp_email"
+                                                                           errorClass="d-none" infoClass="text-success"/>
+                                                            </h:form>
+                                                        </div>
+                                                        <div class="col-6 my-4">
+                                                            <h:form id="form_contrasena">
+                                                                <h:outputLabel for="inp_contrasena" value="Contraseña:" class="w-100 mb-0 font-weight-bold"/>
+                                                                <i class="fas fa-sign-out-alt text-primary"></i>&nbsp;
+                                                                <p:inplace id="inplace_contrasena" label="#{usuariosBean.getContrasenaOculta()}">
+                                                                    <h:inputSecret id="inp_contrasena" required="true" maxlength="45" 
+                                                                                   value="#{usuariosBean.usuarioSesion.contrasena}" 
+                                                                                   requiredMessage="Debes llenar este campo">
+                                                                        <f:validator validatorId="contrasenaValidator"/>
+                                                                    </h:inputSecret><br/>
+                                                                    <h:message id="msg_contrasena_error" for="inp_contrasena" style="left: 0;"
+                                                                               errorClass="text-danger position-absolute w-100 text-center" infoClass="d-none"/><br/>
+                                                                    <h:outputLabel for="inp_contrasena" value="Verificar Contraseña:" class="w-100 mb-0 font-weight-bold"/>
+                                                                    <i class="fas fa-sign-out-alt text-primary"></i>&nbsp;
+                                                                    <h:inputSecret id="inp_contrasena2" required="true" maxlength="45"
+                                                                                   value="#{usuariosBean.usuarioSesion.contrasena}"
+                                                                                   requiredMessage="Debes llenar este campo"/><br/>
+                                                                    <h:message id="msg_contrasena2_error" for="inp_contrasena2" style="left: 0;"
+                                                                               errorClass="text-danger position-absolute w-100 text-center" infoClass="d-none"/><br/>
+                                                                    <h:commandButton value="Guardar" actionListener="#{usuariosBean.actualizarPerfil('form_contrasena','inp_contrasena')}">
+                                                                        <f:ajax execute="inp_contrasena inp_contrasena2" 
+                                                                                render="inplace_contrasena msg_contrasena_error msg_contrasena msg_contrasena2_error"/>
+                                                                    </h:commandButton><br/>
+                                                                </p:inplace><br/>
+                                                                <h:message id="msg_contrasena" for="inp_contrasena"
+                                                                           errorClass="d-none" infoClass="text-success"/>
+                                                            </h:form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="list-group" id="list-tab" role="tablist" style="flex-direction: row !important;">
+                                            <a class="p-2 btn-primary list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home"><i class="fas fa-user"></i> Datos Basicos</a>
+                                            <a class="p-2 btn-success list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile"><i class="fas fa-address-book"></i> Contacto</a>
+                                            <a class="p-2 btn-danger list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages"><i class="fas fa-lock"></i> Seguridad</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer bg-dark text-light">
+                                <i id="icono_info" class="fas fa-info-circle fa-2x"></i>
+                                <h:outputText id="msg_reload" class="text-warning"
+                                              value="Has click en el boton [Aceptar] para visualizar correctamente los cambios que hagas."/>
+                                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancelar</button>
+                                <h:form>
+                                    <h:commandButton class="btn btn-outline-primary" value="Aceptar"/>
+                                </h:form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

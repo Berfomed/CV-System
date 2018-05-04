@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:body>
+        <ui:composition template="../WEB-INF/templates/template_gerente.xhtml">
+            <ui:define name="title">Informe</ui:define>
+            <ui:define name="content">
+
+                <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+                <script type="text/javascript">
+                    google.charts.load('current', {'packages': ['corechart']});
+                    google.charts.setOnLoadCallback(drawChart);
+
+                    function drawChart() {
+
+                        var data = google.visualization.arrayToDataTable([
+                            ['Task', 'Hours per Day'],                           
+                            ['Eat', #{gerenteBeans.conteoAntiguedades().size().toString()}],
+                            ['Computacion', #{gerenteBeans.conteoComputacion().size().toString()}],
+                            ['Deportes', #{gerenteBeans.conteoDeportes().size().toString()}],
+                            ['Electrodomesticos', #{gerenteBeans.conteoElectrodomesticos().size().toString()}],
+                            ['Industria', #{gerenteBeans.conteoIndustria().size().toString()}],
+                            ['Inmuebles', #{gerenteBeans.conteoInmuebles().size().toString()}],
+                            ['Joyeria', #{gerenteBeans.conteoJoyeria().size().toString()}],
+                            ['Jugueteria', #{gerenteBeans.conteoJugueteria().size().toString()}],
+                            ['Muebles', #{gerenteBeans.conteoMuebles().size().toString()}],
+                            ['Relojeria', #{gerenteBeans.conteoRelojeria().size().toString()}],
+                            ['Tecnologia', #{gerenteBeans.conteoTecnologia().size().toString()}],
+                            ['Vehiculos', #{gerenteBeans.conteoVehiculos().size().toString()}],
+                            ['Vehiculos', #{gerenteBeans.conteoArte().size().toString()} ]
+                        ]);
+
+                        var options = {
+                            title: 'My Daily Activities'
+                        };
+
+                        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+                        chart.draw(data, options);
+                    }
+                </script>
+
+                <body>
+                    <div id="piechart" style="width: 900px; height: 500px;"></div>
+                </body>
+
+
+                <p:chart type="pie" model="#{graficosBean.pieModel1}" style="width:400px;height:300px" />
+
+
+
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
