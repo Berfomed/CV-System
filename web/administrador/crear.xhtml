@@ -71,10 +71,11 @@
                                             <h:inputText id="numeroidentificacion" value="#{compraventasBean.usuarios.numeroDocumento}" required="true" requiredMessage="ingresa un dato"/>
                                             <h:message for="numeroidentificacion"/>
                                             <h:outputLabel for="genero" value="Sexo"/>
-                                            <h:selectOneMenu id="sexo" value="#{usuariosBean.usuario.sexo}">
+                                            <h:selectOneMenu id="sexo" value="#{compraventasBean.usuarios.sexo}">
                                                 <f:selectItem itemValue = "masculino" itemLabel = "Masculino" /> 
                                                 <f:selectItem itemValue = "femenino" itemLabel = "Femenino" /> 
-                                            </h:selectOneMenu>                                            <h:message for="genero"/>
+                                            </h:selectOneMenu>                                            
+                                            <h:message for="genero"/>
                                             <h:outputLabel for="direccion" value="Direccion"/>
                                             <h:inputText id="direccion" value="#{compraventasBean.usuarios.direccion}" required="true" requiredMessage="ingresa un dato"/>
                                             <h:message for="direccion"/>
