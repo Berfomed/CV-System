@@ -9,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -28,6 +30,10 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Productos.findByPrecio", query = "SELECT p FROM Productos p WHERE p.precio = :precio")
     , @NamedQuery(name = "Productos.findByFotos", query = "SELECT p FROM Productos p WHERE p.fotos = :fotos")})
 public class Productos implements Serializable {
+
+    @JoinColumn(name = "id_Compraventa", referencedColumnName = "id_compraventa")
+    @ManyToOne
+    private Compraventa idCompraventa;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -165,5 +171,13 @@ public class Productos implements Serializable {
     @Override
     public String toString() {
         return "edu.cvsystem.entidades.Productos[ idProducto=" + idProducto + " ]";
+    }
+
+    public Compraventa getIdCompraventa() {
+        return idCompraventa;
+    }
+
+    public void setIdCompraventa(Compraventa idCompraventa) {
+        this.idCompraventa = idCompraventa;
     }
 }

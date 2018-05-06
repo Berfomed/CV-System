@@ -6,12 +6,9 @@
 package edu.cvsystem.facades;
 
 import edu.cvsystem.entidades.Usuarios;
-import java.util.ArrayList;
-import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 
 /**
  *
@@ -27,16 +24,13 @@ public class UsuariosFacade extends AbstractFacade<Usuarios> {
     protected EntityManager getEntityManager() {
         return em;
     }
-    
-    private List<Usuarios> informacion = new ArrayList<>();
 
     public UsuariosFacade() {
         super(Usuarios.class);
     }
-
-    public EntityManager getEm() {
+    
+    public EntityManager getEm(){
         return em;
     }
-
-
+            
 }

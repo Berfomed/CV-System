@@ -171,6 +171,8 @@ public class CargaArchivos {
         productofacade.create(producto);
         producto = new Productos();
     }
+    
+    
 
     public String upload() {
         String path = FacesContext.getCurrentInstance().getExternalContext().getRealPath("archivos");

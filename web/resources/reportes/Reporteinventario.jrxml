@@ -3,10 +3,23 @@
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
-	<field name="idProducto" class="java.lang.Integer"/>
-	<field name="nombre" class="java.lang.String"/>
-	<field name="precio" class="java.lang.Float"/>
-	<field name="categoria" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     productos.`id_producto` AS productos_id_producto,
+     productos.`nombre` AS productos_nombre,
+     productos.`descripcion` AS productos_descripcion,
+     productos.`categoria` AS productos_categoria,
+     productos.`precio` AS productos_precio
+FROM
+     `productos` productos inner join `compraventa` `compraventa`
+where
+	productos.id_Compraventa = compraventa.id_compraventa	]]>
+	</queryString>
+	<field name="productos_id_producto" class="java.lang.Integer"/>
+	<field name="productos_nombre" class="java.lang.String"/>
+	<field name="productos_descripcion" class="java.lang.String"/>
+	<field name="productos_categoria" class="java.lang.String"/>
+	<field name="productos_precio" class="java.lang.Float"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -19,9 +32,9 @@
 				</textElement>
 				<text><![CDATA[Inventario]]></text>
 			</staticText>
-			<image>
-				<reportElement x="2" y="0" width="436" height="120" uuid="5261c2c2-acb3-4adb-9aa7-815c8e37e433"/>
-				<imageExpression><![CDATA["C:\\Users\\Jorge Amado Perdomo\\Desktop\\Proyecto CVS\\CVSystem\\web\\resources\\img\\logo.jpg"]]></imageExpression>
+			<image scaleImage="FillFrame">
+				<reportElement x="2" y="0" width="237" height="120" uuid="e0cf4620-6fef-4158-ab0c-ce9e5bd225fe"/>
+				<imageExpression><![CDATA["C:\\Users\\Jorge Amado Perdomo\\Desktop\\CV-System\\web\\resources\\img\\logo.jpg"]]></imageExpression>
 			</image>
 		</band>
 	</title>
