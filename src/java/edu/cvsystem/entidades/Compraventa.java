@@ -17,6 +17,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 @Entity
 @Table(name = "compraventa")
@@ -29,6 +30,9 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Compraventa.findByDireccion", query = "SELECT c FROM Compraventa c WHERE c.direccion = :direccion")
     , @NamedQuery(name = "Compraventa.findByTelefono", query = "SELECT c FROM Compraventa c WHERE c.telefono = :telefono")})
 public class Compraventa implements Serializable {
+
+    @OneToMany(mappedBy = "idCompraventa")
+    private Collection<Productos> productosCollection;
 
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "interesAnual")
@@ -179,5 +183,15 @@ public class Compraventa implements Serializable {
 
     public void setInteresAnual(Float interesAnual) {
         this.interesAnual = interesAnual;
+    }
+
+    @XmlTransient
+    @JsonIgnore
+    public Collection<Productos> getProductosCollection() {
+        return productosCollection;
+    }
+
+    public void setProductosCollection(Collection<Productos> productosCollection) {
+        this.productosCollection = productosCollection;
     }
 }

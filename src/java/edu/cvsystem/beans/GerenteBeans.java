@@ -37,6 +37,7 @@ public class GerenteBeans implements Serializable {
         solicitud = new SolicitudCompraventa();
         cargaarchivo = new CargaArchivos();
         productoem = new ProductoEmpeno();
+        usuario = new Usuarios();
     }
 @EJB ProductoEmpenoFacade productoemfacade;
     
@@ -47,6 +48,7 @@ public class GerenteBeans implements Serializable {
     @EJB
     ProductosFacade productofacade = new ProductosFacade();
     Productos producto = new Productos();
+    Usuarios usuario = new Usuarios();
     CargaArchivos cargaarchivo = new CargaArchivos();
 
     /*Generamos las variables necesarias para el manejo de la entidad Solicitudes*/
@@ -54,7 +56,7 @@ public class GerenteBeans implements Serializable {
     SolicitudCompraventaFacade solicitudfacade = new SolicitudCompraventaFacade();
     SolicitudCompraventa solicitud = new SolicitudCompraventa();
     private Compraventa compraventa = new Compraventa();
-    Usuarios usuario = new Usuarios();
+    
 
     /*aqui generamos las variables necesarias para generar la carga de archivos*/
     private Part file;
@@ -87,11 +89,6 @@ public class GerenteBeans implements Serializable {
 
     @EJB
     UsuariosFacade usuariosFacade = new UsuariosFacade();
-
-    public List<Productos> listarProductos() {
-
-        return productofacade.findAll();
-    }
 
 //    public List<SolicitudCompraventa> listarSolicitudes() {
 //        return solicitudfacade.findAll();
@@ -238,6 +235,8 @@ public class GerenteBeans implements Serializable {
         return consulta.getResultList();
     }
 
+     
+    
      //metodo para filtrar las solicitudes por compraventa
      public List<SolicitudCompraventa> listarSolicitudes() {
 //        return solicitudfacade.findAll();
@@ -272,72 +271,171 @@ public class GerenteBeans implements Serializable {
 //         consulta.setParameter("categoria", "Antiques");
 //         return consulta.getResultList();         
 //     }
+     
+     public List<Productos> listaProductos(){//este metodo lista los productos por casa comercial.
+        Query consulta = productofacade.getEm().createQuery("SELECT p FROM Productos p WHERE p.idCompraventa = :idCompraventa");
+              
+        Query consultacompraventa = compraventaFacade.getEm().createQuery("SELECT c FROM Compraventa c WHERE c.idUsuario = :idUsuario");
+        consultacompraventa.setParameter("idUsuario", getUsuarioSesion());
+        List<Compraventa> listacompraventas=consultacompraventa.getResultList();
+       
+        consulta.setParameter("idCompraventa", listacompraventas.get(0) );
+        return consulta.getResultList();
+    }
     
-     public List<Productos> conteoAntiguedades(){
-         Query consulta = productofacade.getEm().createQuery("SELECT (p) FROM Productos p WHERE p.categoria = :categoria");
-         consulta.setParameter("categoria", "Antiguedades");
-         return consulta.getResultList();         
-     }
+    public List<Productos> conteoAntiguedades() {
+        Query consulta = productofacade.getEm().createQuery("SELECT (p) FROM Productos p WHERE p.categoria = :categoria AND p.idCompraventa = :idCompraventa");
+        consulta.setParameter("categoria", "Antiguedades");
+
+        Query consultacompraventa = compraventaFacade.getEm().createQuery("SELECT c FROM Compraventa c WHERE c.idUsuario = :idUsuario");
+        consultacompraventa.setParameter("idUsuario", getUsuarioSesion());
+        List<Compraventa> listacompraventas = consultacompraventa.getResultList();
+
+        consulta.setParameter("idCompraventa", listacompraventas.get(0));
+        return consulta.getResultList();
+    }
+    
      public List<Productos> conteoComputacion(){
-         Query consulta = productofacade.getEm().createQuery("SELECT (p) FROM Productos p WHERE p.categoria = :categoria");
+         Query consulta = productofacade.getEm().createQuery("SELECT (p) FROM Productos p WHERE p.categoria = :categoria AND p.idCompraventa = :idCompraventa");
          consulta.setParameter("categoria", "Computacion");
-         System.out.println(consulta.getResultList());
+         
+         Query consultacompraventa = compraventaFacade.getEm().createQuery("SELECT c FROM Compraventa c Where c.idUsuario = :idUsuario");
+         consultacompraventa.setParameter("idUsuario", getUsuarioSesion());
+         List<Compraventa> listacompraventas = consultacompraventa.getResultList();
+         
+         consulta.setParameter("idCompraventa", listacompraventas.get(0));
          return consulta.getResultList();   
      }
+     
      public List<Productos> conteoDeportes(){
-         Query consulta = productofacade.getEm().createQuery("SELECT (p) FROM Productos p WHERE p.categoria = :categoria");
-         consulta.setParameter("categoria", "Deportes");
-         return consulta.getResultList();         
-     }
+        Query consulta = productofacade.getEm().createQuery("SELECT (p) FROM Productos p WHERE p.categoria = :categoria AND p.idCompraventa = :idCompraventa");
+        consulta.setParameter("categoria", "Deportes");
+
+        Query consultacompraventa = compraventaFacade.getEm().createQuery("SELECT c FROM Compraventa c WHERE c.idUsuario = :idUsuario");
+        consultacompraventa.setParameter("idUsuario", getUsuarioSesion());
+        List<Compraventa> listacompraventas = consultacompraventa.getResultList();
+
+        consulta.setParameter("idCompraventa", listacompraventas.get(0));
+        return consulta.getResultList();
+    }
+     
      public List<Productos> conteoElectrodomesticos(){
-         Query consulta = productofacade.getEm().createQuery("SELECT (p) FROM Productos p WHERE p.categoria = :categoria");
-         consulta.setParameter("categoria", "Electrodomesticos");
-         return consulta.getResultList();         
+         Query consulta = productofacade.getEm().createQuery("SELECT (p) FROM Productos p WHERE p.categoria = :categoria AND p.idCompraventa = :idCompraventa");
+        consulta.setParameter("categoria", "Electrodomesticos");
+
+        Query consultacompraventa = compraventaFacade.getEm().createQuery("SELECT c FROM Compraventa c WHERE c.idUsuario = :idUsuario");
+        consultacompraventa.setParameter("idUsuario", getUsuarioSesion());
+        List<Compraventa> listacompraventas = consultacompraventa.getResultList();
+
+        consulta.setParameter("idCompraventa", listacompraventas.get(0));
+        return consulta.getResultList();         
      }
+     
      public List<Productos> conteoIndustria(){
-         Query consulta = productofacade.getEm().createQuery("SELECT (p) FROM Productos p WHERE p.categoria = :categoria");
-         consulta.setParameter("categoria", "Industria");
-         return consulta.getResultList();         
+          Query consulta = productofacade.getEm().createQuery("SELECT (p) FROM Productos p WHERE p.categoria = :categoria AND p.idCompraventa = :idCompraventa");
+        consulta.setParameter("categoria", "Industria");
+
+        Query consultacompraventa = compraventaFacade.getEm().createQuery("SELECT c FROM Compraventa c WHERE c.idUsuario = :idUsuario");
+        consultacompraventa.setParameter("idUsuario", getUsuarioSesion());
+        List<Compraventa> listacompraventas = consultacompraventa.getResultList();
+
+        consulta.setParameter("idCompraventa", listacompraventas.get(0));
+        return consulta.getResultList();  
      }
+     
      public List<Productos> conteoInmuebles(){
-         Query consulta = productofacade.getEm().createQuery("SELECT (p) FROM Productos p WHERE p.categoria = :categoria");
-         consulta.setParameter("categoria", "Inmuebles");
-         return consulta.getResultList();         
+          Query consulta = productofacade.getEm().createQuery("SELECT (p) FROM Productos p WHERE p.categoria = :categoria AND p.idCompraventa = :idCompraventa");
+        consulta.setParameter("categoria", "Inmuebles");
+
+        Query consultacompraventa = compraventaFacade.getEm().createQuery("SELECT c FROM Compraventa c WHERE c.idUsuario = :idUsuario");
+        consultacompraventa.setParameter("idUsuario", getUsuarioSesion());
+        List<Compraventa> listacompraventas = consultacompraventa.getResultList();
+
+        consulta.setParameter("idCompraventa", listacompraventas.get(0));
+        return consulta.getResultList();         
      }
+     
      public List<Productos> conteoJoyeria(){
-         Query consulta = productofacade.getEm().createQuery("SELECT (p) FROM Productos p WHERE p.categoria = :categoria");
-         consulta.setParameter("categoria", "Joyeria");
-         return consulta.getResultList();         
+          Query consulta = productofacade.getEm().createQuery("SELECT (p) FROM Productos p WHERE p.categoria = :categoria AND p.idCompraventa = :idCompraventa");
+        consulta.setParameter("categoria", "Joyeria");
+
+        Query consultacompraventa = compraventaFacade.getEm().createQuery("SELECT c FROM Compraventa c WHERE c.idUsuario = :idUsuario");
+        consultacompraventa.setParameter("idUsuario", getUsuarioSesion());
+        List<Compraventa> listacompraventas = consultacompraventa.getResultList();
+
+        consulta.setParameter("idCompraventa", listacompraventas.get(0));
+        return consulta.getResultList();       
      }
+     
      public List<Productos> conteoJugueteria(){
-         Query consulta = productofacade.getEm().createQuery("SELECT (p) FROM Productos p WHERE p.categoria = :categoria");
-         consulta.setParameter("categoria", "Jugueteria");
-         return consulta.getResultList();         
+          Query consulta = productofacade.getEm().createQuery("SELECT (p) FROM Productos p WHERE p.categoria = :categoria AND p.idCompraventa = :idCompraventa");
+        consulta.setParameter("categoria", "Jugueteria");
+
+        Query consultacompraventa = compraventaFacade.getEm().createQuery("SELECT c FROM Compraventa c WHERE c.idUsuario = :idUsuario");
+        consultacompraventa.setParameter("idUsuario", getUsuarioSesion());
+        List<Compraventa> listacompraventas = consultacompraventa.getResultList();
+
+        consulta.setParameter("idCompraventa", listacompraventas.get(0));
+        return consulta.getResultList();         
      }
+     
      public List<Productos> conteoMuebles(){
-         Query consulta = productofacade.getEm().createQuery("SELECT (p) FROM Productos p WHERE p.categoria = :categoria");
-         consulta.setParameter("categoria", "Muebles");
-         return consulta.getResultList();         
+          Query consulta = productofacade.getEm().createQuery("SELECT (p) FROM Productos p WHERE p.categoria = :categoria AND p.idCompraventa = :idCompraventa");
+        consulta.setParameter("categoria", "Muebles");
+
+        Query consultacompraventa = compraventaFacade.getEm().createQuery("SELECT c FROM Compraventa c WHERE c.idUsuario = :idUsuario");
+        consultacompraventa.setParameter("idUsuario", getUsuarioSesion());
+        List<Compraventa> listacompraventas = consultacompraventa.getResultList();
+
+        consulta.setParameter("idCompraventa", listacompraventas.get(0));
+        return consulta.getResultList();         
      }
      public List<Productos> conteoRelojeria(){
-         Query consulta = productofacade.getEm().createQuery("SELECT (p) FROM Productos p WHERE p.categoria = :categoria");
-         consulta.setParameter("categoria", "Relojeria");
-         return consulta.getResultList();         
+          Query consulta = productofacade.getEm().createQuery("SELECT (p) FROM Productos p WHERE p.categoria = :categoria AND p.idCompraventa = :idCompraventa");
+        consulta.setParameter("categoria", "Relogeria");
+
+        Query consultacompraventa = compraventaFacade.getEm().createQuery("SELECT c FROM Compraventa c WHERE c.idUsuario = :idUsuario");
+        consultacompraventa.setParameter("idUsuario", getUsuarioSesion());
+        List<Compraventa> listacompraventas = consultacompraventa.getResultList();
+
+        consulta.setParameter("idCompraventa", listacompraventas.get(0));
+        return consulta.getResultList();        
      }
+     
      public List<Productos> conteoTecnologia(){
-         Query consulta = productofacade.getEm().createQuery("SELECT (p) FROM Productos p WHERE p.categoria = :categoria");
-         consulta.setParameter("categoria", "tecnologia ");
-         return consulta.getResultList();         
+          Query consulta = productofacade.getEm().createQuery("SELECT (p) FROM Productos p WHERE p.categoria = :categoria AND p.idCompraventa = :idCompraventa");
+        consulta.setParameter("categoria", "Tecnologia");
+
+        Query consultacompraventa = compraventaFacade.getEm().createQuery("SELECT c FROM Compraventa c WHERE c.idUsuario = :idUsuario");
+        consultacompraventa.setParameter("idUsuario", getUsuarioSesion());
+        List<Compraventa> listacompraventas = consultacompraventa.getResultList();
+
+        consulta.setParameter("idCompraventa", listacompraventas.get(0));
+        return consulta.getResultList();       
      }
+     
      public List<Productos> conteoVehiculos(){
-         Query consulta = productofacade.getEm().createQuery("SELECT (p) FROM Productos p WHERE p.categoria = :categoria");
-         consulta.setParameter("categoria", "Vehiculos");
-         return consulta.getResultList();         
+          Query consulta = productofacade.getEm().createQuery("SELECT (p) FROM Productos p WHERE p.categoria = :categoria AND p.idCompraventa = :idCompraventa");
+        consulta.setParameter("categoria", "Vehiculos");
+
+        Query consultacompraventa = compraventaFacade.getEm().createQuery("SELECT c FROM Compraventa c WHERE c.idUsuario = :idUsuario");
+        consultacompraventa.setParameter("idUsuario", getUsuarioSesion());
+        List<Compraventa> listacompraventas = consultacompraventa.getResultList();
+
+        consulta.setParameter("idCompraventa", listacompraventas.get(0));
+        return consulta.getResultList();       
      }
+     
      public List<Productos> conteoArte(){
-         Query consulta = productofacade.getEm().createQuery("SELECT (p) FROM Productos p WHERE p.categoria = :categoria");
-         consulta.setParameter("categoria", "Arte");
-         return consulta.getResultList();         
+          Query consulta = productofacade.getEm().createQuery("SELECT (p) FROM Productos p WHERE p.categoria = :categoria AND p.idCompraventa = :idCompraventa");
+        consulta.setParameter("categoria", "Arte");
+
+        Query consultacompraventa = compraventaFacade.getEm().createQuery("SELECT c FROM Compraventa c WHERE c.idUsuario = :idUsuario");
+        consultacompraventa.setParameter("idUsuario", getUsuarioSesion());
+        List<Compraventa> listacompraventas = consultacompraventa.getResultList();
+
+        consulta.setParameter("idCompraventa", listacompraventas.get(0));
+        return consulta.getResultList(); 
      }
      
      private ProductoEmpeno productoem = new ProductoEmpeno();

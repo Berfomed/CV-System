@@ -30,10 +30,11 @@ public class ProductosFacade extends AbstractFacade<Productos> {
     public ProductosFacade() {
         super(Productos.class);
     }
-
-    public EntityManager getEm() {
+    
+    public EntityManager getEm(){
         return em;
     }
+    
     //metodo para listar en graficos
      public  List<Object[]> calcularTotal(){
 //        Query query=em.createNativeQuery("SELECT producto.id_producto, producto.producto, producto.cantidad *  producto.precio AS Total FROM  producto");
@@ -52,7 +53,5 @@ public class ProductosFacade extends AbstractFacade<Productos> {
         String frase = resultado+" filas afectadas";
         return frase;
         
-    }
-   
-    
+     }
 }

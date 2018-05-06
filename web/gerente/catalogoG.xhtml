@@ -20,7 +20,7 @@
                 <f:view>
                     <h:form style="border-bottom: solid graytext 1px; border-bottom-left-radius: 20%; border-bottom-right-radius: 20%; margin-top: 2%">
                         <h1 align="center" style="margin-bottom: 20px"><h:outputText value="Inventory" class="titulo_footer text-primary text-center" style="font-size: 50pt"/></h1>
-                        <h:dataTable value="#{gerenteBeans.listarProductos()}" var="item" style="width: 90%; margin-left: 5%;
+                        <h:dataTable value="#{gerenteBeans.listaProductos()}" var="item" style="width: 90%; margin-left: 5%;
                                      border-top: solid graytext 1px; border-top-left-radius: 10%; border-top-right-radius: 10%">
                             <h:column >
                                 <f:facet name="header" >
@@ -57,6 +57,13 @@
                                     <h:outputText value="Image" style="margin-left: 20%"/>
                                 </f:facet>
                                 <a href="http://localhost:8080/#{item.fotos}" style="color: purple">Imagenes</a>
+
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="compraventa" style="margin-left: 20%"/>
+                                </f:facet>
+                                <h:outputText value="#{item.idCompraventa.nombre}" style="font-size: 11pt"/>
 
                             </h:column>
                             <h:column>
