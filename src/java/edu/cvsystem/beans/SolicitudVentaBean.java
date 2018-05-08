@@ -50,6 +50,9 @@ public void registrarSolicitud(String tipo) {
         solicitud.setFechaEnvio(new GregorianCalendar().getTime());
         int calc=(int) ((empeno.getFechaFinal().getTime()-empeno.getFechaInicio().getTime())/86400000);
         empeno.setDias(calc);
+        empeno.setInteres((compraventa.getInteresCompraventa()/360)*empeno.getDias());
+        empeno.setPrecioapagar(solicitud.getPrecio()*empeno.getInteres());
+       
     // solicitud.setFotos("https://cvsystem.com/fotos/fs31a5d/");
 
         solicitudCompraventaFacade.create(solicitud);

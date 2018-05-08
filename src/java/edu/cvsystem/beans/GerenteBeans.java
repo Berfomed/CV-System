@@ -459,17 +459,17 @@ public class GerenteBeans implements Serializable {
     }
     
     
-     public Float calcularEmpeño(){
-         
-        
-        productoem.setInteres((compraventa.getInteresAnual()/360)*productoem.getDias());//agregar los dias de empeño
-        productoem.setPrecioapagar(solicitud.getPrecio() * productoem.getInteres()); 
-        
-       
-         
-         return null;
-         
-     }
+//     public Float calcularEmpeño(){
+//         
+//        
+//        productoem.setInteres((compraventa.getInteresAnual()/360)*productoem.getDias());//agregar los dias de empeño
+//        productoem.setPrecioapagar(solicitud.getPrecio() * productoem.getInteres()); 
+//        
+//       
+//         
+//         return null;
+//         
+//     }
      public void empeñarProducto(){
          
          productoemfacade.create(productoem);         
