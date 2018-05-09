@@ -391,7 +391,7 @@ public class GerenteBeans implements Serializable {
         return consulta.getResultList();         
      }
      public List<Productos> conteoRelojeria(){
-          Query consulta = productofacade.getEm().createQuery("SELECT (p) FROM Productos p WHERE p.categoria = :categoria AND p.idCompraventa = :idCompraventa");
+         Query consulta = productofacade.getEm().createQuery("SELECT (p) FROM Productos p WHERE p.categoria = :categoria AND p.idCompraventa = :idCompraventa");
         consulta.setParameter("categoria", "Relogeria");
 
         Query consultacompraventa = compraventaFacade.getEm().createQuery("SELECT c FROM Compraventa c WHERE c.idUsuario = :idUsuario");
