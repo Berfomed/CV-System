@@ -30,9 +30,13 @@
                             <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModal3">Create</button>
                         </div>
                         <div class="col" align="center">
+                            <figure id="img" class="vertical-align-center">
+                                <img class="rounded-circle" src="../resources/imagenes/img_administrador/cliente.jpg" alt=""/>
+                                <h3 id="textNombre" >upload inventory</h3>
+                            </figure>
                             <h:form enctype="multipart/form-data">
                                 <h:inputFile value="#{administradorBean.file1}" />
-                                <h:commandButton value="subir" action="#{administradorBean.upload()}" />
+                                <h:commandButton class="btn btn-dark" value="subir" action="#{administradorBean.upload()}" />
                             </h:form>
                             
                         </div>
