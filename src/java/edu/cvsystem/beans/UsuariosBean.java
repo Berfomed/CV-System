@@ -56,7 +56,7 @@ public class UsuariosBean {
         usuario.setEstado("activo");
         usuario.setRol("servicios");
         usuariosFacade.create(usuario);
-        Mailler.enviarCorreo("Usuario Servicios", usuario.getCorreoElectronico() + usuario.getContrasena(), usuario.getCorreoElectronico());
+        Mailler.enviarCorreo("Usuario Servicios","<html lang='en' dir='ltr'><body><div style:' font-family: 'Pacifico', cursive;font-size: 6em;'><h2>CVSYSTEM</h2></div><br><div >Correo: "+usuario.getCorreoElectronico() +"<br> Contraseña: "+ usuario.getContrasena()+"</div><br><br><div>Cvsystem te la la vienvenida señor(a) "+usuario.getNombre()+"</div></body></html>", usuario.getCorreoElectronico());
         usuario = new Usuarios();
     }
 
@@ -146,7 +146,7 @@ public class UsuariosBean {
       for (int i = 0; i < correos.length; i++) {
         correos[i] = usuarios.get(i).getCorreoElectronico();
       }
-      Mailler.enviarCorreo("Alerta", "El servidor se encuentra en mantenimiento", correos);
+      Mailler.enviarCorreo("Alerta","<html lang='en' dir='ltr'><body><div style:' font-family: 'Pacifico', cursive;font-size: 6em;'><h2>CVSYSTEM</h2></div><br><div >El servidor se encuentra en mantenimiento</div></body></html>", correos);
     }
 
     public String getPathFoto() {
