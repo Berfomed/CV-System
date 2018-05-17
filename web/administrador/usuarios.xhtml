@@ -13,14 +13,14 @@
                     <f:view>
                         <h:form>
                             <div class="row" >
-                                <div class="col-8">
-                                    <h1><h:outputText value="Usuarios"/></h1>
+                                <div class="col">
+                                    <h1><h:outputText  value="Usuarios"/></h1>
                                 </div>
                                 <div class="col">
-                                    <h5><h:commandButton actionListener="#{administradorBean.PDF}" value="Generar Documento PDF" /></h5>
+                                    <h5><h:commandButton class="btn btn-dark" actionListener="#{administradorBean.PDF}" value="Generar Documento PDF" /></h5>
                                 </div>
                                 <div class="col">
-                                  <h5><h:commandButton actionListener="#{usuariosBean.enviarCorreos()}" 
+                                  <h5><h:commandButton class="btn btn-dark" actionListener="#{usuariosBean.enviarCorreos()}" 
                                                          value="Enviar Correo De Mantenimiento" /></h5>
                                 </div>
                             </div>

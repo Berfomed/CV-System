@@ -37,11 +37,13 @@
                                 <h:outputLabel value="Contrasena:" for="contrasena" />
                                 <h:inputText id="contrasena" value="#{administradorBean.usuario.contrasena}" title="Contrasena" required="true" requiredMessage="The Contrasena field is required."/>
                                 <h:outputLabel value="Estado:" for="estado" />
-                                <h:inputText id="estado" value="#{administradorBean.usuario.estado}" title="Estado" required="true" requiredMessage="The Estado field is required."/>
+                                <h:selectOneMenu id="estado" value="#{administradorBean.usuario.estado}" title="Estado" required="true" requiredMessage="The Estado field is required.">
+                                    <f:selectItem itemValue = "activo" itemLabel = "activo" /> 
+                                    <f:selectItem itemValue = "bloqueado" itemLabel = "bloqueado" /> 
+                                </h:selectOneMenu>
                                 <h:outputLabel value="Rol:" for="rol" />
                                 <h:inputText id="rol" value="#{administradorBean.usuario.rol}" title="Rol" required="true" requiredMessage="The Rol field is required."/>
                             </h:panelGrid>
-                            <h:commandButton actionListener="#{usuariosBean.cambiarEstado()}" value="Bloquear"/>
                             <h:commandButton action="#{administradorBean.editarUsuario()}" value="actualizar"/>
                         </h:form>
                     </f:view>
