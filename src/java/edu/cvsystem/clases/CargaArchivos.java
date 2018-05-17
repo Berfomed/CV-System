@@ -1,6 +1,10 @@
 package edu.cvsystem.clases;
 
 
+import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.Int;
+import edu.cvsystem.beans.GerenteBeans;
+import edu.cvsystem.entidades.Compraventa;
+import static edu.cvsystem.entidades.Compraventa_.idCompraventa;
 import edu.cvsystem.entidades.Productos;
 import edu.cvsystem.facades.ProductosFacade;
 import java.io.File;
@@ -19,10 +23,14 @@ public class CargaArchivos {
 
     public CargaArchivos() {
         producto = new Productos();
+        compraventa = new Compraventa(); 
+        gerente = new GerenteBeans();
         
     }
     @EJB
     private ProductosFacade productofacade = new ProductosFacade();
+    Compraventa compraventa = new Compraventa();
+    private GerenteBeans gerente = new GerenteBeans();
    
     private Part file;
     private Part file2;
@@ -37,7 +45,19 @@ public class CargaArchivos {
     private String pathReal3;
     private String pathReal4;
     private Productos producto;
-       
+
+    
+    
+    public Compraventa getCompraventa() {
+        return compraventa;
+    }
+
+    public void setCompraventa(Compraventa compraventa) {
+        this.compraventa = compraventa;
+    }
+     
+    
+    
     public Productos getFuncionario() {
         return producto;
     }
@@ -168,6 +188,7 @@ public class CargaArchivos {
 
     public void crearProducto() {
         producto.setFotos(pathReal);
+        producto.setIdCompraventa(gerente.idCompraventa());
         productofacade.create(producto);
         producto = new Productos();
     }
@@ -177,13 +198,13 @@ public class CargaArchivos {
     public String upload() {
         String path = FacesContext.getCurrentInstance().getExternalContext().getRealPath("archivos");
         path = path.substring(0, path.indexOf("\\build"));
-        path = path + "\\web\\Archivos\\";
+        path = path + "\\web\\archivos\\";
         try {
             this.nombre = file.getSubmittedFileName(); /*para guardar el nombre*/
             pathReal = "/CVSystem/archivos/" + nombre;
             path = path + this.nombre;
             InputStream in = file.getInputStream();
-
+            
             byte[] data = new byte[in.available()];
             in.read(data);
             FileOutputStream out = new FileOutputStream(new File(path));
@@ -249,6 +270,32 @@ public class CargaArchivos {
 //        }
         crearProducto();
         return "catalogoG";
+    }
+    /*metodo para cargar imagenes*/
+    public void cargarImagen(Part p, Integer id) {
+        try {
+            String pathFolder = FacesContext.getCurrentInstance().getExternalContext()
+                    .getRealPath("resources").concat("\\img\\solicitudes\\Solicitud(" + id + ")").replace("\\build", "");
+            System.out.println("------------------------------------------------------");
+            System.out.println(pathFolder);
+            System.out.println("------------------------------------------------------");
+            File folder = new File(pathFolder);
+            if (!folder.exists()) {
+                folder.mkdir();
+            }
+            String nombre = p.getSubmittedFileName();
+            LoaderFiles.copiarArchivo(p.getInputStream(), pathFolder.concat("\\" + nombre));
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    public GerenteBeans getGerente() {
+        return gerente;
+    }
+
+    public void setGerente(GerenteBeans gerente) {
+        this.gerente = gerente;
     }
     
     
