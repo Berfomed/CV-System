@@ -34,8 +34,7 @@ public class GerenteBeans implements Serializable {
     public GerenteBeans() {
         producto = new Productos();
         compraventa = new Compraventa();
-        solicitud = new SolicitudCompraventa();
-        cargaarchivo = new CargaArchivos();
+        solicitud = new SolicitudCompraventa();        
         productoem = new ProductoEmpeno();
         usuario = new Usuarios();
     }
@@ -49,7 +48,7 @@ public class GerenteBeans implements Serializable {
     ProductosFacade productofacade = new ProductosFacade();
     Productos producto = new Productos();
     Usuarios usuario = new Usuarios();
-    CargaArchivos cargaarchivo = new CargaArchivos();
+  
 
     /*Generamos las variables necesarias para el manejo de la entidad Solicitudes*/
     @EJB
@@ -236,6 +235,13 @@ public class GerenteBeans implements Serializable {
     }
 
      
+   public Compraventa idCompraventa(){
+       Query consulta = compraventaFacade.getEm().createQuery("SELECT c FROM Compraventa c WHERE c.idCompraventa = :idCompraventa");
+       consulta.setParameter("idCompraventa", getUsuarioSesion());
+       List<Compraventa> idusuario = consulta.getResultList();
+        Compraventa id = idusuario.get(0) ;
+       return id;   
+   }
     
      //metodo para filtrar las solicitudes por compraventa
      public List<SolicitudCompraventa> listarSolicitudes() {
