@@ -27,9 +27,8 @@
                             <h:inputTextarea id="descripcion" value="#{solicitudVentaBean.solicitud.descripcion}" title="Description" required="true" requiredMessage="The Description field is required."/>
                             <h:message for="descripcion"/>
 
-                            <h:outputLabel value="Category:" for="category" />
-                            <!--<h:inputText id="category" value="#{solicitudVentaBean.solicitud.categoria}" title="Category" required="true" requiredMessage="The Category field is required."/>-->
-                            <h:selectOneMenu  style="margin-left: -180px" id="category" value="#{solicitudVentaBean.solicitud.categoria}" title="Categoria" required="true" requiredMessage="The description field is required">   
+                            <h:outputLabel value="Category:" for="category" />                          
+                            <h:selectOneMenu  id="category" value="#{solicitudVentaBean.solicitud.categoria}" title="Categoria" required="true" requiredMessage="The description field is required">   
                                 <f:selectItem itemValue="" itemLabel=""/>
                                 <f:selectItem itemValue="Antiques" itemLabel="Antiques"/>
                                 <f:selectItem itemValue="Computing" itemLabel="Computing"/>
@@ -60,12 +59,12 @@
                              </h:inputText>
                             <h:message for="fDate"/>  
 
-                            <h:outputLabel value="Price:" for="price" class="form-group" style="margin-left:-90px" />
-                            <h:inputText id="price" style="margin-left:-180px" value="#{solicitudVentaBean.solicitud.precio}" title="Price" required="true" requiredMessage="The Price field is required."/>
+                            <h:outputLabel value="Price:" for="price" class="form-group"/>
+                            <h:inputText id="price" value="#{solicitudVentaBean.solicitud.precio}" title="Price" required="true" requiredMessage="The Price field is required."/>
                             <h:message for="price"/>
 
-                            <h:outputLabel value="Pawn Shop:" for="pawnshop" style="margin-left:-90px"/>
-                            <h:selectOneMenu id="pawnshop" value="#{solicitudVentaBean.compraventa.idCompraventa}" style="margin-left:-180px">
+                            <h:outputLabel value="Pawn Shop:" for="pawnshop"/>
+                            <h:selectOneMenu id="pawnshop" value="#{solicitudVentaBean.compraventa.idCompraventa}">
                                 <f:selectItems value="#{solicitudVentaBean.listarCompraventas()}" var="compraventa"
                                                itemLabel="#{compraventa.nombre}" itemValue="#{compraventa.idCompraventa}"/>
                             </h:selectOneMenu>

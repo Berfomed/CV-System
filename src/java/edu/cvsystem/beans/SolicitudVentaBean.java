@@ -17,6 +17,7 @@ import javax.ejb.EJB;
 import javax.enterprise.inject.Model;
 import javax.servlet.http.Part;
 import javax.faces.context.FacesContext;
+import javax.persistence.Query;
 
 @Model
 public class SolicitudVentaBean {
@@ -26,10 +27,10 @@ public class SolicitudVentaBean {
 
     @EJB
     private CompraventaFacade compraventaFacade;
-    
+
     @EJB
-   private ProductoEmpenoFacade productoEmpenoFacade;
-    
+    private ProductoEmpenoFacade productoEmpenoFacade;
+
     public SolicitudVentaBean() {
     }
 
@@ -41,23 +42,33 @@ public class SolicitudVentaBean {
         msg = "";
     }
 
-public void registrarSolicitud(String tipo) {
+    public void registrarSolicitud(String tipo) {
         Usuarios usuario = (Usuarios) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioLog");
         solicitud.setTipo(tipo);
         solicitud.setIdUsuario(usuario);
-//        solicitud.setIdUsuarioServicios(0);
+        solicitud.setIdUsuarioServicios(0);        
         solicitud.setIdCompraventa(compraventa);
         solicitud.setFechaEnvio(new GregorianCalendar().getTime());
-        int calc=(int) ((empeno.getFechaFinal().getTime()-empeno.getFechaInicio().getTime())/86400000);
+        int calc = (int) ((empeno.getFechaFinal().getTime() - empeno.getFechaInicio().getTime()) / 86400000);
         empeno.setDias(calc);
-        empeno.setInteres((compraventa.getInteresCompraventa()/360)*empeno.getDias());
-        empeno.setPrecioapagar(solicitud.getPrecio()*empeno.getInteres());
-       
-    // solicitud.setFotos("https://cvsystem.com/fotos/fs31a5d/");
+        compraventa = compraventaFacade.find(compraventa.getIdCompraventa());
+
+        System.out.println("++++++++++++" + compraventa.getInteresCompraventa());
+        System.out.println("++++++++++++" + empeno.getDias());
+        empeno.setInteres((compraventa.getInteresCompraventa() / 360) * empeno.getDias());
+        empeno.setPrecioapagar(solicitud.getPrecio() * empeno.getInteres());
+
+        
+
 
         solicitudCompraventaFacade.create(solicitud);
+//        productoEmpenoFacade.create(empeno);
+        Query query = compraventaFacade.getEm().createNativeQuery("SELECT MAX(id_solicitud_compraventa) FROM solicitud_compraventa");
+        int id = (int) query.getResultList().get(0);
+        solicitud.setFotos("resources/img/solicitudes/" + "Solicitud(" + id + ")");
+        cargarImagen(path, id);
+        solicitudCompraventaFacade.edit(solicitud);
         List<SolicitudCompraventa> lista = solicitudCompraventaFacade.findAll();
-
         msg = "La solicitud ha sido envida exitosamente";
         if (path != null) {
             cargarImagen(path, lista.get(lista.size() - 1).getIdSolicitudCompraventa());
@@ -117,6 +128,14 @@ public void registrarSolicitud(String tipo) {
 
     public void setPath(Part path) {
         this.path = path;
+    }
+
+    public ProductoEmpeno getEmpeno() {
+        return empeno;
+    }
+
+    public void setEmpeno(ProductoEmpeno empeno) {
+        this.empeno = empeno;
     }
 
     private Part path;

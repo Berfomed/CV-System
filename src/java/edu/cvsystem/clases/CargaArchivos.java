@@ -4,7 +4,7 @@ package edu.cvsystem.clases;
 import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.Int;
 import edu.cvsystem.beans.GerenteBeans;
 import edu.cvsystem.entidades.Compraventa;
-import static edu.cvsystem.entidades.Compraventa_.idCompraventa;
+
 import edu.cvsystem.entidades.Productos;
 import edu.cvsystem.facades.ProductosFacade;
 import java.io.File;
