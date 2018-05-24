@@ -12,7 +12,7 @@ import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author Jorge Amado Perdomo
+ * @author jafp9
  */
 @Stateless
 public class UsuariosFacade extends AbstractFacade<Usuarios> {
@@ -28,8 +28,8 @@ public class UsuariosFacade extends AbstractFacade<Usuarios> {
     public UsuariosFacade() {
         super(Usuarios.class);
     }
-    
-    public EntityManager getEm(){
+
+    public EntityManager getEm() {
         return em;
     }
     

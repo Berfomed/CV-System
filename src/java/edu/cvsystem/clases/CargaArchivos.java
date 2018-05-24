@@ -3,6 +3,10 @@ package edu.cvsystem.clases;
 
 import edu.cvsystem.beans.GerenteBeans;
 import edu.cvsystem.entidades.Compraventa;
+<<<<<<< HEAD
+=======
+
+>>>>>>> d852deca7401505e22607a38f4e1e16e7dd7d0b3
 import edu.cvsystem.entidades.Productos;
 import edu.cvsystem.entidades.Usuarios;
 import edu.cvsystem.facades.CompraventaFacade;

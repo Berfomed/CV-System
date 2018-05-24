@@ -40,7 +40,7 @@ public class CompraventasBean implements Serializable {
         usuariosFacade.create(usuarios);
         compraventa.setIdUsuario(usuarios);
         compraventaFacade.create(compraventa);
-        Mailler.enviarCorreo(compraventa.getNombre(), usuarios.getCorreoElectronico() + usuarios.getContrasena(), usuarios.getCorreoElectronico());
+        Mailler.enviarCorreo(compraventa.getNombre(),"<html lang='en' dir='ltr'><body><div style:' font-family: 'Pacifico', cursive;font-size: 6em;'><h2>CVSYSTEM</h2></div><br><div >Correo: "+usuarios.getCorreoElectronico() +"<br> Contraseña: "+ usuarios.getContrasena()+"</div><br><br><div>Cvsystem te la la vienvenida señor(a) "+usuarios.getNombre()+"</div></body></html>", usuarios.getCorreoElectronico());
         compraventa = new Compraventa();
         usuarios = new Usuarios();
     }

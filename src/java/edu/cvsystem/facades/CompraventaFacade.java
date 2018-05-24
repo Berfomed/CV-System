@@ -12,7 +12,7 @@ import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author Jorge Amado Perdomo
+ * @author jafp9
  */
 @Stateless
 public class CompraventaFacade extends AbstractFacade<Compraventa> {
@@ -28,8 +28,8 @@ public class CompraventaFacade extends AbstractFacade<Compraventa> {
     public CompraventaFacade() {
         super(Compraventa.class);
     }
-    
-    public EntityManager getEm(){
+
+    public EntityManager getEm() {
         return em;
         
     }

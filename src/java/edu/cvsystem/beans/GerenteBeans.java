@@ -509,6 +509,7 @@ public class GerenteBeans implements Serializable {
         productoemfacade.create(productoem);
     }
     
+<<<<<<< HEAD
     //metodo para listar los productos que se encuetran separados en el inventario de la casa comercial
     public List<Productos> listarSeparados(){
        Query consulta = productofacade.getEm().createQuery("SELECT p FROM Productos p "
@@ -524,3 +525,30 @@ public class GerenteBeans implements Serializable {
     }
 
 }
+=======
+    
+//     public Float calcularEmpeño(){
+//         
+//        
+//        productoem.setInteres((compraventa.getInteresAnual()/360)*productoem.getDias());//agregar los dias de empeño
+//        productoem.setPrecioapagar(solicitud.getPrecio() * productoem.getInteres()); 
+//        
+//       
+//         
+//         return null;
+//         
+//     }
+     public void empeñarProducto(){
+         
+         productoemfacade.create(productoem);         
+     }
+
+  
+   
+ 
+        
+    }
+
+
+ 
+>>>>>>> d852deca7401505e22607a38f4e1e16e7dd7d0b3

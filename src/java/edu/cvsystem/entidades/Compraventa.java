@@ -1,9 +1,12 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package edu.cvsystem.entidades;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,12 +16,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
-import org.codehaus.jackson.annotate.JsonIgnore;
 
+/**
+ *
+ * @author jafp9
+ */
 @Entity
 @Table(name = "compraventa")
 @XmlRootElement
@@ -28,15 +32,9 @@ import org.codehaus.jackson.annotate.JsonIgnore;
     , @NamedQuery(name = "Compraventa.findByNombre", query = "SELECT c FROM Compraventa c WHERE c.nombre = :nombre")
     , @NamedQuery(name = "Compraventa.findByDescripcion", query = "SELECT c FROM Compraventa c WHERE c.descripcion = :descripcion")
     , @NamedQuery(name = "Compraventa.findByDireccion", query = "SELECT c FROM Compraventa c WHERE c.direccion = :direccion")
-    , @NamedQuery(name = "Compraventa.findByTelefono", query = "SELECT c FROM Compraventa c WHERE c.telefono = :telefono")})
+    , @NamedQuery(name = "Compraventa.findByTelefono", query = "SELECT c FROM Compraventa c WHERE c.telefono = :telefono")
+    , @NamedQuery(name = "Compraventa.findByInteresCompraventa", query = "SELECT c FROM Compraventa c WHERE c.interesCompraventa = :interesCompraventa")})
 public class Compraventa implements Serializable {
-
-    @OneToMany(mappedBy = "idCompraventa")
-    private Collection<Productos> productosCollection;
-
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "interesAnual")
-    private Float interesAnual;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -56,15 +54,12 @@ public class Compraventa implements Serializable {
     @Basic(optional = false)
     @Column(name = "telefono")
     private String telefono;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCompraventa")
-    private Collection<ProductoInventario> productoInventarioCollection;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "interes_compraventa")
+    private Float interesCompraventa;
     @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario")
     @ManyToOne(optional = false)
     private Usuarios idUsuario;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCompraventa")
-    private Collection<ProductoEmpeno> productoEmpenoCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCompraventa")
-    private Collection<SolicitudCompraventa> solicitudCompraventaCollection;
 
     public Compraventa() {
     }
@@ -121,13 +116,12 @@ public class Compraventa implements Serializable {
         this.telefono = telefono;
     }
 
-    @XmlTransient
-    public Collection<ProductoInventario> getProductoInventarioCollection() {
-        return productoInventarioCollection;
+    public Float getInteresCompraventa() {
+        return interesCompraventa;
     }
 
-    public void setProductoInventarioCollection(Collection<ProductoInventario> productoInventarioCollection) {
-        this.productoInventarioCollection = productoInventarioCollection;
+    public void setInteresCompraventa(Float interesCompraventa) {
+        this.interesCompraventa = interesCompraventa;
     }
 
     public Usuarios getIdUsuario() {
@@ -136,24 +130,6 @@ public class Compraventa implements Serializable {
 
     public void setIdUsuario(Usuarios idUsuario) {
         this.idUsuario = idUsuario;
-    }
-
-    @XmlTransient
-    public Collection<ProductoEmpeno> getProductoEmpenoCollection() {
-        return productoEmpenoCollection;
-    }
-
-    public void setProductoEmpenoCollection(Collection<ProductoEmpeno> productoEmpenoCollection) {
-        this.productoEmpenoCollection = productoEmpenoCollection;
-    }
-
-    @XmlTransient
-    public Collection<SolicitudCompraventa> getSolicitudCompraventaCollection() {
-        return solicitudCompraventaCollection;
-    }
-
-    public void setSolicitudCompraventaCollection(Collection<SolicitudCompraventa> solicitudCompraventaCollection) {
-        this.solicitudCompraventaCollection = solicitudCompraventaCollection;
     }
 
     @Override
@@ -165,33 +141,20 @@ public class Compraventa implements Serializable {
 
     @Override
     public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof Compraventa)) {
             return false;
         }
         Compraventa other = (Compraventa) object;
-        return !((this.idCompraventa == null && other.idCompraventa != null) || (this.idCompraventa != null && !this.idCompraventa.equals(other.idCompraventa)));
+        if ((this.idCompraventa == null && other.idCompraventa != null) || (this.idCompraventa != null && !this.idCompraventa.equals(other.idCompraventa))) {
+            return false;
+        }
+        return true;
     }
 
     @Override
     public String toString() {
         return "edu.cvsystem.entidades.Compraventa[ idCompraventa=" + idCompraventa + " ]";
     }
-
-    public Float getInteresAnual() {
-        return interesAnual;
-    }
-
-    public void setInteresAnual(Float interesAnual) {
-        this.interesAnual = interesAnual;
-    }
-
-    @XmlTransient
-    @JsonIgnore
-    public Collection<Productos> getProductosCollection() {
-        return productosCollection;
-    }
-
-    public void setProductosCollection(Collection<Productos> productosCollection) {
-        this.productosCollection = productosCollection;
-    }
+    
 }
