@@ -55,7 +55,7 @@ public class Compraventa implements Serializable {
     @Column(name = "telefono")
     private String telefono;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "interes_compraventa")
+    @Column(name = "interesAnual")
     private Float interesCompraventa;
     @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario")
     @ManyToOne(optional = false)
