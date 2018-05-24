@@ -9,49 +9,44 @@
         <ui:composition template="../WEB-INF/templates/template_gerente.xhtml">
             <ui:define name="title">Informe</ui:define>
             <ui:define name="content">
+                <div style="margin-bottom: -300px">
 
-                <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-                <script type="text/javascript">
-                    google.charts.load('current', {'packages': ['corechart']});
-                    google.charts.setOnLoadCallback(drawChart);
+                    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+                    <script type="text/javascript">
+                        google.charts.load('current', {'packages': ['corechart']});
+                        google.charts.setOnLoadCallback(drawChart);
+                        function drawChart() {
+                            var data = google.visualization.arrayToDataTable([
+                                ['Task', 'Hours per Day'],
+                                ['Antiguedades', #{gerenteBeans.conteoAntiguedades().size().toString()}],
+                                ['Computacion', #{gerenteBeans.conteoComputacion().size().toString()}],
+                                ['Deportes', #{gerenteBeans.conteoDeportes().size().toString()}],
+                                ['Electrodomesticos', #{gerenteBeans.conteoElectrodomesticos().size().toString()}],
+                                ['Industria', #{gerenteBeans.conteoIndustria().size().toString()}],
+                                ['Inmuebles', #{gerenteBeans.conteoInmuebles().size().toString()}],
+                                ['Joyeria', #{gerenteBeans.conteoJoyeria().size().toString()}],
+                                ['Jugueteria', #{gerenteBeans.conteoJugueteria().size().toString()}],
+                                ['Muebles', #{gerenteBeans.conteoMuebles().size().toString()}],
+                                ['Relojeria', #{gerenteBeans.conteoRelojeria().size().toString()}],
+                                ['Tecnologia', #{gerenteBeans.conteoTecnologia().size().toString()}],
+                                ['Vehiculos', #{gerenteBeans.conteoVehiculos().size().toString()}],
+                                ['Vehiculos', #{gerenteBeans.conteoArte().size().toString()}]
+                            ]);
 
-                    function drawChart() {
+                            var options = {
+                                title: 'Cantidad de Productos en Inventario'
+                            };
 
-                        var data = google.visualization.arrayToDataTable([
-                            ['Task', 'Hours per Day'],                           
-                            ['Eat', #{gerenteBeans.conteoAntiguedades().size().toString()}],
-                            ['Computacion', #{gerenteBeans.conteoComputacion().size().toString()}],
-                            ['Deportes', #{gerenteBeans.conteoDeportes().size().toString()}],
-                            ['Electrodomesticos', #{gerenteBeans.conteoElectrodomesticos().size().toString()}],
-                            ['Industria', #{gerenteBeans.conteoIndustria().size().toString()}],
-                            ['Inmuebles', #{gerenteBeans.conteoInmuebles().size().toString()}],
-                            ['Joyeria', #{gerenteBeans.conteoJoyeria().size().toString()}],
-                            ['Jugueteria', #{gerenteBeans.conteoJugueteria().size().toString()}],
-                            ['Muebles', #{gerenteBeans.conteoMuebles().size().toString()}],
-                            ['Relojeria', #{gerenteBeans.conteoRelojeria().size().toString()}],
-                            ['Tecnologia', #{gerenteBeans.conteoTecnologia().size().toString()}],
-                            ['Vehiculos', #{gerenteBeans.conteoVehiculos().size().toString()}],
-                            ['Vehiculos', #{gerenteBeans.conteoArte().size().toString()} ]
-                        ]);
+                            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
 
-                        var options = {
-                            title: 'My Daily Activities'
-                        };
-
-                        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-
-                        chart.draw(data, options);
-                    }
-                </script>
-
-                <body>
-                    <div id="piechart" style="width: 900px; height: 500px;"></div>
-                </body>
-
-
-                <p:chart type="pie" model="#{graficosBean.pieModel1}" style="width:400px;height:300px" />
-
-
+                            chart.draw(data, options);
+                        }
+                    </script>
+                    <body>
+                        <div id="piechart" style="width: 900px; height: 500px;"></div>
+                    </body>
+                    <p:chart type="pie" model="#{graficosBean.pieModel1}" style="width:400px;height:300px"/> 
+                </div>
 
             </ui:define>
         </ui:composition>

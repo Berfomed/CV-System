@@ -31,7 +31,7 @@ public class ProductosFacade extends AbstractFacade<Productos> {
         super(Productos.class);
     }
     
-    public EntityManager getEm(){
+        public EntityManager getEm(){
         return em;
     }
     
@@ -54,4 +54,6 @@ public class ProductosFacade extends AbstractFacade<Productos> {
         return frase;
         
      }
+
+    
 }

@@ -9,11 +9,11 @@
         <ui:composition template="../WEB-INF/templates/template_gerente.xhtml">
             <ui:define name="title">Edit</ui:define>
             <ui:define name="content">
-                <nav aria-label="breadcrumb" style="left: 0;"
+                <nav aria-label="breadcrumb" style="left: 0; margin-top: -2%; font-size: 10pt"
                      class="position-absolute w-100 animated slideInRight">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><h:link value="Inicio" outcome="index" class="text-danger"/></li>
-                        <li class="breadcrumb-item active" aria-current="page">Edicion</li>
+                        <li class="breadcrumb-item"><h:link value="Inicio" outcome="index" class="text-primary"/></li>
+                        <li class="breadcrumb-item active" aria-current="page">Catálogo</li>
                     </ol>
                 </nav>
                 <div class="container pt-5" align="center">
@@ -26,22 +26,55 @@
                                          value="#{gerenteBeans.producto.nombre}"
                                          requiredMessage="Information Required" size="30"/>
                             <h:message for="nombre" styleClass="text-danger"/> 
+
                             <h:outputLabel for="descripcion" value="Description" style="font-size: 20pt"/>
                             <h:inputText id="descripcion" required="true" maxlength="45" 
                                          value="#{gerenteBeans.producto.descripcion}"
                                          requiredMessage="Information Required" size="30"/>
                             <h:message for="descripcion" styleClass="text-danger"/>
-                            
-                            <h:outputLabel for="precio" value="Price" style="font-size: 20pt"/>
+
+                            <h:outputLabel for="Estatus" value="Status" style="font-size: 20pt"/>                                                      
+                                <h:selectOneMenu  class="form-control-sm col-12" 
+                                                  value="#{gerenteBeans.producto.estatus}"
+                                                  title="Categoria" required="true" 
+                                                  requiredMessage="The description field is required">   
+                                    <f:selectItem itemValue=" " itemLabel=" "/>
+                                    <f:selectItem itemValue="Disponible" itemLabel="Disponible"/>
+                                    <f:selectItem itemValue="Separado" itemLabel="Separado"/>
+                                    <f:selectItem itemValue=" " itemLabel=" "/>                         
+                                </h:selectOneMenu>  
+                                <h:message for="descripcion" styleClass="text-danger"/>
+                         
+
+
+
+
+                            <h:outputLabel for="precio" value="Price" style="font-size: 20pt"/>                
                             <h:inputText id="precio" required="true" maxlength="45" 
                                          value="#{gerenteBeans.producto.precio}"
                                          requiredMessage="Information Required"
                                          converterMessage="Please Insert a Correct Value"  size="30"/>
                             <h:message for="precio" styleClass="text-danger"/>                            
                             <h:outputLabel for="categoria" value="Category" style="font-size: 20pt"/>
-                            <h:inputText id="categoria" required="true" maxlength="45" 
-                                         value="#{gerenteBeans.producto.categoria}"
-                                         requiredMessage="Information Required" size="30"/>                           
+                            <h:selectOneMenu  class="form-control-sm col-12" 
+                                              value="#{gerenteBeans.producto.categoria}"
+                                                  title="Categoria" required="true" 
+                                                  requiredMessage="The description field is required">   
+                                       <f:selectItem itemValue="" itemLabel=""/>
+                                    <f:selectItem itemValue="Antiguedades" itemLabel="Antiguedades"/>
+                                    <f:selectItem itemValue="Computacion" itemLabel="Computacion"/>
+                                    <f:selectItem itemValue="Deportes" itemLabel="Deportes"/>
+                                    <f:selectItem itemValue="Electrodomesticos" itemLabel="Electrodomesticos"/>
+                                    <f:selectItem itemValue="Industria" itemLabel="Industry"/>
+                                    <f:selectItem itemValue="Inmuebles" itemLabel="Inmuebles"/>
+                                    <f:selectItem itemValue="Joyeria" itemLabel="Joyeria"/>
+                                    <f:selectItem itemValue="Jugueteria" itemLabel="Jugueteria"/>
+                                    <f:selectItem itemValue="Muebles" itemLabel="Muebles"/>
+                                    <f:selectItem itemValue="Relojeria" itemLabel="Relojeria"/>
+                                    <f:selectItem itemValue="Tecnologia" itemLabel="Tecnologia"/>
+                                    <f:selectItem itemValue="Vehiculos" itemLabel="Vehiculos"/>
+                                    <f:selectItem itemValue="Arte" itemLabel="Arte"/>                    
+                                </h:selectOneMenu>                           
                         </h:panelGrid><br/>
                         <h:commandButton class="btn btn-outline-primary" value="Edit" action="#{gerenteBeans.editarProducto()}" actionListener="catalogoG?faces-redirect=true" style="width: 200px; font-size: 15pt"/>&nbsp;
                         <h:commandButton class="btn btn-outline-warning" value="Cancel" action="catalogoG?faces-redirect=true" style="width: 200px; font-size: 15pt"/>
@@ -52,7 +85,7 @@
 
 
 
-   
-           </h:body>
+
+    </h:body>
 </html>
 

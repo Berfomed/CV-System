@@ -1,21 +1,20 @@
 package edu.cvsystem.clases;
 
 
-import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.Int;
 import edu.cvsystem.beans.GerenteBeans;
 import edu.cvsystem.entidades.Compraventa;
-import static edu.cvsystem.entidades.Compraventa_.idCompraventa;
 import edu.cvsystem.entidades.Productos;
+import edu.cvsystem.entidades.Usuarios;
+import edu.cvsystem.facades.CompraventaFacade;
 import edu.cvsystem.facades.ProductosFacade;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
-import java.util.Spliterator;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
+import javax.persistence.TypedQuery;
 import javax.servlet.http.Part;
 
 @ManagedBean(name = "cargaarchivos")
@@ -29,6 +28,10 @@ public class CargaArchivos {
     }
     @EJB
     private ProductosFacade productofacade = new ProductosFacade();
+    
+    @EJB
+    private CompraventaFacade compraventaFacade = new CompraventaFacade();
+    
     Compraventa compraventa = new Compraventa();
     private GerenteBeans gerente = new GerenteBeans();
    
@@ -186,9 +189,19 @@ public class CargaArchivos {
         this.producto = producto;
     }
 
+    public Usuarios getUsuarioSesion() {
+        return (Usuarios) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioLog");
+    }
+    
     public void crearProducto() {
         producto.setFotos(pathReal);
-        producto.setIdCompraventa(gerente.idCompraventa());
+        producto.setEstatus("Disponible");
+        
+        TypedQuery<Compraventa> query = compraventaFacade.getEm().createQuery("SELECT c FROM Compraventa "
+                + "c WHERE c.idUsuario = :usuario", Compraventa.class);
+        query.setParameter("usuario", getUsuarioSesion());
+        producto.setIdCompraventa(query.getResultList().get(0));        
+    
         productofacade.create(producto);
         producto = new Productos();
     }
@@ -196,12 +209,12 @@ public class CargaArchivos {
     
 
     public String upload() {
-        String path = FacesContext.getCurrentInstance().getExternalContext().getRealPath("archivos");
+        String path = FacesContext.getCurrentInstance().getExternalContext().getRealPath("imagenes");
         path = path.substring(0, path.indexOf("\\build"));
-        path = path + "\\web\\archivos\\";
+        path = path + "\\web\\imagenes\\";
         try {
             this.nombre = file.getSubmittedFileName(); /*para guardar el nombre*/
-            pathReal = "/CVSystem/archivos/" + nombre;
+            pathReal = "/CV-System/imagenes/" + nombre;
             path = path + this.nombre;
             InputStream in = file.getInputStream();
             

@@ -31,5 +31,7 @@ public class CompraventaFacade extends AbstractFacade<Compraventa> {
     
     public EntityManager getEm(){
         return em;
+        
     }
+    
 }

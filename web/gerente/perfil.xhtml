@@ -44,7 +44,7 @@
                             <nav>
                                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
                                     <a class="nav-item text-dark nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-compras" role="tab" aria-controls="nav-compras" aria-selected="true"><strong>Productos</strong></a>
-                                    <a class="nav-item text-dark nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-ventas" role="tab" aria-controls="nav-ventas" aria-selected="false"><strong>Registro de Productos</strong></a>
+                                    <a class="nav-item text-dark nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-ventas" role="tab" aria-controls="nav-ventas" aria-selected="false"><strong>Productos Vendidos</strong></a>
                                     <a class="nav-item text-dark nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-empeños" role="tab" aria-controls="nav-empeños" aria-selected="false"><strong>Tienes #{gerenteBeans.conteoSolicitudes().size().toString()} Solicitudes</strong></a>
                                 </div>
                             </nav>
@@ -53,51 +53,83 @@
                                     <div class="container p-4">
                                         <p align="center" class="mt-5 pt-5">
                                             <div style="margin-top: -100px">
-                                            <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-                                            <script type="text/javascript">
-                                                google.charts.load('current', {'packages': ['corechart']});
-                                                google.charts.setOnLoadCallback(drawChart);
+                                                <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+                                                <script type="text/javascript">
+                                                    google.charts.load('current', {'packages': ['corechart']});
+                                                    google.charts.setOnLoadCallback(drawChart);
 
-                                                function drawChart() {
+                                                    function drawChart() {
 
-                                                    var data = google.visualization.arrayToDataTable([
-                                                        ['Task', 'Hours per Day'],
-                                                        ['Eat', #{gerenteBeans.conteoAntiguedades().size().toString()}],
-                                                        ['Computacion', #{gerenteBeans.conteoComputacion().size().toString()}],
-                                                        ['Deportes', #{gerenteBeans.conteoDeportes().size().toString()}],
-                                                        ['Electrodomesticos', #{gerenteBeans.conteoElectrodomesticos().size().toString()}],
-                                                        ['Industria', #{gerenteBeans.conteoIndustria().size().toString()}],
-                                                        ['Inmuebles', #{gerenteBeans.conteoInmuebles().size().toString()}],
-                                                        ['Joyeria', #{gerenteBeans.conteoJoyeria().size().toString()}],
-                                                        ['Jugueteria', #{gerenteBeans.conteoJugueteria().size().toString()}],
-                                                        ['Muebles', #{gerenteBeans.conteoMuebles().size().toString()}],
-                                                        ['Relojeria', #{gerenteBeans.conteoRelojeria().size().toString()}],
-                                                        ['Tecnologia', #{gerenteBeans.conteoTecnologia().size().toString()}],
-                                                        ['Vehiculos', #{gerenteBeans.conteoVehiculos().size().toString()}],
-                                                        ['Vehiculos', #{gerenteBeans.conteoArte().size().toString()}]
-                                                    ]);
+                                                        var data = google.visualization.arrayToDataTable([
+                                                            ['Task', 'Hours per Day'],
+                                                            ['Eat', #{gerenteBeans.conteoAntiguedades().size().toString()}],
+                                                            ['Computacion', #{gerenteBeans.conteoComputacion().size().toString()}],
+                                                            ['Deportes', #{gerenteBeans.conteoDeportes().size().toString()}],
+                                                            ['Electrodomesticos', #{gerenteBeans.conteoElectrodomesticos().size().toString()}],
+                                                            ['Industria', #{gerenteBeans.conteoIndustria().size().toString()}],
+                                                            ['Inmuebles', #{gerenteBeans.conteoInmuebles().size().toString()}],
+                                                            ['Joyeria', #{gerenteBeans.conteoJoyeria().size().toString()}],
+                                                            ['Jugueteria', #{gerenteBeans.conteoJugueteria().size().toString()}],
+                                                            ['Muebles', #{gerenteBeans.conteoMuebles().size().toString()}],
+                                                            ['Relojeria', #{gerenteBeans.conteoRelojeria().size().toString()}],
+                                                            ['Tecnologia', #{gerenteBeans.conteoTecnologia().size().toString()}],
+                                                            ['Vehiculos', #{gerenteBeans.conteoVehiculos().size().toString()}],
+                                                            ['Vehiculos', #{gerenteBeans.conteoArte().size().toString()}]
+                                                        ]);
 
-                                                    var options = {
-                                                        title: 'My Daily Activities'
-                                                    };
+                                                        var options = {
+                                                            title: 'My Daily Activities'
+                                                        };
 
-                                                    var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+                                                        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
 
-                                                    chart.draw(data, options);
-                                                }
-                                            </script>
+                                                        chart.draw(data, options);
+                                                    }
+                                                </script>
 
-                                            <body>
-                                                <div id="piechart" style="width: 900px; height: 500px;"></div>
-                                            </body>
+                                                <body>
+                                                    <div id="piechart" style="width: 900px; height: 500px;"></div>
+                                                </body>
                                             </div>
- </p>
+                                        </p>
                                     </div>
                                 </div>
                                 <!--                                Pestaña Productos-->
                                 <div class="tab-pane fade" id="nav-ventas" role="tabpanel" aria-labelledby="nav-ventas-tab">
                                     <div class="container p-4">
                                         <p align="center" class="mt-5 pt-5">
+                                            <f:view>
+                                                <h:form style="font-size: 15pt">
+                                                    <h1><h:outputText value=" "/></h1>
+                                                    <h:dataTable value="#{gerenteBeans.listarSeparados()}" var="item" style="width: 600px">
+                                                        <h:column>
+                                                            <f:facet name="header">
+                                                                <h:outputText value="Code" />
+                                                            </f:facet>
+                                                            <h:outputText value="#{item.idProducto}" />
+                                                        </h:column>
+                                                        <h:column>
+                                                            <f:facet name="header">
+                                                                <h:outputText value="Product" style="margin-left: 20%"/>
+                                                            </f:facet>
+                                                            <h:outputText value="#{item.nombre}" />
+                                                        </h:column>
+                                                        
+                                                        <h:column>
+                                                            <f:facet name="header">
+                                                                <h:outputText value="Category" style="margin-left: 5%"/>
+                                                            </f:facet>
+                                                            <h:outputText value="#{item.categoria}"/>
+                                                        </h:column>
+                                                        <h:column>
+                                                            <f:facet name="header">
+                                                                <h:outputText value="Price" style="margin-left: 5%"/>
+                                                            </f:facet>
+                                                            <h:outputText value="#{item.precio}"/>
+                                                        </h:column>                                                       
+                                                    </h:dataTable>
+                                                </h:form>
+                                            </f:view>
                                         </p>
                                     </div>
                                 </div>

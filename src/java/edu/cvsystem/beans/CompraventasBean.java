@@ -11,6 +11,7 @@ import edu.cvsystem.facades.UsuariosFacade;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import edu.cvsystem.clases.Mailler;
+import javax.faces.context.FacesContext;
 
 @Named(value = "compraventasBean")
 @RequestScoped
@@ -78,4 +79,5 @@ public class CompraventasBean implements Serializable {
     }
     private Usuarios usuarios;
     private Compraventa compraventa;
+    
 }

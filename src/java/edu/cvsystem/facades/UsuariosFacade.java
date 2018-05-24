@@ -32,5 +32,5 @@ public class UsuariosFacade extends AbstractFacade<Usuarios> {
     public EntityManager getEm(){
         return em;
     }
-            
+    
 }

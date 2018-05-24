@@ -4,11 +4,13 @@ import edu.cvsystem.clases.CargaArchivos;
 import edu.cvsystem.clases.Mailler;
 import edu.cvsystem.entidades.Compraventa;
 import edu.cvsystem.entidades.ProductoEmpeno;
+import edu.cvsystem.entidades.ProductoInventario;
 import edu.cvsystem.entidades.Productos;
 import edu.cvsystem.entidades.SolicitudCompraventa;
 import edu.cvsystem.entidades.Usuarios;
 import edu.cvsystem.facades.CompraventaFacade;
 import edu.cvsystem.facades.ProductoEmpenoFacade;
+import edu.cvsystem.facades.ProductoInventarioFacade;
 import edu.cvsystem.facades.ProductosFacade;
 import edu.cvsystem.facades.SolicitudCompraventaFacade;
 import edu.cvsystem.facades.UsuariosFacade;
@@ -34,33 +36,57 @@ public class GerenteBeans implements Serializable {
     public GerenteBeans() {
         producto = new Productos();
         compraventa = new Compraventa();
-        solicitud = new SolicitudCompraventa();        
+        solicitud = new SolicitudCompraventa();
         productoem = new ProductoEmpeno();
         usuario = new Usuarios();
+        productoinventario = new ProductoInventario();
     }
-@EJB ProductoEmpenoFacade productoemfacade;
-    
+    @EJB
+    ProductoEmpenoFacade productoemfacade;
+
     @EJB
     CompraventaFacade compraventaFacade;
+
+    @EJB
+    ProductoInventarioFacade productoInventarioFacade = new ProductoInventarioFacade();
 
     /*Generamos las variables necesarias para el manejo de la entidad Productos*/
     @EJB
     ProductosFacade productofacade = new ProductosFacade();
     Productos producto = new Productos();
     Usuarios usuario = new Usuarios();
-  
+
+    ProductoInventario productoinventario = new ProductoInventario();
 
     /*Generamos las variables necesarias para el manejo de la entidad Solicitudes*/
     @EJB
     SolicitudCompraventaFacade solicitudfacade = new SolicitudCompraventaFacade();
     SolicitudCompraventa solicitud = new SolicitudCompraventa();
     private Compraventa compraventa = new Compraventa();
-    
+
 
     /*aqui generamos las variables necesarias para generar la carga de archivos*/
     private Part file;
     private String nombre;
     private String pathReal;
+
+    public ProductoInventarioFacade getProductoInventarioFacade() {
+        return productoInventarioFacade;
+    }
+
+    public void setProductoInventarioFacade(ProductoInventarioFacade productoInventarioFacade) {
+        this.productoInventarioFacade = productoInventarioFacade;
+    }
+
+    public ProductoInventario getProductoinventario() {
+        return productoinventario;
+    }
+
+    public void setProductoinventario(ProductoInventario productoinventario) {
+        this.productoinventario = productoinventario;
+    }
+
+    
 
     public Part getFile() {
         return file;
@@ -149,16 +175,15 @@ public class GerenteBeans implements Serializable {
     public void setCompraventa(Compraventa compraventa) {
         this.compraventa = compraventa;
     }
-  
-      //aqui genero los set y get para filtrar por categoria 
-       public String getOpcion() {
+
+    //aqui genero los set y get para filtrar por categoria 
+    public String getOpcion() {
         return opcion;
     }
 
     public void setOpcion(String opcion) {
         this.opcion = opcion;
     }
-
 
     public String editarProducto(Productos editproducto) {
         producto = editproducto;
@@ -220,13 +245,13 @@ public class GerenteBeans implements Serializable {
         solicitud = new SolicitudCompraventa();
 
     }
-    
-    public float sumatoria(){
+
+    public float sumatoria() {
         float g = productofacade.suma(producto.getPrecio());
         System.out.println(g);
         return g;
     }
-    
+
     //metodo para filtrar por precio
     public List<Productos> filtrarPrecio() {
         Query consulta = productofacade.getEm().createQuery("SELECT  p FROM Productos p WHERE p.precio = :precio");
@@ -234,17 +259,17 @@ public class GerenteBeans implements Serializable {
         return consulta.getResultList();
     }
 
-     
-   public Compraventa idCompraventa(){
-       Query consulta = compraventaFacade.getEm().createQuery("SELECT c FROM Compraventa c WHERE c.idCompraventa = :idCompraventa");
-       consulta.setParameter("idCompraventa", getUsuarioSesion());
-       List<Compraventa> idusuario = consulta.getResultList();
-        Compraventa id = idusuario.get(0) ;
-       return id;   
-   }
-    
-     //metodo para filtrar las solicitudes por compraventa
-     public List<SolicitudCompraventa> listarSolicitudes() {
+    public Compraventa idCompraventa() {
+        Query consulta = compraventaFacade.getEm().createQuery("SELECT c FROM Compraventa c "
+                + "WHERE c.idCompraventa = :idCompraventa");
+        consulta.setParameter("idCompraventa", getUsuarioSesion());
+        List<Compraventa> idusuario = consulta.getResultList();
+        Compraventa id = idusuario.get(0);
+        return id;
+    }
+
+    //metodo para filtrar las solicitudes por compraventa
+    public List<SolicitudCompraventa> listarSolicitudes() {
 //        return solicitudfacade.findAll();
         Query consulta = solicitudfacade.getEm().createQuery("SELECT s FROM SolicitudCompraventa s WHERE s.idUsuarioServicios = :idUsuariosServicios AND s.idCompraventa = :idCompraventa");
         consulta.setParameter("idUsuariosServicios", new Usuarios(0).getIdUsuario());
@@ -256,39 +281,44 @@ public class GerenteBeans implements Serializable {
         consulta.setParameter("idCompraventa", compraventas.get(0));
         return consulta.getResultList();
     }
-     
-     public List<SolicitudCompraventa> conteoSolicitudes(){
-         Query consulta = solicitudfacade.getEm().createQuery("SELECT (s) FROM SolicitudCompraventa s WHERE s.idUsuarioServicios = :idUsuariosServicios AND s.idCompraventa = :idCompraventa");
+
+    public List<SolicitudCompraventa> conteoSolicitudes() {
+        Query consulta = solicitudfacade.getEm().createQuery("SELECT (s) FROM SolicitudCompraventa s WHERE s.idUsuarioServicios = :idUsuariosServicios AND s.idCompraventa = :idCompraventa");
         consulta.setParameter("idUsuariosServicios", new Usuarios(0).getIdUsuario());
-         
+
         Query consultaCompraventa = compraventaFacade.getEm().createQuery("SELECT c FROM Compraventa c WHERE c.idUsuario = :idUsuario");
-         consultaCompraventa.setParameter("idUsuario", getUsuarioSesion());
+        consultaCompraventa.setParameter("idUsuario", getUsuarioSesion());
         List<Compraventa> compraventas = consultaCompraventa.getResultList();
-       
 
         consulta.setParameter("idCompraventa", compraventas.get(0));
         return consulta.getResultList();
 
-     }
-    
+    }
+
     //metodos para filtrar por categorias y enviar datos a los charts.
 //     public List<Productos> conteo(){
 //         Query consulta = productofacade.getEm().createQuery("SELECT count(p) FROM Productos p WHERE p.categoria = :categoria");
 //         consulta.setParameter("categoria", "Antiques");
 //         return consulta.getResultList();         
 //     }
-     
-     public List<Productos> listaProductos(){//este metodo lista los productos por casa comercial.
-        Query consulta = productofacade.getEm().createQuery("SELECT p FROM Productos p WHERE p.idCompraventa = :idCompraventa");
-              
+    
+    
+    //------------------------//
+    
+    //este metodo lista los productos por casa comercial.
+    public List<Productos> listaProductos() {
+        Query consulta = productofacade.getEm().createQuery("SELECT p FROM Productos p "
+                + "WHERE p.idCompraventa = :idCompraventa AND p.estatus = :estatus");
+
         Query consultacompraventa = compraventaFacade.getEm().createQuery("SELECT c FROM Compraventa c WHERE c.idUsuario = :idUsuario");
         consultacompraventa.setParameter("idUsuario", getUsuarioSesion());
-        List<Compraventa> listacompraventas=consultacompraventa.getResultList();
-       
-        consulta.setParameter("idCompraventa", listacompraventas.get(0) );
+        List<Compraventa> listacompraventas = consultacompraventa.getResultList();
+
+        consulta.setParameter("idCompraventa", listacompraventas.get(0));
+        consulta.setParameter("estatus", "Disponible");
         return consulta.getResultList();
     }
-    
+
     public List<Productos> conteoAntiguedades() {
         Query consulta = productofacade.getEm().createQuery("SELECT (p) FROM Productos p WHERE p.categoria = :categoria AND p.idCompraventa = :idCompraventa");
         consulta.setParameter("categoria", "Antiguedades");
@@ -300,20 +330,20 @@ public class GerenteBeans implements Serializable {
         consulta.setParameter("idCompraventa", listacompraventas.get(0));
         return consulta.getResultList();
     }
-    
-     public List<Productos> conteoComputacion(){
-         Query consulta = productofacade.getEm().createQuery("SELECT (p) FROM Productos p WHERE p.categoria = :categoria AND p.idCompraventa = :idCompraventa");
-         consulta.setParameter("categoria", "Computacion");
-         
-         Query consultacompraventa = compraventaFacade.getEm().createQuery("SELECT c FROM Compraventa c Where c.idUsuario = :idUsuario");
-         consultacompraventa.setParameter("idUsuario", getUsuarioSesion());
-         List<Compraventa> listacompraventas = consultacompraventa.getResultList();
-         
-         consulta.setParameter("idCompraventa", listacompraventas.get(0));
-         return consulta.getResultList();   
-     }
-     
-     public List<Productos> conteoDeportes(){
+
+    public List<Productos> conteoComputacion() {
+        Query consulta = productofacade.getEm().createQuery("SELECT (p) FROM Productos p WHERE p.categoria = :categoria AND p.idCompraventa = :idCompraventa");
+        consulta.setParameter("categoria", "Computacion");
+
+        Query consultacompraventa = compraventaFacade.getEm().createQuery("SELECT c FROM Compraventa c Where c.idUsuario = :idUsuario");
+        consultacompraventa.setParameter("idUsuario", getUsuarioSesion());
+        List<Compraventa> listacompraventas = consultacompraventa.getResultList();
+
+        consulta.setParameter("idCompraventa", listacompraventas.get(0));
+        return consulta.getResultList();
+    }
+
+    public List<Productos> conteoDeportes() {
         Query consulta = productofacade.getEm().createQuery("SELECT (p) FROM Productos p WHERE p.categoria = :categoria AND p.idCompraventa = :idCompraventa");
         consulta.setParameter("categoria", "Deportes");
 
@@ -324,9 +354,9 @@ public class GerenteBeans implements Serializable {
         consulta.setParameter("idCompraventa", listacompraventas.get(0));
         return consulta.getResultList();
     }
-     
-     public List<Productos> conteoElectrodomesticos(){
-         Query consulta = productofacade.getEm().createQuery("SELECT (p) FROM Productos p WHERE p.categoria = :categoria AND p.idCompraventa = :idCompraventa");
+
+    public List<Productos> conteoElectrodomesticos() {
+        Query consulta = productofacade.getEm().createQuery("SELECT (p) FROM Productos p WHERE p.categoria = :categoria AND p.idCompraventa = :idCompraventa");
         consulta.setParameter("categoria", "Electrodomesticos");
 
         Query consultacompraventa = compraventaFacade.getEm().createQuery("SELECT c FROM Compraventa c WHERE c.idUsuario = :idUsuario");
@@ -334,11 +364,11 @@ public class GerenteBeans implements Serializable {
         List<Compraventa> listacompraventas = consultacompraventa.getResultList();
 
         consulta.setParameter("idCompraventa", listacompraventas.get(0));
-        return consulta.getResultList();         
-     }
-     
-     public List<Productos> conteoIndustria(){
-          Query consulta = productofacade.getEm().createQuery("SELECT (p) FROM Productos p WHERE p.categoria = :categoria AND p.idCompraventa = :idCompraventa");
+        return consulta.getResultList();
+    }
+
+    public List<Productos> conteoIndustria() {
+        Query consulta = productofacade.getEm().createQuery("SELECT (p) FROM Productos p WHERE p.categoria = :categoria AND p.idCompraventa = :idCompraventa");
         consulta.setParameter("categoria", "Industria");
 
         Query consultacompraventa = compraventaFacade.getEm().createQuery("SELECT c FROM Compraventa c WHERE c.idUsuario = :idUsuario");
@@ -346,11 +376,11 @@ public class GerenteBeans implements Serializable {
         List<Compraventa> listacompraventas = consultacompraventa.getResultList();
 
         consulta.setParameter("idCompraventa", listacompraventas.get(0));
-        return consulta.getResultList();  
-     }
-     
-     public List<Productos> conteoInmuebles(){
-          Query consulta = productofacade.getEm().createQuery("SELECT (p) FROM Productos p WHERE p.categoria = :categoria AND p.idCompraventa = :idCompraventa");
+        return consulta.getResultList();
+    }
+
+    public List<Productos> conteoInmuebles() {
+        Query consulta = productofacade.getEm().createQuery("SELECT (p) FROM Productos p WHERE p.categoria = :categoria AND p.idCompraventa = :idCompraventa");
         consulta.setParameter("categoria", "Inmuebles");
 
         Query consultacompraventa = compraventaFacade.getEm().createQuery("SELECT c FROM Compraventa c WHERE c.idUsuario = :idUsuario");
@@ -358,11 +388,11 @@ public class GerenteBeans implements Serializable {
         List<Compraventa> listacompraventas = consultacompraventa.getResultList();
 
         consulta.setParameter("idCompraventa", listacompraventas.get(0));
-        return consulta.getResultList();         
-     }
-     
-     public List<Productos> conteoJoyeria(){
-          Query consulta = productofacade.getEm().createQuery("SELECT (p) FROM Productos p WHERE p.categoria = :categoria AND p.idCompraventa = :idCompraventa");
+        return consulta.getResultList();
+    }
+
+    public List<Productos> conteoJoyeria() {
+        Query consulta = productofacade.getEm().createQuery("SELECT (p) FROM Productos p WHERE p.categoria = :categoria AND p.idCompraventa = :idCompraventa");
         consulta.setParameter("categoria", "Joyeria");
 
         Query consultacompraventa = compraventaFacade.getEm().createQuery("SELECT c FROM Compraventa c WHERE c.idUsuario = :idUsuario");
@@ -370,11 +400,11 @@ public class GerenteBeans implements Serializable {
         List<Compraventa> listacompraventas = consultacompraventa.getResultList();
 
         consulta.setParameter("idCompraventa", listacompraventas.get(0));
-        return consulta.getResultList();       
-     }
-     
-     public List<Productos> conteoJugueteria(){
-          Query consulta = productofacade.getEm().createQuery("SELECT (p) FROM Productos p WHERE p.categoria = :categoria AND p.idCompraventa = :idCompraventa");
+        return consulta.getResultList();
+    }
+
+    public List<Productos> conteoJugueteria() {
+        Query consulta = productofacade.getEm().createQuery("SELECT (p) FROM Productos p WHERE p.categoria = :categoria AND p.idCompraventa = :idCompraventa");
         consulta.setParameter("categoria", "Jugueteria");
 
         Query consultacompraventa = compraventaFacade.getEm().createQuery("SELECT c FROM Compraventa c WHERE c.idUsuario = :idUsuario");
@@ -382,11 +412,11 @@ public class GerenteBeans implements Serializable {
         List<Compraventa> listacompraventas = consultacompraventa.getResultList();
 
         consulta.setParameter("idCompraventa", listacompraventas.get(0));
-        return consulta.getResultList();         
-     }
-     
-     public List<Productos> conteoMuebles(){
-          Query consulta = productofacade.getEm().createQuery("SELECT (p) FROM Productos p WHERE p.categoria = :categoria AND p.idCompraventa = :idCompraventa");
+        return consulta.getResultList();
+    }
+
+    public List<Productos> conteoMuebles() {
+        Query consulta = productofacade.getEm().createQuery("SELECT (p) FROM Productos p WHERE p.categoria = :categoria AND p.idCompraventa = :idCompraventa");
         consulta.setParameter("categoria", "Muebles");
 
         Query consultacompraventa = compraventaFacade.getEm().createQuery("SELECT c FROM Compraventa c WHERE c.idUsuario = :idUsuario");
@@ -394,10 +424,11 @@ public class GerenteBeans implements Serializable {
         List<Compraventa> listacompraventas = consultacompraventa.getResultList();
 
         consulta.setParameter("idCompraventa", listacompraventas.get(0));
-        return consulta.getResultList();         
-     }
-     public List<Productos> conteoRelojeria(){
-         Query consulta = productofacade.getEm().createQuery("SELECT (p) FROM Productos p WHERE p.categoria = :categoria AND p.idCompraventa = :idCompraventa");
+        return consulta.getResultList();
+    }
+
+    public List<Productos> conteoRelojeria() {
+        Query consulta = productofacade.getEm().createQuery("SELECT (p) FROM Productos p WHERE p.categoria = :categoria AND p.idCompraventa = :idCompraventa");
         consulta.setParameter("categoria", "Relogeria");
 
         Query consultacompraventa = compraventaFacade.getEm().createQuery("SELECT c FROM Compraventa c WHERE c.idUsuario = :idUsuario");
@@ -405,11 +436,11 @@ public class GerenteBeans implements Serializable {
         List<Compraventa> listacompraventas = consultacompraventa.getResultList();
 
         consulta.setParameter("idCompraventa", listacompraventas.get(0));
-        return consulta.getResultList();        
-     }
-     
-     public List<Productos> conteoTecnologia(){
-          Query consulta = productofacade.getEm().createQuery("SELECT (p) FROM Productos p WHERE p.categoria = :categoria AND p.idCompraventa = :idCompraventa");
+        return consulta.getResultList();
+    }
+
+    public List<Productos> conteoTecnologia() {
+        Query consulta = productofacade.getEm().createQuery("SELECT (p) FROM Productos p WHERE p.categoria = :categoria AND p.idCompraventa = :idCompraventa");
         consulta.setParameter("categoria", "Tecnologia");
 
         Query consultacompraventa = compraventaFacade.getEm().createQuery("SELECT c FROM Compraventa c WHERE c.idUsuario = :idUsuario");
@@ -417,11 +448,11 @@ public class GerenteBeans implements Serializable {
         List<Compraventa> listacompraventas = consultacompraventa.getResultList();
 
         consulta.setParameter("idCompraventa", listacompraventas.get(0));
-        return consulta.getResultList();       
-     }
-     
-     public List<Productos> conteoVehiculos(){
-          Query consulta = productofacade.getEm().createQuery("SELECT (p) FROM Productos p WHERE p.categoria = :categoria AND p.idCompraventa = :idCompraventa");
+        return consulta.getResultList();
+    }
+
+    public List<Productos> conteoVehiculos() {
+        Query consulta = productofacade.getEm().createQuery("SELECT (p) FROM Productos p WHERE p.categoria = :categoria AND p.idCompraventa = :idCompraventa");
         consulta.setParameter("categoria", "Vehiculos");
 
         Query consultacompraventa = compraventaFacade.getEm().createQuery("SELECT c FROM Compraventa c WHERE c.idUsuario = :idUsuario");
@@ -429,11 +460,11 @@ public class GerenteBeans implements Serializable {
         List<Compraventa> listacompraventas = consultacompraventa.getResultList();
 
         consulta.setParameter("idCompraventa", listacompraventas.get(0));
-        return consulta.getResultList();       
-     }
-     
-     public List<Productos> conteoArte(){
-          Query consulta = productofacade.getEm().createQuery("SELECT (p) FROM Productos p WHERE p.categoria = :categoria AND p.idCompraventa = :idCompraventa");
+        return consulta.getResultList();
+    }
+
+    public List<Productos> conteoArte() {
+        Query consulta = productofacade.getEm().createQuery("SELECT (p) FROM Productos p WHERE p.categoria = :categoria AND p.idCompraventa = :idCompraventa");
         consulta.setParameter("categoria", "Arte");
 
         Query consultacompraventa = compraventaFacade.getEm().createQuery("SELECT c FROM Compraventa c WHERE c.idUsuario = :idUsuario");
@@ -441,19 +472,19 @@ public class GerenteBeans implements Serializable {
         List<Compraventa> listacompraventas = consultacompraventa.getResultList();
 
         consulta.setParameter("idCompraventa", listacompraventas.get(0));
-        return consulta.getResultList(); 
-     }
-     
-     private ProductoEmpeno productoem = new ProductoEmpeno();
-     
+        return consulta.getResultList();
+    }
+
+    private ProductoEmpeno productoem = new ProductoEmpeno();
+
     public ProductoEmpeno getProductoem() {
         return productoem;
     }
 
     public void setProductoem(ProductoEmpeno productoem) {
-        this.productoem = productoem; 
+        this.productoem = productoem;
     }
-    
+
     float dias;
 
     public float getDias() {
@@ -463,29 +494,33 @@ public class GerenteBeans implements Serializable {
     public void setDias(float dias) {
         this.dias = dias;
     }
-    
-    
-     public Float calcularEmpeño(){
-         
-        
-        productoem.setInteres((compraventa.getInteresAnual()/360)*productoem.getDias());//agregar los dias de empeño
-        productoem.setPrecioapagar(solicitud.getPrecio() * productoem.getInteres()); 
-        
-       
-         
-         return null;
-         
-     }
-     public void empeñarProducto(){
-         
-         productoemfacade.create(productoem);         
-     }
 
-  
-   
- 
-        
+    public Float calcularEmpeño() {
+
+        productoem.setInteres((compraventa.getInteresAnual() / 360) * productoem.getDias());//agregar los dias de empeño
+        productoem.setPrecioapagar(solicitud.getPrecio() * productoem.getInteres());
+
+        return null;
+
     }
 
+    public void empeñarProducto() {
 
- 
+        productoemfacade.create(productoem);
+    }
+    
+    //metodo para listar los productos que se encuetran separados en el inventario de la casa comercial
+    public List<Productos> listarSeparados(){
+       Query consulta = productofacade.getEm().createQuery("SELECT p FROM Productos p "
+               + "WHERE p.idCompraventa = :idCompraventa AND p.estatus = :estatus");
+
+        Query consultacompraventa = compraventaFacade.getEm().createQuery("SELECT c FROM Compraventa c WHERE c.idUsuario = :idUsuario");
+        consultacompraventa.setParameter("idUsuario", getUsuarioSesion());
+        List<Compraventa> listacompraventas = consultacompraventa.getResultList();
+
+        consulta.setParameter("idCompraventa", listacompraventas.get(0));
+        consulta.setParameter("estatus", "Separado" );
+        return consulta.getResultList();
+    }
+
+}
