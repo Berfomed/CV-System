@@ -48,7 +48,7 @@ public class ProductosFacade extends AbstractFacade<Productos> {
     
 }
      public String importar(String archivo ,String tabla){
-        Query query = em.createNativeQuery("LOAD DATA LOCAL INFILE '"+archivo+"' REPLACE INTO TABLE "+tabla+" FIELDS TERMINATED BY ';' ENCLOSED BY '\\\"' ESCAPED BY '\\\\' LINES TERMINATED BY '\\r\\n'");
+        Query query = em.createNativeQuery("LOAD DATA INFILE 'C:\\\\xampp\\\\tmp\\\\phpA629.tmp' REPLACE INTO TABLE `productos` FIELDS TERMINATED BY ';' ENCLOSED BY '\\\"' ESCAPED BY '\\\\' LINES TERMINATED BY '\\r\\n'");
         int resultado = query.executeUpdate();
         String frase = resultado+" filas afectadas";
         return frase;
