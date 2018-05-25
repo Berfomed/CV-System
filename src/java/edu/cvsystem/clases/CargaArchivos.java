@@ -213,12 +213,13 @@ public class CargaArchivos {
     
 
     public String upload() {
-        String path = FacesContext.getCurrentInstance().getExternalContext().getRealPath("imagenes");
+        String path = FacesContext.getCurrentInstance().getExternalContext().getRealPath("resources");
         path = path.substring(0, path.indexOf("\\build"));
-        path = path + "\\web\\imagenes\\";
+        path = path + "\\web\\resources\\imagenes\\";
         try {
             this.nombre = file.getSubmittedFileName(); /*para guardar el nombre*/
-            pathReal = "/CV-System/imagenes/" + nombre;
+//            pathReal = "/CV-System/resources/imagenes/" + nombre;
+            pathReal = "imagenes\\" + nombre;
             path = path + this.nombre;
             InputStream in = file.getInputStream();
             

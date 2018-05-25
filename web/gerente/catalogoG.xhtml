@@ -55,11 +55,11 @@
                             <h:column>
                                 <f:facet name="header">
                                     <h:outputText value="Image" style="margin-left: 20%"/>
-                                </f:facet>                   
-                                <a href="http://localhost:8080#{item.fotos}" style="color: purple">Imagenes</a>
-
+                                </f:facet> 
+                                <button  data-target="#exampleModal#{item.idProducto}" type="button"  data-toggle="modal"
+                                         style="background-color: transparent; margin-left: 10%; border: none; margin-left: 30%" 
+                                         class="fas fa-image btn-outline-primary"></button>
                             </h:column>
-
                             <h:column>
                                 <f:facet name="header">
                                     <h:outputText value="compraventa" style="margin-left: 20%"/>
@@ -76,86 +76,42 @@
 
                         </h:dataTable>
                         <div style="margin-left: 30%">
-<!--                            <button  data-target="#exampleModal" type="button"  data-toggle="modal"  
-                                     style="background-color: transparent; margin-left: 10%" class="btn-outline-success">Agregar Producto <i class="fa fa-plus-square-o" aria-hidden="true"></i></button>-->
-                             <h:commandButton class="btn-outline-success" value="Add" action="registropro.xhtml" style="margin-left: 10%; margin-top: 2%; margin-bottom: 2%; "/>
-                        
+                            <h:commandButton class="btn-outline-success" value="Add" action="registropro.xhtml" style="margin-left: 10%; margin-top: 2%; margin-bottom: 2%; "/>
+
                             <h:commandButton class="btn-outline-warning" value="Download Report"  
                                              action="#{pdfBeans.PDF(actionEvent)}" style="margin-left: 10%; margin-top: 2%; margin-bottom: 2%; "/>
                         </div>
-                          </h:form>
-                        
-                        <!-- Modal -->
-                        <div  style="margin-top: 50px" class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    </h:form>                  
+                    <!--                    Modal Buttom-->
+                    <!--                        <button  data-target="#exampleModal" type="button"  data-toggle="modal"  
+                                                         style="background-color: transparent; margin-left: 10%" class="btn-outline-success">Agregar Producto <i class="fa fa-plus-square-o" aria-hidden="true"></i></button>-->
+                    <!-- Modal -->
+                    <c:forEach items="#{gerenteBeans.listaProductos()}" var="foto">
+
+                        <div  style="" class="modal fade" id="exampleModal#{foto.idProducto}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-lg pt-5" role="document">
                                 <div class="modal-content bg-dark text-light">
                                     <div class="modal-header">
-                                        <h5 align="center" class="modal-title" id="exampleModalLabel">Casa Comercial: #{usuariosBean.usuarioSesion.idUsuario}</h5>
+                                        <h5 align="center" class="modal-title" id="exampleModalLabel">Product: #{foto.nombre}</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
-                                    <h:form enctype="multipart/form-data" style=" margin-left: 25%; width: 50%;font-family: garamond; font-size: 15pt; border: solid green 0.3px ;border-bottom: solid graytext 0.5px; border-bottom-left-radius: 20%; border-bottom-right-radius: 20%; border-top-left-radius: 20%; border-top-right-radius: 20%; margin-top: 2%">
-                                        <h1 align="center"><h:outputText value="Add New Product" class="titulo_footer text-success text-center" style="font-size: 50pt"/></h1>
-                                        <h:panelGrid class="form-group row" style="margin-left: 20%">
-                                            <!--                             <div class="form-group row" >
-                                                                        <h:outputLabel  value="Product Code" for="idproducto" class="col-12 col-form-label" />
-                                                                        <h:inputText  class="form-control-sm col-12" id="idProducto" value="#{cargaarchivos.producto.idProducto}" title="Nombre" required="true" requiredMessage="The Nombre field is required."/>
-                                                                        </div>-->
-                                            <div class="form-group row" >
-                                                <h:outputLabel  value="Product Name" for="nombre" class="col-12 col-form-label" />
-                                                <h:inputText  class="form-control-sm col-12" id="nombre" value="#{cargaarchivos.producto.nombre}" title="Nombre" required="true" requiredMessage="The Nombre field is required." />
-                                            </div>
-                                            <div class="form-group row" >
-                                                <h:outputLabel value="Description" for="descripcion" class="col-2 col-form-label"/>
-                                                <h:inputText class="form-control-sm col-12" id="descripcion" value="#{cargaarchivos.producto.descripcion}" title="Descripcion" required="true" requiredMessage="The Descripcion field is required."/>
-                                            </div>
-                                            <div class="form-group row" >
-                                                <h:outputLabel value="Category" for="categoria" class="col-2 col-form-label"/>                            
-                                                <h:selectOneMenu  class="form-control-sm col-12" value="#{cargaarchivos.producto.categoria}" title="Categoria" required="true" requiredMessage="The description field is required">   
-                                                    <f:selectItem itemValue="" itemLabel=""/>
-                                                    <f:selectItem itemValue="Antiguedades" itemLabel="Antiguedades"/>
-                                                    <f:selectItem itemValue="Computacion" itemLabel="Computacion"/>
-                                                    <f:selectItem itemValue="Deportes" itemLabel="Deportes"/>
-                                                    <f:selectItem itemValue="Electrodomesticos" itemLabel="Electrodomesticos"/>
-                                                    <f:selectItem itemValue="Industria" itemLabel="Industry"/>
-                                                    <f:selectItem itemValue="Inmuebles" itemLabel="Inmuebles"/>
-                                                    <f:selectItem itemValue="Joyeria" itemLabel="Joyeria"/>
-                                                    <f:selectItem itemValue="Jugueteria" itemLabel="Jugueteria"/>
-                                                    <f:selectItem itemValue="Muebles" itemLabel="Muebles"/>
-                                                    <f:selectItem itemValue="Relojeria" itemLabel="Relojeria"/>
-                                                    <f:selectItem itemValue="Tecnologia" itemLabel="Tecnologia"/>
-                                                    <f:selectItem itemValue="Vehiculos" itemLabel="Vehiculos"/>
-                                                    <f:selectItem itemValue="Arte" itemLabel="Arte"/>
-                                                </h:selectOneMenu>                           
-                                                <!--<h:inputText class="form-control-sm col-12" id="categoria" value="#{cargaarchivos.producto.categoria}" title="Categoria" required="true" requiredMessage="The Categoria field is required."/>-->
-                                            </div>
-                                            <div class="form-group row" >
-                                                <h:outputLabel value="Price" for="precio" class="col-2 col-form-label"/>
-                                                <h:inputText class="form-control-sm col-12" id="precio" value="#{cargaarchivos.producto.precio}" title="Precio" label="$" required="true" requiredMessage="The Precio field is required."/>
-                                            </div>
-                                            <div class="form-group row" >
-                                                <h:outputLabel value="Images" for="fotos" class="col-2 col-form-label"/>
-                                                <h:inputFile class="form-control-sm col-12 btn-outline-dark" id="fotos" value="#{cargaarchivos.file}" title="Fotos" />
-                                            </div>
-                                            <div>
-                                            </div>
-                                            <div>
-                                                <h:commandButton value="Add Product" action="#{cargaarchivos.upload()}"  class="btn-outline-success" style=" margin-top: 10%; margin-bottom: 2%; float:left"/> 
 
-                                            </div>
-                                        </h:panelGrid>                        
-                                    </h:form>      
-                                    <h:form style="margin-top: -4.8%">
-                                        <h:commandButton value="Cancel" action="catalogoG" class="btn-outline-danger" style="margin-left: 50%; width: 150px; height: 38px; font-size: 15pt"/>                   
-                                    </h:form>
-                                   <!--fin modal -->                                
+                                    <div class="modal-body">      
+                                        <h:graphicImage  name="#{foto.fotos}" style="margin-left: 20%; width: 500px; height: 300px"/>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
+                                    </div>
+                                    <!--fin modal -->                                
                                 </div>
                             </div>
                         </div>
-                  
+                    </c:forEach>
+
                 </f:view>
- </ui:define>
+            </ui:define>
         </ui:composition>
+      
     </h:body>
 </html>

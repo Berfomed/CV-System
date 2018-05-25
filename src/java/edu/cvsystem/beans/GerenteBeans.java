@@ -305,6 +305,13 @@ public class GerenteBeans implements Serializable {
     
     //------------------------//
     
+    public String pathFoto(String foto){
+        String path = FacesContext.getCurrentInstance().getExternalContext().getRealPath("imagenes").replace("\\build", "");
+        path = path + foto;
+        System.out.println(path);       
+        return path;
+    }
+    
     //este metodo lista los productos por casa comercial.
     public List<Productos> listaProductos() {
         Query consulta = productofacade.getEm().createQuery("SELECT p FROM Productos p "
