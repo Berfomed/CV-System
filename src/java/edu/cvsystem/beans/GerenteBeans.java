@@ -43,6 +43,7 @@ public class GerenteBeans implements Serializable {
     }
     @EJB
     ProductoEmpenoFacade productoemfacade;
+    ProductoEmpeno productoemp = new ProductoEmpeno();
 
     @EJB
     CompraventaFacade compraventaFacade;
@@ -63,6 +64,10 @@ public class GerenteBeans implements Serializable {
     SolicitudCompraventaFacade solicitudfacade = new SolicitudCompraventaFacade();
     SolicitudCompraventa solicitud = new SolicitudCompraventa();
     private Compraventa compraventa = new Compraventa();
+    
+    @EJB
+    ProductoEmpenoFacade productoempenofacade = new ProductoEmpenoFacade();
+    
 
 
     /*aqui generamos las variables necesarias para generar la carga de archivos*/
@@ -502,19 +507,19 @@ public class GerenteBeans implements Serializable {
         this.dias = dias;
     }
 
-    public Float calcularEmpeño() {
-
-        productoem.setInteres((compraventa.getInteresCompraventa() / 360) * productoem.getDias());//agregar los dias de empeño
-        productoem.setPrecioapagar(solicitud.getPrecio() * productoem.getInteres());
-
-        return null;
-
-    }
-
     public void empeñarProducto() {
 
         productoemfacade.create(productoem);
     }
+
+    
+    /*Metodo para calcular el valor del interes diario*/
+//    public Float calcularEmpeño() {
+//        productoem.setInteres((compraventa.getInteresCompraventa() / 360) * productoem.getDias());//agregar los dias de empeño
+//        productoem.setPrecioapagar(solicitud.getPrecio() * productoem.getInteres());
+//        return null;
+//    }
+
     
 
     //metodo para listar los productos que se encuetran separados en el inventario de la casa comercial
@@ -528,6 +533,18 @@ public class GerenteBeans implements Serializable {
 
         consulta.setParameter("idCompraventa", listacompraventas.get(0));
         consulta.setParameter("estatus", "Separado" );
+        return consulta.getResultList();
+    }
+    
+    public List<ProductoEmpeno> listarEmpeñados(){
+        Query consulta = productoempenofacade.getEm().createQuery("SELECT p FROM ProductoEmpeno p WHERE p.idCompraventa = :idCompraventa");
+        
+        Query consultacompraventa = compraventaFacade.getEm().createQuery("SELECT c FROM Compraventa c WHERE c.idUsuario = :idUsuario");
+        consultacompraventa.setParameter("idUsuario", getUsuarioSesion());
+        List<Compraventa> listacompraventas = consultacompraventa.getResultList();
+
+        consulta.setParameter("idCompraventa", listacompraventas.get(0));
+       
         return consulta.getResultList();
     }
 

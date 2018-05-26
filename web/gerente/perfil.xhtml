@@ -9,19 +9,19 @@
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:body>
         <ui:composition template="../WEB-INF/templates/template_gerente.xhtml">
-            <ui:define name="title">Mi perfil</ui:define>
+            <ui:define name="title">My Profile</ui:define>
             <ui:define name="content">
                 <nav aria-label="breadcrumb" style="left: 0; margin-top: -2%; font-size: 10pt"
                      class="position-absolute w-100 animated slideInRight">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><h:link value="Inicio" outcome="index" class="text-primary"/></li>
+                        <li class="breadcrumb-item"><h:link value="Home" outcome="index" class="text-primary"/></li>
                         <li class="breadcrumb-item active" aria-current="page">Request</li>
                     </ol>
                 </nav>
                 <div class="container p-5">
                     <div class="row">
                         <div class="col-4">
-                            <h5 align="center" class="text-primary h3 pr-5">Datos personales</h5>
+                            <h5 align="center" class="text-primary h3 pr-5">Personal Information</h5>
                             <div class="card pt-3" style="width: 18rem;">
                                 <h:graphicImage library="img" class="card-img-top" name="#{usuariosBean.pathFoto}" alt="Card image cap" height="250"/>
                                 <div class="card-body pb-2">
@@ -30,22 +30,23 @@
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item"><i class="fas fa-envelope text-warning"></i> #{usuariosBean.usuarioSesion.correoElectronico}</li>
                                     <li class="list-group-item"><i class="fas fa-address-card text-primary"></i> #{usuariosBean.usuarioSesion.numeroDocumento}</li>
-                                    <li class="list-group-item"><i class="fas fa-birthday-cake text-danger"></i> #{usuariosBean.usuarioSesion.edad} años</li>
+                                    <li class="list-group-item"><i class="fas fa-birthday-cake text-danger"></i> #{usuariosBean.usuarioSesion.edad} years</li>
                                     <li class="list-group-item"><i class="fas fa-map-marker text-danger"></i> #{usuariosBean.usuarioSesion.direccion}</li>
                                     <li class="list-group-item"><i class="fas fa-phone-square text-success"></i> #{usuariosBean.usuarioSesion.celular} - #{usuariosBean.usuarioSesion.telefono}</li>
                                 </ul>
                                 <div class="card-body">
-                                    <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#modal_editar_info">Editar</button>
+                                    <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#modal_editar_info">Edit Profile</button>
                                 </div>
                             </div>
                         </div>
                         <div class="col-8">
-                            <h5 align="center" class="text-primary h3 pr-5">Historial</h5>
+                            <h5 align="center" class="text-primary h3 pr-5">Options</h5>
                             <nav>
                                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                    <a class="nav-item text-dark nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-compras" role="tab" aria-controls="nav-compras" aria-selected="true"><strong>Productos</strong></a>
-                                    <a class="nav-item text-dark nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-ventas" role="tab" aria-controls="nav-ventas" aria-selected="false"><strong>Productos Vendidos</strong></a>
-                                    <a class="nav-item text-dark nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-empeños" role="tab" aria-controls="nav-empeños" aria-selected="false"><strong>Tienes #{gerenteBeans.conteoSolicitudes().size().toString()} Solicitudes</strong></a>
+                                    <a class="nav-item text-dark nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-compras" role="tab" aria-controls="nav-compras" aria-selected="true"><strong>Items Chart</strong></a>
+                                    <a class="nav-item text-dark nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-ventas" role="tab" aria-controls="nav-ventas" aria-selected="false"><strong>Sold Products</strong></a>
+                                    <a class="nav-item text-dark nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-Solicitudes" role="tab" aria-controls="nav-Solicitudes" aria-selected="false"><strong>You have #{gerenteBeans.conteoSolicitudes().size().toString()} Requests</strong></a>
+                            
                                 </div>
                             </nav>
                             <div class="tab-content border-top-0 card" id="nav-tabContent" style="height: 652px">
@@ -78,7 +79,7 @@
                                                         ]);
 
                                                         var options = {
-                                                            title: 'My Daily Activities'
+                                                            title: 'Inventory Products'
                                                         };
 
                                                         var chart = new google.visualization.PieChart(document.getElementById('piechart'));
@@ -94,7 +95,7 @@
                                         </p>
                                     </div>
                                 </div>
-                                <!--                                Pestaña Productos-->
+                                <!--Pestaña Productos-->
                                 <div class="tab-pane fade" id="nav-ventas" role="tabpanel" aria-labelledby="nav-ventas-tab">
                                     <div class="container p-4">
                                         <p align="center" class="mt-5 pt-5">
@@ -135,7 +136,7 @@
                                 </div>
 
                                 <!--Pestaña Solicitudes-->
-                                <div class="tab-pane fade" id="nav-empeños" role="tabpanel" aria-labelledby="nav-empeños-tab">
+                                <div class="tab-pane fade" id="nav-Solicitudes" role="tabpanel" aria-labelledby="nav-Solicitudes-tab">
                                     <div class="container p-4">
                                         <f:view>                    
                                             <h:form>                      
@@ -163,13 +164,15 @@
                         </div>
                     </div>
                 </div>
+                
+                 
 
                 <!-- Modal Editar Información -->
                 <div class="modal fade" id="modal_editar_info" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
                     <div class="modal-dialog modal-lg pt-5" role="document">
                         <div class="modal-content">
                             <div class="modal-header bg-dark text-light">
-                                <h5 class="modal-title" id="exampleModalLongTitle">Editar Datos</h5>
+                                <h5 class="modal-title" id="exampleModalLongTitle">Edit Profile</h5>
                                 <button id="bstp_close" type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true" class="text-light">&times;</span>
                                 </button>

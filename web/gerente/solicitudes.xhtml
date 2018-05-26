@@ -4,7 +4,8 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:body>
         <ui:composition template="../WEB-INF/templates/template_gerente.xhtml">
             <ui:define name="title">Solicitudes</ui:define>
@@ -45,52 +46,60 @@
                             </h:column>
 
                             <h:column>
-                                <h:outputText value="#{item.fechaEnvio}" style="font-size: 11pt; margin-left: -140%" class="text-primary" >
+                                <f:facet name="header">
+                                    <h:outputText value="Date" style="margin-left: 30%"/>
+                                </f:facet>
+                                <h:outputText value="#{item.fechaEnvio}" style="font-size: 11pt" class="text-primary" >
                                     <f:convertDateTime pattern="MM/dd/yyyy" />
                                 </h:outputText>
                             </h:column>
-                             <h:column>
-                                 <f:facet name="header">
-                                    <h:outputText value="Status" style="font-size: 11pt; margin-left: -170%"/>
-                                </f:facet>
-                                 <h:outputText value="#{item.respuesta}" style="font-size: 11pt; margin-left: -170%">
-                              
-                                </h:outputText>
-                            </h:column>
+                            <!--                             <h:column>
+                                                             <f:facet name="header">
+                                                                <h:outputText value="Status" style="font-size: 11pt; margin-left: -170%"/>
+                                                            </f:facet>
+                                                             <h:outputText value="#{item.respuesta}" style="font-size: 11pt; margin-left: -170%">
+                                                          
+                                                            </h:outputText>
+                                                        </h:column>-->
                             <h:column>
-                                <!--      
-                                modal button-->
                                 <h:commandButton value="Answer" action="#{gerenteBeans.editarSolicitud(item)}" class="btn-outline-primary"/>
-                                <!--<button  data-target="#exampleModal" type="button"  data-toggle="modal"  style="background-color: transparent; border: none" class="text-warning">Responder</button>-->
-                                <!-- Modal -->
-                                <div  style="margin-top: 50px" class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-lg pt-5" role="document">
-                                        <div class="modal-content bg-dark text-light">
-                                            <div class="modal-header">
-                                                <h5 align="center" class="modal-title" id="exampleModalLabel">Casa Comercial: #{usuariosBean.usuarioSesion.correoElectronico}</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-header">
-                                                <output type="label">Usuario / E-mail : </output>
-                                                <h:outputText value="#{item.idUsuario.correoElectronico}" style="margin-right: 50%"/>
-                                            </div>
-                                            <div class="modal-body">
-                                                <h:outputText value="Message"/>
-                                                <h:inputTextarea value="#{gerenteBeans.solicitud.respuestaMsg}" style="height: 200px; width:760px "/>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
-                                                <h:commandButton value="Send" action="#{gerenteBeans.editarSolicitud(item)}" class="btn btn-outline-success"/>
-                                            </div>
-                                            <!--fin modal -->                                
-                                        </div>
-                                    </div>
-                                </div>
+<!--                                <button type="button" class="btn btn-primary" data-toggle="modal" 
+                                        data-target="#exampleModal #{item.idSolicitudCompraventa}" data-whatever="@fat">Answer</button>-->
                             </h:column>
                         </h:dataTable>
                     </h:form>
+
+                    <!--Modal-->
+<!--                    <c:forEach items="#{gerenteBeans.listarSolicitudes()}">
+                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form>
+                                            <div class="form-group">
+                                                <label for="recipient-name" class="col-form-label">Recipient:</label>
+                                                <input type="text" class="form-control" id="recipient-name"/>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="message-text" class="col-form-label">Message:</label>
+                                                <textarea class="form-control" id="message-text"></textarea>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary">Send message</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </c:forEach>-->
                 </f:view> 
             </ui:define>
         </ui:composition>

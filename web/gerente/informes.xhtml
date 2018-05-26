@@ -7,9 +7,77 @@
       xmlns:p="http://primefaces.org/ui">
     <h:body>
         <ui:composition template="../WEB-INF/templates/template_gerente.xhtml">
-            <ui:define name="title">Informe</ui:define>
+            <ui:define name="title">Pawns</ui:define>
             <ui:define name="content">
-                <div style="margin-bottom: -300px">
+                 <nav aria-label="breadcrumb" style="left: 0; margin-top: -2%; font-size: 10pt"
+                     class="position-absolute w-100 animated slideInRight">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><h:link value="Home" outcome="index" class="text-primary"/></li>
+                        <li class="breadcrumb-item active" aria-current="page">Pawns</li>
+                    </ol>
+                </nav>
+                <f:view>
+                    <h:form style="margin-top:5%">
+                        <h1><h:outputText value="Pawns Status" /></h1>
+                        <h:dataTable value="#{gerenteBeans.listarEmpeñados()}" var="item" style="width: 90%; margin-left: 5%">
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Pawn Code"/>
+                                </f:facet>
+                                <h:outputText value="#{item.idProductoEmpeno}" style="margin-left: 20%"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Pawn Date"/>
+                                </f:facet>
+                                <h:outputText value="#{item.fechaInicio}">
+                                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                                </h:outputText>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Date" style="margin-left: 20%"/>
+                                </f:facet>
+                                <h:outputText value="#{item.fechaFinal}">
+                                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                                </h:outputText>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Status"/>
+                                </f:facet>
+                                <h:outputText value="#{item.estado}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Price"/>
+                                </f:facet>
+                                <h:outputText value="#{item.precioapagar}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Tax"/>
+                                </f:facet>
+                                <h:outputText value="#{item.interes}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Pawn Days"/>
+                                </f:facet>
+                                <h:outputText value="#{item.dias}"/>
+                            </h:column>                           
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Customer"/>
+                                </f:facet>
+                                <h:outputText value="#{item.idUsuario.nombre}"/>
+                            </h:column>
+                       
+                        </h:dataTable>
+                    </h:form>
+                </f:view>
+
+<!--                <div style="margin-bottom: -300px">
 
                     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
                     <script type="text/javascript">
@@ -46,7 +114,7 @@
                         <div id="piechart" style="width: 900px; height: 500px;"></div>
                     </body>
                     <p:chart type="pie" model="#{graficosBean.pieModel1}" style="width:400px;height:300px"/> 
-                </div>
+                </div>-->
 
             </ui:define>
         </ui:composition>
