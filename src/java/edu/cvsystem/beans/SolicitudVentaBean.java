@@ -1,5 +1,6 @@
 package edu.cvsystem.beans;
 
+import com.sun.faces.facelets.util.Path;
 import edu.cvsystem.clases.LoaderFiles;
 import edu.cvsystem.entidades.Compraventa;
 import edu.cvsystem.entidades.ProductoEmpeno;
@@ -9,7 +10,11 @@ import edu.cvsystem.facades.CompraventaFacade;
 import edu.cvsystem.facades.ProductoEmpenoFacade;
 import edu.cvsystem.facades.SolicitudCompraventaFacade;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.GregorianCalendar;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -46,52 +51,60 @@ public class SolicitudVentaBean {
         Usuarios usuario = (Usuarios) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuarioLog");
         solicitud.setTipo(tipo);
         solicitud.setIdUsuario(usuario);
-        solicitud.setIdUsuarioServicios(0);        
+        solicitud.setIdUsuarioServicios(0);
         solicitud.setIdCompraventa(compraventa);
-        solicitud.setFechaEnvio(new GregorianCalendar().getTime());
-        int calc = (int) ((empeno.getFechaFinal().getTime() - empeno.getFechaInicio().getTime()) / 86400000);
-        empeno.setDias(calc);
-        compraventa = compraventaFacade.find(compraventa.getIdCompraventa());
+        solicitud.setFechaEnvio(Date.valueOf(LocalDate.now()));
+        solicitud.setFotos("");
+//        int calc = (int) ((empeno.getFechaFinal().getTime() - empeno.getFechaInicio().getTime()) / 86400000);
+//        empeno.setDias(calc);
+//        compraventa = compraventaFacade.find(compraventa.getIdCompraventa());
 
-        System.out.println("++++++++++++" + compraventa.getInteresCompraventa());
-        System.out.println("++++++++++++" + empeno.getDias());
-        empeno.setInteres((compraventa.getInteresCompraventa() / 360) * empeno.getDias());
-        empeno.setPrecioapagar(solicitud.getPrecio() * empeno.getInteres());
-
-        
-
-
+//        System.out.println("++++++++++++" + compraventa.getInteresCompraventa());
+//        System.out.println("++++++++++++" + empeno.getDias());
+//        empeno.setInteres((compraventa.getInteresCompraventa() / 360) * empeno.getDias());
+//        empeno.setPrecioapagar(solicitud.getPrecio() * empeno.getInteres());
         solicitudCompraventaFacade.create(solicitud);
-//        productoEmpenoFacade.create(empeno);
-        Query query = compraventaFacade.getEm().createNativeQuery("SELECT MAX(id_solicitud_compraventa) FROM solicitud_compraventa");
-        int id = (int) query.getResultList().get(0);
-        solicitud.setFotos("resources/img/solicitudes/" + "Solicitud(" + id + ")");
-        cargarImagen(path, id);
+        solicitud.setFotos(cargarImagen(path, solicitud.getIdSolicitudCompraventa()));
         solicitudCompraventaFacade.edit(solicitud);
-        List<SolicitudCompraventa> lista = solicitudCompraventaFacade.findAll();
-        msg = "La solicitud ha sido envida exitosamente";
-        if (path != null) {
-            cargarImagen(path, lista.get(lista.size() - 1).getIdSolicitudCompraventa());
-        }
+//        productoEmpenoFacade.create(empeno);
+//        Query query = compraventaFacade.getEm().createNativeQuery("SELECT MAX(id_solicitud_compraventa) FROM solicitud_compraventa");
+//        int id = (int) query.getResultList().get(0);
+//        solicitud.setFotos("resources/img/solicitudes/" + "Solicitud(" + id + ")");
+//        solicitudCompraventaFacade.edit(solicitud);
+//        List<SolicitudCompraventa> lista = solicitudCompraventaFacade.findAll();
+//        msg = "La solicitud ha sido envida exitosamente";
+//        if (path != null) {
+//            cargarImagen(path, lista.get(lista.size() - 1).getIdSolicitudCompraventa());
+//        }
         solicitud = new SolicitudCompraventa();
     }
 
-    public void cargarImagen(Part p, Integer id) {
+    public String cargarImagen(Part p, Integer id) {
         try {
-            String pathFolder = FacesContext.getCurrentInstance().getExternalContext()
-                    .getRealPath("resources").concat("\\img\\solicitudes\\Solicitud(" + id + ")").replace("\\build", "");
-            System.out.println("------------------------------------------------------");
-            System.out.println(pathFolder);
-            System.out.println("------------------------------------------------------");
-            File folder = new File(pathFolder);
-            if (!folder.exists()) {
-                folder.mkdir();
-            }
-            String nombre = p.getSubmittedFileName();
-            LoaderFiles.copiarArchivo(p.getInputStream(), pathFolder.concat("\\" + nombre));
+//            String pathFolder = FacesContext.getCurrentInstance().getExternalContext()
+//                    .getRealPath("resources").concat("\\img\\solicitudes\\Solicitud(" + id + ")").replace("\\build", "");
+            String pathFolderBuild = FacesContext.getCurrentInstance().getExternalContext()
+                    .getRealPath("resources").concat("\\img\\solicitudes\\Solicitud(" + id + ")");
+
+            File folderBuild = new File(pathFolderBuild);
+            File folder = new File(pathFolderBuild.replace("\\build", ""));
+
+            folderBuild.mkdir();
+            folder.mkdir();
+
+            String pathFolder = folder.getPath() + "\\" + p.getSubmittedFileName();
+            pathFolderBuild += "\\" + p.getSubmittedFileName();
+
+            LoaderFiles.copiarArchivo(p.getInputStream(), pathFolder);
+            LoaderFiles.copiarArchivo(p.getInputStream(), pathFolderBuild);
+
+            pathFolder = pathFolder.substring(pathFolder.lastIndexOf("resources"));
+
+            return pathFolder;
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }
+        return "";
     }
 
     public List<Compraventa> listarCompraventas() {
