@@ -71,7 +71,11 @@ CREATE TABLE `compraventa` (
 
 LOCK TABLES `compraventa` WRITE;
 /*!40000 ALTER TABLE `compraventa` DISABLE KEYS */;
-INSERT INTO `compraventa` VALUES (1,'Compraventa Rokefeller','Compra, vente y empeña lo que necesites, aqui en Rokefeller','Calle 60 norte N° 24 - 21','2486819',5,28),(2,'LaHome2','Calidad y rapidez, es nuestro lema','Calle 55b norte N° 24 - 18','4681598',6,27),(3,'CasaComercial Fargon','Nuestra compraventa es de la mejor calidad','Avenida 65c oeste No 54-15','6478979',7,27.5),(4,'Compraventa Lakers','Lak lak lakker compra ya!','Calle 60 norte No 24-35','6489897',8,29),(5,'Compraventa Lakers','Lak lak lakker compra ya!','Carrera 13 No 15-35','6188948',8,26);
+INSERT INTO `compraventa` VALUES 	(1,'Compraventa Rokefeller','Compra, vente y empeña lo que necesites, aqui en Rokefeller','Calle 60 norte N° 24 - 21','2486819',5,28),
+									(2,'LaHome2','Calidad y rapidez, es nuestro lema','Calle 55b norte N° 24 - 18','4681598',6,27),
+                                    (3,'CasaComercial Fargon','Nuestra compraventa es de la mejor calidad','Avenida 65c oeste No 54-15','6478979',7,27.5),
+                                    (4,'Compraventa Lakers','Lak lak lakker compra ya!','Calle 60 norte No 24-35','6489897',8,29),
+                                    (5,'Compraventa Lakers','Lak lak lakker compra ya!','Carrera 13 No 15-35','6188948',8,26);
 /*!40000 ALTER TABLE `compraventa` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -109,7 +113,8 @@ CREATE TABLE `producto_empeno` (
 
 LOCK TABLES `producto_empeno` WRITE;
 /*!40000 ALTER TABLE `producto_empeno` DISABLE KEYS */;
-INSERT INTO `producto_empeno` VALUES (1,'2017-12-22','2018-01-18','reclamado',4,1,4,NULL,NULL,NULL),(2,'2018-02-18','2018-03-18','pendiente',9,3,1,NULL,NULL,NULL);
+INSERT INTO `producto_empeno` VALUES 	(1,'2017-12-22','2018-01-18','reclamado',4,1,4,NULL,NULL,NULL),
+										(2,'2018-02-18','2018-03-18','pendiente',9,3,1,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `producto_empeno` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -140,7 +145,16 @@ CREATE TABLE `producto_inventario` (
 
 LOCK TABLES `producto_inventario` WRITE;
 /*!40000 ALTER TABLE `producto_inventario` DISABLE KEYS */;
-INSERT INTO `producto_inventario` VALUES (1,'2017-08-15','disponible',1,1),(2,'2017-09-15','separado',2,2),(3,'2017-10-29','almacenado',3,1),(4,'2017-11-03','disponible',5,1),(5,'2017-11-25','separado',6,5),(6,'2017-12-15','almacenado',7,5),(7,'2018-01-19','comprado',8,4),(8,'2018-01-20','disponible',10,3),(9,'2018-02-10','comprado',11,3),(10,'2018-02-20','disponible',12,4);
+INSERT INTO `producto_inventario` VALUES 	(1,'2017-08-15','disponible',1,1),
+											(2,'2017-09-15','separado',2,2),
+                                            (3,'2017-10-29','almacenado',3,1),
+                                            (4,'2017-11-03','disponible',5,1),
+                                            (5,'2017-11-25','separado',6,5),
+                                            (6,'2017-12-15','almacenado',7,5),
+                                            (7,'2018-01-19','comprado',8,4),
+                                            (8,'2018-01-20','disponible',10,3),
+                                            (9,'2018-02-10','comprado',11,3),
+                                            (10,'2018-02-20','disponible',12,4);
 /*!40000 ALTER TABLE `producto_inventario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -172,7 +186,28 @@ CREATE TABLE `productos` (
 
 LOCK TABLES `productos` WRITE;
 /*!40000 ALTER TABLE `productos` DISABLE KEYS */;
-INSERT INTO `productos` VALUES (1,'IphoneX','Excelente celular gama alta ultra veloz','tecnologia',4200000,'resources/img/productos/Producto(1)/',1,'Disponible'),(2,'Apple Series 3','Marca Apple, gran relog avanzado','tecnologia',280000,'resources/img/productos/Producto(2)/',1,'Disponible'),(3,'Refrigerador nak','Gran refrigerador, con acondicionador incluido','domesticos',455000,'resources/img/productos/Producto(3)/',1,'Disponible'),(4,'Balon nike','Balon rojo con negro marca nike','deportes',35000,'resources/img/productos/Producto(4)/',1,'Disponible'),(5,'Bicicleta','Bicicleta color negro, en excelente estado','deportes',180000,'resources/img/productos/Producto(5)/',2,'Separado'),(6,'Parlantes Genius','Parlantes negros con un muy buen sonido','tecnologia',50000,'resources/img/productos/Producto(6)/',2,'Separado'),(7,'Cadena Dorada','Brillante cadena de color dorado, a muy bajo precio','joyeria',10000,'resources/img/productos/Producto(7)/',2,'Searado'),(8,'Bicicleta Montana','Con muy buen estado, bicicleta marca montana','deportes',155000,'resources/img/productos/Producto(8)/',2,'Separado'),(9,'Huawei','Celular con 8G de almacenamiento, muy rapido','tecnologia',570000,'resources/img/productos/Producto(9)/',3,'Separado'),(10,'Pintura LaYampia','Marco de pintura, de el gran pintor Jaime Yortuno','arte',58000,'resources/img/productos/Producto(10)/',3,'Disponible'),(11,'Impresora Cannon','Impresora marca cannon con muy buena calidad de impresión','tecnologia',185000,'resources/img/productos/Producto(11)/',3,'Disponible'),(12,'Gorra Nike','Gorra de color negro con marca nike','deportes',25000,'resources/img/productos/Producto(12)/',3,'Disponible'),(24,'Bicicleta Cannondale','Bicicleta Todo Terreno','Deportes',1500000,'/CVSystem/archivos/Bicicleta1.jpg',4,'Disponible'),(25,'Anillo en Oro ','Anillo en Oro 24Kilates','tecnologia',250000,'/CVSystem/archivos/Anillo.jpg',4,'Disponible'),(26,'Anillo en Oro ','Anillo en Oro 24Kilates','joyeria',250000,'/CVSystem/archivos/Anillo.jpg',4,'Disponible'),(27,'Anillo en Oro ','Anillo en Oro 24Kilates','joyeria',250000,'/CVSystem/archivos/Anillo.jpg',4,'Disponible'),(28,'Reloj Cassino','Reloj de oro casiino','Relojeria',450000,'/CVSystem/archivos/reloj.jpg',2,'Separado'),(33,'Reloj Cassino','Reloj de oro casiino','Relojeria',450000,NULL,2,'Separado'),(34,'Bicicleta Cannondale','Bicicleta Todo Terreno','Deportes',4654650,'/CVSystem/archivos/Bicicleta3.jpg',2,'Disponible'),(70,'reloj morter','reloj deportivo morter','Relojeria',950000,'/CV-System/imagenes/descarga.jpg',2,'Disponible'),(71,'','','',0,NULL,NULL,''),(72,'Laptop Asus','Computador Portatil Asus intel core i7 4ta generacion','Tecnologia',1855000,'/CV-System/imagenes/Portatil Asus.jpg',2,NULL),(73,'Laptop Asus','Computador Portatil Asus intel core i7 4ta generacion','Tecnologia',1855000,'/CV-System/imagenes/Portatil Asus.jpg',2,NULL),(74,'Laptop Asus','Computador Portatil Asus intel core i7 4ta generacion','Tecnologia',1855000,'/CV-System/imagenes/Portatil Asus.jpg',2,NULL),(75,'Laptop Asus','Computador Portatil Asus intel core i7 4ta generacion','Tecnologia',1855000,'/CV-System/imagenes/Portatil Asus.jpg',2,NULL),(76,'Laptop Asus','Computador Portatil Asus intel core i7 4ta generacion','Tecnologia',1855000,'/CV-System/imagenes/Portatil Asus.jpg',2,'Disponible'),(77,'Collar','Collar con esmeralda','Joyeria',8957460,'/CV-System/imagenes/Collar.jpg',2,'Disponible');
+INSERT INTO `productos` VALUES 	(1,'IphoneX','Excelente celular gama alta ultra veloz','tecnologia',4200000,'resources/img/productos/Producto(1)/',1,'Disponible'),
+								(2,'Apple Series 3','Marca Apple, gran relog avanzado','tecnologia',280000,'resources/img/productos/Producto(2)/',1,'Disponible'),
+								(3,'Refrigerador nak','Gran refrigerador, con acondicionador incluido','domesticos',455000,'resources/img/productos/Producto(3)/',1,'Disponible'),
+                                (4,'Balon nike','Balon rojo con negro marca nike','deportes',35000,'resources/img/productos/Producto(4)/',1,'Disponible'),
+                                (5,'Bicicleta','Bicicleta color negro, en excelente estado','deportes',180000,'resources/img/productos/Producto(5)/',2,'Separado'),
+                                (6,'Parlantes Genius','Parlantes negros con un muy buen sonido','tecnologia',50000,'resources/img/productos/Producto(6)/',2,'Separado'),
+                                (7,'Cadena Dorada','Brillante cadena de color dorado, a muy bajo precio','joyeria',10000,'resources/img/productos/Producto(7)/',2,'Searado'),
+                                (8,'Bicicleta Montana','Con muy buen estado, bicicleta marca montana','deportes',155000,'resources/img/productos/Producto(8)/',2,'Separado'),
+                                (9,'Huawei','Celular con 8G de almacenamiento, muy rapido','tecnologia',570000,'resources/img/productos/Producto(9)/',3,'Separado'),
+                                (10,'Pintura LaYampia','Marco de pintura, de el gran pintor Jaime Yortuno','arte',58000,'resources/img/productos/Producto(10)/',3,'Disponible'),
+                                (11,'Impresora Cannon','Impresora marca cannon con muy buena calidad de impresión','tecnologia',185000,'resources/img/productos/Producto(11)/',3,'Disponible'),
+                                (12,'Gorra Nike','Gorra de color negro con marca nike','deportes',25000,'resources/img/productos/Producto(12)/',3,'Disponible'),
+                                (24,'Bicicleta Cannondale','Bicicleta Todo Terreno','Deportes',1500000,'/CVSystem/archivos/Bicicleta1.jpg',4,'Disponible'),
+                                (25,'Anillo en Oro ','Anillo en Oro 24Kilates','tecnologia',250000,'/CVSystem/archivos/Anillo.jpg',4,'Disponible'),
+                                (26,'Anillo en Oro ','Anillo en Oro 24Kilates','joyeria',250000,'/CVSystem/archivos/Anillo.jpg',4,'Disponible'),
+                                (27,'Anillo en Oro ','Anillo en Oro 24Kilates','joyeria',250000,'/CVSystem/archivos/Anillo.jpg',4,'Disponible'),
+                                (28,'Reloj Cassino','Reloj de oro casiino','Relojeria',450000,'/CVSystem/archivos/reloj.jpg',2,'Separado'),
+                                (33,'Reloj Cassino','Reloj de oro casiino','Relojeria',450000,NULL,2,'Separado'),
+                                (34,'Bicicleta Cannondale','Bicicleta Todo Terreno','Deportes',4654650,'/CVSystem/archivos/Bicicleta3.jpg',2,'Disponible'),
+                                (70,'reloj morter','reloj deportivo morter','Relojeria',950000,'/CV-System/imagenes/descarga.jpg',2,'Disponible'),
+                                (76,'Laptop Asus','Computador Portatil Asus intel core i7 4ta generacion','Tecnologia',1855000,'/CV-System/imagenes/Portatil Asus.jpg',2,'Disponible'),
+                                (77,'Collar','Collar con esmeralda','Joyeria',8957460,'/CV-System/imagenes/Collar.jpg',2,'Disponible');
 /*!40000 ALTER TABLE `productos` ENABLE KEYS */;
 UNLOCK TABLES;
 
