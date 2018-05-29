@@ -7,44 +7,44 @@
       xmlns:p="http://primefaces.org/ui">
     <h:body>
         <ui:composition template="../WEB-INF/templates/template_administrador.xhtml">
-            <ui:define name="title">Usuarios</ui:define>
+            <ui:define name="title">Users</ui:define>
             <ui:define name="content">
                 <div class="container">
                     <f:view>
                         <h:form>
                             <h1><h:outputText value="Edit"/></h1>
                             <h:panelGrid columns="2">
-                                <h:outputLabel value="Nombre:" for="nombre" />
+                                <h:outputLabel value="First name:" for="nombre" />
                                 <h:inputText id="nombre" value="#{administradorBean.usuario.nombre}" title="Nombre" required="true" requiredMessage="The Nombre field is required."/>
-                                <h:outputLabel value="Apellido:" for="apellido" />
+                                <h:outputLabel value="Last name:" for="apellido" />
                                 <h:inputText id="apellido" value="#{administradorBean.usuario.apellido}" title="Apellido" required="true" requiredMessage="The Apellido field is required."/>
-                                <h:outputLabel value="TipoDocumento:" for="tipoDocumento" />
+                                <h:outputLabel value="Document Type:" for="tipoDocumento" />
                                 <h:inputText id="tipoDocumento" value="#{administradorBean.usuario.tipoDocumento}" title="TipoDocumento" required="true" requiredMessage="The TipoDocumento field is required."/>
-                                <h:outputLabel value="NumeroDocumento:" for="numeroDocumento" />
+                                <h:outputLabel value="Document Number:" for="numeroDocumento" />
                                 <h:inputText id="numeroDocumento" value="#{administradorBean.usuario.numeroDocumento}" title="NumeroDocumento" required="true" requiredMessage="The NumeroDocumento field is required."/>
-                                <h:outputLabel value="Edad:" for="edad" />
+                                <h:outputLabel value="Age:" for="edad" />
                                 <h:inputText id="edad" value="#{administradorBean.usuario.edad}" title="Edad" required="true" requiredMessage="The Edad field is required."/>
-                                <h:outputLabel value="Sexo:" for="sexo" />
+                                <h:outputLabel value="Gender:" for="sexo" />
                                 <h:inputText id="sexo" value="#{administradorBean.usuario.sexo}" title="Sexo" required="true" requiredMessage="The Sexo field is required."/>
-                                <h:outputLabel value="Direccion:" for="direccion" />
+                                <h:outputLabel value="Address:" for="direccion" />
                                 <h:inputText id="direccion" value="#{administradorBean.usuario.direccion}" title="Direccion" required="true" requiredMessage="The Direccion field is required."/>
-                                <h:outputLabel value="Telefono:" for="telefono" />
+                                <h:outputLabel value="Phone:" for="telefono" />
                                 <h:inputText id="telefono" value="#{administradorBean.usuario.telefono}" title="Telefono" required="true" requiredMessage="The Telefono field is required."/>
-                                <h:outputLabel value="Celular:" for="celular" />
+                                <h:outputLabel value="Cell phone:" for="celular" />
                                 <h:inputText id="celular" value="#{administradorBean.usuario.celular}" title="Celular" required="true" requiredMessage="The Celular field is required."/>
-                                <h:outputLabel value="CorreoElectronico:" for="correoElectronico" />
+                                <h:outputLabel value="Email:" for="correoElectronico" />
                                 <h:inputText id="correoElectronico" value="#{administradorBean.usuario.correoElectronico}" title="CorreoElectronico" required="true" requiredMessage="The CorreoElectronico field is required."/>
-                                <h:outputLabel value="Contrasena:" for="contrasena" />
+                                <h:outputLabel value="Password:" for="contrasena" />
                                 <h:inputText id="contrasena" value="#{administradorBean.usuario.contrasena}" title="Contrasena" required="true" requiredMessage="The Contrasena field is required."/>
-                                <h:outputLabel value="Estado:" for="estado" />
+                                <h:outputLabel value="State:" for="estado" />
                                 <h:selectOneMenu id="estado" value="#{administradorBean.usuario.estado}" title="Estado" required="true" requiredMessage="The Estado field is required.">
-                                    <f:selectItem itemValue = "activo" itemLabel = "activo" /> 
-                                    <f:selectItem itemValue = "bloqueado" itemLabel = "bloqueado" /> 
+                                    <f:selectItem itemValue = "activo" itemLabel = "active" /> 
+                                    <f:selectItem itemValue = "bloqueado" itemLabel = "locked" /> 
                                 </h:selectOneMenu>
-                                <h:outputLabel value="Rol:" for="rol" />
+                                <h:outputLabel value="Role:" for="rol" />
                                 <h:inputText id="rol" value="#{administradorBean.usuario.rol}" title="Rol" required="true" requiredMessage="The Rol field is required."/>
                             </h:panelGrid>
-                            <h:commandButton action="#{administradorBean.editarUsuario()}" value="actualizar"/>
+                            <h:commandButton action="#{administradorBean.editarUsuario()}" value="update"/>
                         </h:form>
                     </f:view>
                 </div>

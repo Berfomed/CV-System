@@ -219,7 +219,7 @@
                                                                             </div>
                                                                             <div id="carouselControlesVenta#{venta.idSolicitudCompraventa}" class="carousel slide" data-ride="carousel">
                                                                                 <div class="carousel-inner bg-secondary" align="center">
-                                                                                    <ui:repeat value="#{historialBean.getFotos(venta.fotos)}" var="foto">
+                                                                                    <ui:repeat value="#{historialBean.getFotosSolicitudes(venta.idSolicitudCompraventa)}" var="foto">
                                                                                         <div class="carousel-item">
                                                                                             <h:graphicImage library="img" width="200" height="200"
                                                                                                             name="solicitudes/Solicitud(#{venta.idSolicitudCompraventa})/#{foto}"/>
@@ -274,7 +274,7 @@
                                                             <div class="col-12 col-sm-5">
                                                                 <div id="carouselControlsVenta#{venta.idSolicitudCompraventa}" class="carousel slide" data-ride="carousel">
                                                                     <div class="carousel-inner">
-                                                                        <ui:repeat value="#{historialBean.getFotos(venta.fotos)}" var="foto">
+                                                                        <ui:repeat value="#{historialBean.getFotosSolicitudes(venta.idSolicitudCompraventa)}" var="foto">
                                                                             <div class="carousel-item" align="center">
                                                                                 <h:graphicImage library="img" style="max-width: 100%;" height="200"
                                                                                                 name="solicitudes/Solicitud(#{venta.idSolicitudCompraventa})/#{foto}"/>
@@ -339,7 +339,7 @@
                                                                             </div>
                                                                             <div id="carouselControlesEmpeno#{empeno.idSolicitudCompraventa}" class="carousel slide" data-ride="carousel">
                                                                                 <div class="carousel-inner bg-secondary" align="center">
-                                                                                    <ui:repeat value="#{historialBean.getFotos(empeno.fotos)}" var="foto">
+                                                                                    <ui:repeat value="#{historialBean.getFotosSolicitudes(empeno.idSolicitudCompraventa)}" var="foto">
                                                                                         <div class="carousel-item">
                                                                                             <h:graphicImage library="img" width="200" height="200"
                                                                                                             name="solicitudes/Solicitud(#{empeno.idSolicitudCompraventa})/#{foto}"/>
@@ -394,7 +394,7 @@
                                                             <div class="col-12 col-sm-5">
                                                                 <div id="carouselControlsEmpeno#{empeno.idSolicitudCompraventa}" class="carousel slide" data-ride="carousel">
                                                                     <div class="carousel-inner">
-                                                                        <ui:repeat value="#{historialBean.getFotos(empeno.fotos)}" var="foto">
+                                                                        <ui:repeat value="#{historialBean.getFotosSolicitudes(empeno.idSolicitudCompraventa)}" var="foto">
                                                                             <div class="carousel-item" align="center">
                                                                                 <h:graphicImage library="img" style="max-width: 100%;" height="200"
                                                                                                 name="solicitudes/Solicitud(#{empeno.idSolicitudCompraventa})/#{foto}"/>

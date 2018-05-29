@@ -7,7 +7,7 @@
       xmlns:p="http://primefaces.org/ui">
     <h:body>
         <ui:composition template="../WEB-INF/templates/template_administrador.xhtml">
-            <ui:define name="title">Compraventas</ui:define>
+            <ui:define name="title">Pawn shop</ui:define>
             <ui:define name="content">
                 <div class="container"> 
                     <f:view>
@@ -15,7 +15,7 @@
                         <h:form>
                             <div class="row" >
                                 <div class="col-8">
-                                    <h1><h:outputText value="Compraventas"  /></h1> 
+                                    <h1><h:outputText value="Pawn shop"  /></h1> 
                                 </div>
                                 <div class="col">
                                     <h5><h:commandButton class="btn btn-dark" actionListener="#{administradorBean.PDF2()}" value="Generar Documento PDF" /></h5>
@@ -30,37 +30,37 @@
                                 </p:column>
                                 <p:column>
                                     <f:facet name="header">
-                                        <h:outputText value="Nombre"/>
+                                        <h:outputText value="Name"/>
                                     </f:facet>
                                     <h:outputText value="#{item.nombre}"/>
                                 </p:column>
                                 <p:column>
                                     <f:facet name="header">
-                                        <h:outputText value="Descripcion"/>
+                                        <h:outputText value="Description"/>
                                     </f:facet>
                                     <h:outputText value="#{item.descripcion}"/>
                                 </p:column>
                                 <p:column>
                                     <f:facet name="header">
-                                        <h:outputText value="Direccion"/>
+                                        <h:outputText value="Address"/>
                                     </f:facet>
                                     <h:outputText value="#{item.direccion}"/>
                                 </p:column>
                                 <p:column>
                                     <f:facet name="header">
-                                        <h:outputText value="Telefono"/>
+                                        <h:outputText value="Phone"/>
                                     </f:facet>
                                     <h:outputText value="#{item.telefono}"/>
                                 </p:column>
                                 <p:column>
                                     <f:facet name="header"> 
-                                        <h:outputText value="Dueño"/>
+                                        <h:outputText value="Owner"/>
                                     </f:facet>
                                     <h:outputText value="#{item.idUsuario.nombre}"/>
                                 </p:column>
                                 <p:column>
                                     <f:facet name="header">
-                                        <h:outputText value="Opciones"/>
+                                        <h:outputText value="Options"/>
                                     </f:facet>
                                     <h:commandButton action="#{administradorBean.editarCompraventa(item)}" value="Editar" />
                                 </p:column>

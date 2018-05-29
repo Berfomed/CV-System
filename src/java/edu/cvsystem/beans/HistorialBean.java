@@ -47,6 +47,17 @@ public class HistorialBean {
     public String[] getFotos(int idProducto) {
         String context = FacesContext.getCurrentInstance().getExternalContext().getRealPath("resources/img/productos/Producto(" + idProducto + ")");
         File file = new File(context);
+        for (String foto : file.list()) {
+            System.out.println(foto);
+        }
+        return file.list();
+    }
+
+    public String[] getFotosSolicitudes(int idSolicitud) {
+        String context = FacesContext.getCurrentInstance().getExternalContext()
+                .getRealPath("resources/img/solicitudes/Solicitud(" + idSolicitud + ")").replace("\\build", "");
+        System.out.println(context);
+        File file = new File(context);
         return file.list();
     }
 
