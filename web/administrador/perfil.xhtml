@@ -6,7 +6,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:body>
         <ui:composition template="../WEB-INF/templates/template_administrador.xhtml">
-            <ui:define name="title">Inicio</ui:define>
+            <ui:define name="title">Perfil</ui:define>
             <ui:define name="content">
                 <section class="container-fluid" style="padding: 40px 50px 0px 100px">
                     <div class="container" >  
@@ -15,28 +15,28 @@
                                 <figure id="img"  class="vertical-align-center">
                                     <h:graphicImage library="img" class="card-img-top w-100" name="#{usuariosBean.pathFoto}" alt="Card image cap" height="280"/>
                                 </figure>
-                                <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#fotin">Cambiar Foto</button>
+                                <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#fotin">Change photo</button>
                             </div>
                             <div class="col">
                                 <div class="jumbotron">
                                     <h2 id="textNombre" >#{usuariosBean.usuarioSesion.nombre} #{usuariosBean.usuarioSesion.apellido}</h2>
-                                    <p class="lead">estamos felices que estes un dia mas con nosotros gracias por tu apoyo</p>
+                                    <p class="lead">we are happy that you are one more day with us thanks for your support</p>
                                     <hr class="my-4"/>
-                                    <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModal3">Actualizar informacion</button>
+                                    <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModal3">Update information</button>
                                     <p></p>
                                     <div class="card" style="width: 100%;">
                                         <div class="card-body">
-                                            <h4 class="card-title">Datos Basicos</h4>
+                                            <h4 class="card-title">Basic data</h4>
                                             <hr class="my-4"/>
                                             <div class="row">
                                                 <div class="col">
-                                                    <h6>Correo:</h6>
+                                                    <h6>Mail:</h6>
                                                 </div>
                                                 <div class="col">
-                                                    <h6>Direccion:</h6>
+                                                    <h6>Address:</h6>
                                                 </div>
                                                 <div class="col">
-                                                    <h6>Celular:</h6>
+                                                    <h6>Cell phone:</h6>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -51,17 +51,17 @@
                                                 </div> 
                                             </div>
                                             <br/>
-                                            <h4 class="card-title">Informacion Personal</h4>
+                                            <h4 class="card-title">Personal information</h4>
                                             <hr class="my-4"/>
                                             <div class="row">
                                                 <div class="col">
-                                                    <h6>Tipo De Documento:</h6>
+                                                    <h6>Document type:</h6>
                                                 </div>
                                                 <div class="col">
-                                                    <h6>Numero De Documento:</h6>
+                                                    <h6>Document number:</h6>
                                                 </div>
                                                 <div class="col">
-                                                    <h6>Edad:</h6>
+                                                    <h6>Age:</h6>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -77,10 +77,10 @@
                                             </div><br/>
                                             <div class="row">
                                                 <div class="col">
-                                                    <h6>Sexo:</h6>
+                                                    <h6>Gender:</h6>
                                                 </div>
                                                 <div class="col">
-                                                    <h6>Telefono:</h6>
+                                                    <h6>Phone:</h6>
                                                 </div>
                                                 <div class="col">
                                                     <h6></h6>
@@ -110,7 +110,7 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel3">Editar Datos</h5>
+                                <h5 class="modal-title" id="exampleModalLabel3">Edit Data </h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -119,22 +119,22 @@
                                 <f:view>
                                     <h:form>
                                         <h:panelGrid columns="2">
-                                            <h:outputLabel value="Nombre:" for="nombre" />
+                                            <h:outputLabel value="First name:" for="nombre" />
                                             <h:inputText id="nombre" value="#{usuariosBean.usuarioSesion.nombre}" title="Nombre" required="true" requiredMessage="The Nombre field is required."/>
-                                            <h:outputLabel value="Apellido:" for="apellido" />
+                                            <h:outputLabel value="Last name:" for="apellido" />
                                             <h:inputText id="apellido" value="#{usuariosBean.usuarioSesion.apellido}" title="Apellido" required="true" requiredMessage="The Apellido field is required."/>
-                                            <h:outputLabel value="Direccion:" for="direccion" />
+                                            <h:outputLabel value="Address:" for="direccion" />
                                             <h:inputText id="direccion" value="#{usuariosBean.usuarioSesion.direccion}" title="Direccion" required="true" requiredMessage="The Direccion field is required."/>
-                                            <h:outputLabel value="Telefono:" for="telefono" />
+                                            <h:outputLabel value="Phone:" for="telefono" />
                                             <h:inputText id="telefono" value="#{usuariosBean.usuarioSesion.telefono}" title="Telefono" required="true" requiredMessage="The Telefono field is required."/>
-                                            <h:outputLabel value="Celular:" for="celular" />
+                                            <h:outputLabel value="Cell phone:" for="celular" />
                                             <h:inputText id="celular" value="#{usuariosBean.usuarioSesion.celular}" title="Celular" required="true" requiredMessage="The Celular field is required."/>
-                                            <h:outputLabel value="CorreoElectronico:" for="correoElectronico" />
+                                            <h:outputLabel value="Email:" for="correoElectronico" />
                                             <h:inputText id="correoElectronico" value="#{usuariosBean.usuarioSesion.correoElectronico}" title="CorreoElectronico" required="true" requiredMessage="The CorreoElectronico field is required."/>
-                                            <h:outputLabel value="Contrasena:" for="contrasena" />
+                                            <h:outputLabel value="Password:" for="contrasena" />
                                             <h:inputText id="contrasena" value="#{usuariosBean.usuarioSesion.contrasena}" title="Contrasena" required="true" requiredMessage="The Contrasena field is required."/>
                                         </h:panelGrid>
-                                        <h:commandButton value="cargar" action="#{usuariosBean.actualizarPerfilAd()}"/>
+                                        <h:commandButton value="load" action="#{usuariosBean.actualizarPerfilAd()}"/>
                                     </h:form>
                                 </f:view>
                             </div>
@@ -145,7 +145,7 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="fotin">Editar Datos</h5>
+                                <h5 class="modal-title" id="fotin">Edit Data</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -158,7 +158,7 @@
                                             <br/>
                                             <br/>
                                             <br/>
-                                            <h:commandButton class="btn btn-outline-primary" value="Guardar" actionListener="#{usuariosBean.actualizarFoto()}"/>
+                                            <h:commandButton class="btn btn-outline-primary" value="save" actionListener="#{usuariosBean.actualizarFoto()}"/>
 
                                     </h:form>
                                 </f:view>

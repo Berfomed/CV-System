@@ -6,7 +6,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:body>
         <ui:composition template="../WEB-INF/templates/template_administrador.xhtml">
-            <ui:define name="title">Crear cuentas</ui:define>
+            <ui:define name="title">Create bills</ui:define>
             <ui:define name="content">
                 <div class="container">
                     <br/>
@@ -18,7 +18,7 @@
                         <div class="col" align="center" >
                             <figure id="img" class="vertical-align-center">
                                 <img class="rounded-circle" src="../resources/imagenes/img_administrador/cliente.jpg" alt=""/>
-                                <h3 id="textNombre" >Create Commercial Houses</h3>
+                                <h3 id="textNombre" >Create Pawn Shop</h3>
                             </figure>
                             <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModal1">Create</button>
                         </div>
@@ -36,7 +36,7 @@
                             </figure>
                             <h:form enctype="multipart/form-data">
                                 <h:inputFile value="#{administradorBean.file1}" />
-                                <h:commandButton class="btn btn-dark" value="subir" action="#{administradorBean.upload()}" />
+                                <h:commandButton class="btn btn-dark" value="upload" action="#{administradorBean.upload()}" />
                             </h:form>
                             
                         </div>
@@ -46,7 +46,7 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel1">Create Commercial Houses</h5>
+                                <h5 class="modal-title" id="exampleModalLabel1">Create Pawn Shop</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -55,59 +55,59 @@
                                 <f:view>
                                     <h:form>
                                         <h:panelGrid columns="3">
-                                            <h:outputLabel for="nombres" value="Nombres"/>
+                                            <h:outputLabel for="nombres" value="Name"/>
                                             <h:inputText id="nombres" value="#{compraventasBean.usuarios.nombre}" required="true" requiredMessage="ingresa un dato"/>
                                             <h:message for="nombres"/>
-                                            <h:outputLabel for="apellidos" value="Apellidos"/>
+                                            <h:outputLabel for="apellidos" value="Surnames"/>
                                             <h:inputText id="apellidos" value="#{compraventasBean.usuarios.apellido}" required="true" requiredMessage="ingresa un dato"/>
                                             <h:message for="apellidos"/>
-                                            <h:outputLabel for="edad" value="Edad"/>
+                                            <h:outputLabel for="edad" value="Age"/>
                                             <h:inputText id="edad" value="#{compraventasBean.usuarios.edad}" required="true" requiredMessage="ingresa un dato"/>
                                             <h:message for="edad"/>
-                                            <h:outputLabel value="TipoDocumento:" for="tipoDocumentoc" />
+                                            <h:outputLabel value="Document type:" for="tipoDocumentoc" />
                                             <h:selectOneMenu id="tipoDocumentoc" value="#{compraventasBean.usuarios.tipoDocumento}" title="tipoDocumento" required="true" requiredMessage="The Edad field is required.">
                                                 <f:selectItem itemValue = "cedula de ciudadania" itemLabel = "cedula de ciudadania" /> 
                                                 <f:selectItem itemValue = "cedula extranjera" itemLabel = "cedula extranjera" /> 
                                                 <f:selectItem itemValue = "pasaporte" itemLabel = "pasaporte" /> 
                                             </h:selectOneMenu>
                                             <h:message for="tipoDocumentoc"/>
-                                            <h:outputLabel for="numeroidentificacion" value="Numeroidentificacion"/>
+                                            <h:outputLabel for="numeroidentificacion" value="Identification number"/>
                                             <h:inputText id="numeroidentificacion" value="#{compraventasBean.usuarios.numeroDocumento}" required="true" requiredMessage="ingresa un dato"/>
                                             <h:message for="numeroidentificacion"/>
-                                            <h:outputLabel for="genero" value="Sexo"/>
+                                            <h:outputLabel for="genero" value="gender"/>
                                             <h:selectOneMenu id="sexo" value="#{compraventasBean.usuarios.sexo}">
-                                                <f:selectItem itemValue = "masculino" itemLabel = "Masculino" /> 
-                                                <f:selectItem itemValue = "femenino" itemLabel = "Femenino" /> 
+                                                <f:selectItem itemValue = "masculino" itemLabel = "male" /> 
+                                                <f:selectItem itemValue = "femenino" itemLabel = "Female" /> 
                                             </h:selectOneMenu>                                            
                                             <h:message for="genero"/>
-                                            <h:outputLabel for="direccion" value="Direccion"/>
+                                            <h:outputLabel for="direccion" value="Address"/>
                                             <h:inputText id="direccion" value="#{compraventasBean.usuarios.direccion}" required="true" requiredMessage="ingresa un dato"/>
                                             <h:message for="direccion"/>
-                                            <h:outputLabel for="telefono" value="Telefono"/>
+                                            <h:outputLabel for="telefono" value="Phone"/>
                                             <h:inputText id="telefono" value="#{compraventasBean.usuarios.telefono}" required="true" requiredMessage="ingresa un dato"/>
                                             <h:message for="telefono"/>
-                                            <h:outputLabel for="celular" value="Celular"/>
+                                            <h:outputLabel for="celular" value="Cell phone"/>
                                             <h:inputText id="celular" value="#{compraventasBean.usuarios.celular}" required="true" requiredMessage="ingresa un dato"/>
                                             <h:message for="celular"/>
-                                            <h:outputLabel for="correoelectronico" value="Correoelectronico"/>
+                                            <h:outputLabel for="correoelectronico" value="Email"/>
                                             <h:inputText id="correoelectronico" value="#{compraventasBean.usuarios.correoElectronico}" required="true" requiredMessage="ingresa un dato"/>
                                             <h:message for="correoelectronico"/>
-                                            <h:outputLabel for="contraseña" value="Contraseña"/>
+                                            <h:outputLabel for="contraseña" value="Password"/>
                                             <h:inputSecret id="contraseña" value="#{compraventasBean.usuarios.contrasena}" required="true" requiredMessage="ingresa un dato"/>
                                             <h:message for="contraseña"/>
-                                            <h:outputLabel for="razonS" value="Razon Social"/>
+                                            <h:outputLabel for="razonS" value="Business name"/>
                                             <h:inputText id="razonS" value="#{compraventasBean.compraventa.nombre}" required="true" requiredMessage="ingresa un dato"/>
                                             <h:message for="razonS"/>
                                             <h:outputLabel for="descripcion" value="Descripcion"/>
                                             <h:inputText id="descripcion" value="#{compraventasBean.compraventa.descripcion}" required="true" requiredMessage="ingresa un dato"/>
                                             <h:message for="descripcion"/>
-                                            <h:outputLabel for="direccionc" value="Direccionc"/>
+                                            <h:outputLabel for="direccionc" value="Description Pawn Shop"/>
                                             <h:inputText id="direccionc" value="#{compraventasBean.compraventa.direccion}" required="true" requiredMessage="ingresa un dato"/>
                                             <h:message for="direccionc"/>
-                                            <h:outputLabel for="telefonoc" value="telefonoc"/>
+                                            <h:outputLabel for="telefonoc" value="Phone Pawn Shop"/>
                                             <h:inputText id="telefonoc" value="#{compraventasBean.compraventa.telefono}" required="true" requiredMessage="ingresa un dato"/>
                                             <h:message for="telefonoc"/>
-                                            <h:commandButton actionListener="#{compraventasBean.registrarCompraventa()}" value="registrar"/>
+                                            <h:commandButton actionListener="#{compraventasBean.registrarCompraventa()}" value="Register"/>
                                             
                                         </h:panelGrid>
                                     </h:form>
@@ -130,34 +130,34 @@
                                 <f:view>
                                     <h:form>
                                         <h:panelGrid columns="2">
-                                            <h:outputLabel value="Nombre:" for="nombre" />
+                                            <h:outputLabel value="Name" for="nombre" />
                                             <h:inputText id="nombre" value="#{usuariosBean.usuario.nombre}" title="Nombre" required="true" requiredMessage="The Nombre field is required."/>
-                                            <h:outputLabel value="Apellido:" for="apellido" />
+                                            <h:outputLabel value="Last name:" for="apellido" />
                                             <h:inputText id="apellido" value="#{usuariosBean.usuario.apellido}" title="Apellido" required="true" requiredMessage="The Apellido field is required."/>
-                                            <h:outputLabel value="TipoDocumento:" for="tipoDocumento" />
+                                            <h:outputLabel value="TypeDocument:" for="tipoDocumento" />
                                             <h:selectOneMenu id="tipoDocumento" value="#{usuariosBean.usuario.tipoDocumento}" title="tipoDocumento" required="true" requiredMessage="The Edad field is required.">
-                                                <f:selectItem itemValue = "cedula de ciudadania" itemLabel = "cedula de ciudadania" /> 
-                                                <f:selectItem itemValue = "cedula extranjera" itemLabel = "cedula extranjera" /> 
-                                                <f:selectItem itemValue = "pasaporte" itemLabel = "pasaporte" /> 
+                                                <f:selectItem itemValue = "cedula de ciudadania" itemLabel = "citizenship card" /> 
+                                                <f:selectItem itemValue = "cedula extranjera" itemLabel = "foreign cedula" /> 
+                                                <f:selectItem itemValue = "pasaporte" itemLabel = "passport" /> 
                                             </h:selectOneMenu>
-                                            <h:outputLabel value="NumeroDocumento:" for="numeroDocumento" />
+                                            <h:outputLabel value="Document Number:" for="numeroDocumento" />
                                             <h:inputText id="numeroDocumento" value="#{usuariosBean.usuario.numeroDocumento}" title="NumeroDocumento" required="true" requiredMessage="The NumeroDocumento field is required."/>
-                                            <h:outputLabel value="Edad:" for="edad" />
+                                            <h:outputLabel value="Age:" for="edad" />
                                             <h:inputText id="edad" value="#{usuariosBean.usuario.edad}" title="Edad" required="true" requiredMessage="The Edad field is required."/>
-                                            <h:outputLabel value="Sexo:" for="sexo" />
+                                            <h:outputLabel value="Gender:" for="sexo" />
                                             <h:selectOneMenu id="sexo" value="#{usuariosBean.usuario.sexo}">
-                                                <f:selectItem itemValue = "masculino" itemLabel = "Masculino" /> 
-                                                <f:selectItem itemValue = "femenino" itemLabel = "Femenino" /> 
+                                                <f:selectItem itemValue = "masculino" itemLabel = "Male" /> 
+                                                <f:selectItem itemValue = "femenino" itemLabel = "Female" /> 
                                             </h:selectOneMenu>
-                                            <h:outputLabel value="Direccion:" for="direccion" />
+                                            <h:outputLabel value="Address:" for="direccion" />
                                             <h:inputText id="direccion" value="#{usuariosBean.usuario.direccion}" title="Direccion" required="true" requiredMessage="The Direccion field is required."/>
-                                            <h:outputLabel value="Telefono:" for="telefono" />
+                                            <h:outputLabel value="Phone:" for="telefono" />
                                             <h:inputText id="telefono" value="#{usuariosBean.usuario.telefono}" title="Telefono" required="true" requiredMessage="The Telefono field is required."/>
-                                            <h:outputLabel value="Celular:" for="celular" />
+                                            <h:outputLabel value="Cell phone:" for="celular" />
                                             <h:inputText id="celular" value="#{usuariosBean.usuario.celular}" title="Celular" required="true" requiredMessage="The Celular field is required."/>
-                                            <h:outputLabel value="CorreoElectronico:" for="correoElectronico" />
+                                            <h:outputLabel value="Email:" for="correoElectronico" />
                                             <h:inputText id="correoElectronico" value="#{usuariosBean.usuario.correoElectronico}" title="CorreoElectronico" required="true" requiredMessage="The CorreoElectronico field is required."/>
-                                            <h:outputLabel value="Contrasena:" for="contrasena" />
+                                            <h:outputLabel value="Password:" for="contrasena" />
                                             <h:inputSecret id="contrasena" value="#{usuariosBean.usuario.contrasena}" title="Contrasena" required="true" requiredMessage="The Contrasena field is required."/>
                                             <h:commandButton actionListener="#{usuariosBean.registrarUsuarioS()}" value="registrar"/>
                                         </h:panelGrid>

@@ -6,22 +6,22 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:body>
         <ui:composition template="../WEB-INF/templates/template_administrador.xhtml">
-            <ui:define name="title">Editar Compraventa</ui:define>
+            <ui:define name="title">Edit Pawn Shop</ui:define>
             <ui:define name="content">
                 <div align="center">
                     <h:form>
                         <h1><h:outputText value="Create/Edit"/></h1>
                         <h:panelGrid columns="2">
-                            <h:outputLabel value="Nombre:" for="nombre" />
+                            <h:outputLabel value="First name:" for="nombre" />
                             <h:inputText id="nombre" value="#{administradorBean.compraventa.nombre}" title="Nombre" required="true" requiredMessage="The Nombre field is required."/>
-                            <h:outputLabel value="Descripcion:" for="descripcion" />
+                            <h:outputLabel value="Description:" for="descripcion" />
                             <h:inputText id="descripcion" value="#{administradorBean.compraventa.descripcion}" title="Descripcion" required="true" requiredMessage="The Descripcion field is required."/>
-                            <h:outputLabel value="Direccion:" for="direccion" />
+                            <h:outputLabel value="Address:" for="direccion" />
                             <h:inputText id="direccion" value="#{administradorBean.compraventa.direccion}" title="Direccion" required="true" requiredMessage="The Direccion field is required."/>
-                            <h:outputLabel value="Telefono:" for="telefono" />
+                            <h:outputLabel value="Phone:" for="telefono" />
                             <h:inputText id="telefono" value="#{administradorBean.compraventa.telefono}" title="Telefono" required="true" requiredMessage="The Telefono field is required."/>
                         </h:panelGrid>
-                        <h:commandButton value="editar" action="#{administradorBean.editarCompraventa()}"/>
+                        <h:commandButton value="Edit" action="#{administradorBean.editarCompraventa()}"/>
                     </h:form>
                 </div>
             </ui:define>
