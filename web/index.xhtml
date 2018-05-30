@@ -59,18 +59,18 @@
                                         <h:inputSecret id="inContrasenaInicio" class="form-control" 
                                                        ps:placeholder="Contraseña" maxlength="45"
                                                        value="#{usuariosBean.usuario.contrasena}" 
-                                                       required="true" requiredMessage="¡Password Required!"/>
+                                                       required="true" requiredMessage="Password Required!"/>
                                         <h:message for="inContrasenaInicio" styleClass="text-danger font-weight-bold"/>
                                     </div>
                                 </div>
                             </div>
-                            <p align="center"> Do you not have an account yet?, Sign In  
+                            <p align="center"> Don´t you have an account yet?, Sign In  
                                 <span class="text-primary btn_i" style="cursor: pointer;" data-dismiss="modal">Here!</span>
                             </p>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
-                            <h:commandButton class="btn btn-outline-primary" value="Login"
+                            <h:commandButton class="btn btn-outline-primary" value="Sign in"
                                              action="#{usuariosBean.iniciarSesion()}">
                                 <f:ajax execute="formulario_inicio" render="formulario_inicio"/>
                             </h:commandButton>
@@ -236,7 +236,7 @@
             <div class="position-absolute h-100 w-100">
                 <nav class="navbar justify-content-center animated fadeInDownBig" style="animation-duration: 2s">
                     <button id="btn_inicio" class="btn btn-sm btn-outline-primary" style="width: 100px"
-                            data-toggle="modal" data-target="#modal_inicio">Log In</button>
+                            data-toggle="modal" data-target="#modal_inicio">Sign in</button>
                     <h:button outcome="index" class="d-none" id="redirect"/>
                     <div id="logo" class="d-inline-block position-relative h-100" align="center" onclick="document.all('redirect').click();">
                         <div id="logo_texto" class="position-absolute h-100 w-100" style="opacity: 0; transform: translate3d(0, -100%, 0);">
@@ -249,7 +249,7 @@
                         </div>
                     </div>
                     <button id="btn_registro" class="btn btn-sm btn-outline-success" style="width: 100px" 
-                            data-toggle="modal" data-target="#modal_registro">Sign In</button>
+                            data-toggle="modal" data-target="#modal_registro">Register</button>
                 </nav>
             </div>
         </div>
@@ -265,7 +265,7 @@
                             <h:graphicImage class="w-100 h-100 position-absolute" alt="First Slide" library="img/medianas" name="fondo1.jpg"/>
                         </picture>
                         <div class="position-absolute h-100 w-100 d-flex align-items-center">
-                            <span class="carousel_txt w-100 text-center text-secondary animated jackInTheBox" style="animation-duration: 1.5s">What do you want, <br/> to do today?</span>
+                            <span class="carousel_txt w-100 text-center text-secondary animated jackInTheBox" style="animation-duration: 1.5s">What do you want <br/> to do today?</span>
                         </div>
                     </div>
                     <div class="carousel-item h-100">
@@ -289,7 +289,7 @@
                         <div class="position-absolute h-100 w-100 d-flex align-items-center">
                             <span class="carousel_txt w-100 text-center text-secondary animated jackInTheBox"  style="animation-duration: 1.5s">
                                 <i class="far fa-hand-point-right"></i>
-                                ¡You decide!
+                                You decide!
                                 <i class="far fa-hand-point-left"></i><br/>
                             </span>
                         </div>
@@ -316,7 +316,12 @@
                 <div class="jumbotron jumbotron-fluid">
                     <div class="container">
                         <h1 class="display-4">About us</h1>
-                        <p class="lead" align="justify">We are a group of developers in formative stage, with the objective of developing a web information system aimed at gathering the information of the products of the Colombia Purchase and Sale Houses to publish their products, as well as how to use the viability of the information, so that people can access in an easier and more comfortable way the services offered by commercial houses.</p>
+                        <p class="lead" align="justify">We are a group of developers in training stage, with 
+                            the objective of developing a web information system aimed at gathering the information 
+                            of the products of the Colombia Purchase and Sale Houses to publish their products, 
+                            as well as the procedure to determine the feasibility of the information, 
+                            so that people can access the services offered by commercial houses easily and comfortably.
+                            </p>
                     </div>
                 </div>
                 <br/><br/><br/>
@@ -327,7 +332,9 @@
                         </div>
                         <div class="col-xs-12 col-md-7">
                             <h2 style="font-weight: bold;">Purchases</h2>
-                            <p class="h4 mt-4" align="justify">On our page you can access the products published by the commercial companies affiliated with CV System, if there is an item of your interest, you can make the reservation of the product online.</p>
+                            <p class="h4 mt-4" align="justify">In our web page you can access the products published by 
+                                the commercial companies affiliated with CV System, 
+                                if there is an item of your interest, you can make the reservation of the product online.</p>
                         </div>
                     </div>
                 </div>
@@ -335,7 +342,10 @@
                     <div class="row h-100">
                         <div class="col-xs-12 col-md-7">
                             <h2 style="font-weight: bold;">Pawn <span id="sp"></span></h2>
-                            <p class="h4 mt-4" align="justify">Through the CV System you have the option of making an item that you no longer use, through our service, the request of commitment will be notified to all Commercial Houses that are affiliated, with this we guarantee that you receive more than one offer and have the option to choose the one that best suits your need.</p>
+                            <p class="h4 mt-4" align="justify">Through the CV System you have the option to sell or pawn an item 
+                                that you don´t longer use, through our service; the request of commitment will be notified to 
+                                all Commercial Houses that are affiliated, and we guarantee that you receive more than 
+                                one offer and have the option to choose the one that best suits your need.</p>
                         </div>
                         <div class="col-xs-12 col-md-5 art">
                             <h:graphicImage library="img" name="empeno.jpg" alt="Empeño" class="w-100 h-100" style="border-radius: 50%"/>
@@ -349,7 +359,9 @@
                         </div>
                         <div class="col-xs-12 col-md-7">
                             <h2 style="font-weight: bold;">Sales</h2>
-                            <p class="h4 mt-4" align="justify">In the same way that you request a pawn service, you can make the sale of a product that you do not use under the same methodology; Also, you can receive several offers of products published by the commercial houses, opting for the one that interests you the most.</p>
+                            <p class="h4 mt-4" align="justify">In the same way that you request a pawn service, you can sell 
+                                a product that you do not use under the same methodology; Also, you can receive several
+                                offers of products published by the commercial houses, selecting the one that interests you the most.</p>
                         </div>
                     </div>
                 </div>
