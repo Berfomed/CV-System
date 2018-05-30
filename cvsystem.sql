@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `cvsystem` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `cvsystem`;
 -- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: cvsystem
@@ -15,8 +17,9 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
-create database cvsystem;
-use cvsystem;
+--
+-- Table structure for table `compra_producto`
+--
 
 DROP TABLE IF EXISTS `compra_producto`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -71,11 +74,7 @@ CREATE TABLE `compraventa` (
 
 LOCK TABLES `compraventa` WRITE;
 /*!40000 ALTER TABLE `compraventa` DISABLE KEYS */;
-INSERT INTO `compraventa` VALUES 	(1,'Compraventa Rokefeller','Compra, vente y empeña lo que necesites, aqui en Rokefeller','Calle 60 norte N° 24 - 21','2486819',5,28),
-									(2,'LaHome2','Calidad y rapidez, es nuestro lema','Calle 55b norte N° 24 - 18','4681598',6,27),
-                                    (3,'CasaComercial Fargon','Nuestra compraventa es de la mejor calidad','Avenida 65c oeste No 54-15','6478979',7,27.5),
-                                    (4,'Compraventa Lakers','Lak lak lakker compra ya!','Calle 60 norte No 24-35','6489897',8,29),
-                                    (5,'Compraventa Lakers','Lak lak lakker compra ya!','Carrera 13 No 15-35','6188948',8,26);
+INSERT INTO `compraventa` VALUES (1,'Compraventa Rokefeller','Compra, vente y empeña lo que necesites, aqui en Rokefeller','Calle 60 norte N° 24 - 21','2486819',5,28),(2,'LaHome2','Calidad y rapidez, es nuestro lema','Calle 55b norte N° 24 - 18','4681598',6,27),(3,'CasaComercial Fargon','Nuestra compraventa es de la mejor calidad','Avenida 65c oeste No 54-15','6478979',7,27.5),(4,'Compraventa Lakers','Lak lak lakker compra ya!','Calle 60 norte No 24-35','6489897',8,29),(5,'Compraventa Lakers','Lak lak lakker compra ya!','Carrera 13 No 15-35','6188948',8,26);
 /*!40000 ALTER TABLE `compraventa` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -113,8 +112,7 @@ CREATE TABLE `producto_empeno` (
 
 LOCK TABLES `producto_empeno` WRITE;
 /*!40000 ALTER TABLE `producto_empeno` DISABLE KEYS */;
-INSERT INTO `producto_empeno` VALUES 	(1,'2017-12-22','2018-01-18','reclamado',4,1,4,NULL,NULL,NULL),
-										(2,'2018-02-18','2018-03-18','pendiente',9,3,1,NULL,NULL,NULL);
+INSERT INTO `producto_empeno` VALUES (1,'2017-12-22','2018-01-18','reclamado',4,1,2,180000,0.5,30),(2,'2018-02-18','2018-03-18','pendiente',9,3,1,250000,0.5,30);
 /*!40000 ALTER TABLE `producto_empeno` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -145,16 +143,7 @@ CREATE TABLE `producto_inventario` (
 
 LOCK TABLES `producto_inventario` WRITE;
 /*!40000 ALTER TABLE `producto_inventario` DISABLE KEYS */;
-INSERT INTO `producto_inventario` VALUES 	(1,'2017-08-15','disponible',1,1),
-											(2,'2017-09-15','separado',2,2),
-                                            (3,'2017-10-29','almacenado',3,1),
-                                            (4,'2017-11-03','disponible',5,1),
-                                            (5,'2017-11-25','separado',6,5),
-                                            (6,'2017-12-15','almacenado',7,5),
-                                            (7,'2018-01-19','comprado',8,4),
-                                            (8,'2018-01-20','disponible',10,3),
-                                            (9,'2018-02-10','comprado',11,3),
-                                            (10,'2018-02-20','disponible',12,4);
+INSERT INTO `producto_inventario` VALUES (1,'2017-08-15','disponible',1,1),(2,'2017-09-15','separado',2,2),(3,'2017-10-29','almacenado',3,1),(4,'2017-11-03','disponible',5,1),(5,'2017-11-25','separado',6,5),(6,'2017-12-15','almacenado',7,5),(7,'2018-01-19','comprado',8,4),(8,'2018-01-20','disponible',10,3),(9,'2018-02-10','comprado',11,3),(10,'2018-02-20','disponible',12,4);
 /*!40000 ALTER TABLE `producto_inventario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -177,7 +166,7 @@ CREATE TABLE `productos` (
   PRIMARY KEY (`id_producto`),
   KEY `id_Compraventa` (`id_Compraventa`),
   CONSTRAINT `productos_ibfk_1` FOREIGN KEY (`id_Compraventa`) REFERENCES `compraventa` (`id_compraventa`)
-) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=116 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -186,28 +175,7 @@ CREATE TABLE `productos` (
 
 LOCK TABLES `productos` WRITE;
 /*!40000 ALTER TABLE `productos` DISABLE KEYS */;
-INSERT INTO `productos` VALUES 	(1,'IphoneX','Excelente celular gama alta ultra veloz','tecnologia',4200000,'resources/img/productos/Producto(1)/',1,'Disponible'),
-								(2,'Apple Series 3','Marca Apple, gran relog avanzado','tecnologia',280000,'resources/img/productos/Producto(2)/',1,'Disponible'),
-								(3,'Refrigerador nak','Gran refrigerador, con acondicionador incluido','domesticos',455000,'resources/img/productos/Producto(3)/',1,'Disponible'),
-                                (4,'Balon nike','Balon rojo con negro marca nike','deportes',35000,'resources/img/productos/Producto(4)/',1,'Disponible'),
-                                (5,'Bicicleta','Bicicleta color negro, en excelente estado','deportes',180000,'resources/img/productos/Producto(5)/',2,'Separado'),
-                                (6,'Parlantes Genius','Parlantes negros con un muy buen sonido','tecnologia',50000,'resources/img/productos/Producto(6)/',2,'Separado'),
-                                (7,'Cadena Dorada','Brillante cadena de color dorado, a muy bajo precio','joyeria',10000,'resources/img/productos/Producto(7)/',2,'Searado'),
-                                (8,'Bicicleta Montana','Con muy buen estado, bicicleta marca montana','deportes',155000,'resources/img/productos/Producto(8)/',2,'Separado'),
-                                (9,'Huawei','Celular con 8G de almacenamiento, muy rapido','tecnologia',570000,'resources/img/productos/Producto(9)/',3,'Separado'),
-                                (10,'Pintura LaYampia','Marco de pintura, de el gran pintor Jaime Yortuno','arte',58000,'resources/img/productos/Producto(10)/',3,'Disponible'),
-                                (11,'Impresora Cannon','Impresora marca cannon con muy buena calidad de impresión','tecnologia',185000,'resources/img/productos/Producto(11)/',3,'Disponible'),
-                                (12,'Gorra Nike','Gorra de color negro con marca nike','deportes',25000,'resources/img/productos/Producto(12)/',3,'Disponible'),
-                                (24,'Bicicleta Cannondale','Bicicleta Todo Terreno','Deportes',1500000,'/CVSystem/archivos/Bicicleta1.jpg',4,'Disponible'),
-                                (25,'Anillo en Oro ','Anillo en Oro 24Kilates','tecnologia',250000,'/CVSystem/archivos/Anillo.jpg',4,'Disponible'),
-                                (26,'Anillo en Oro ','Anillo en Oro 24Kilates','joyeria',250000,'/CVSystem/archivos/Anillo.jpg',4,'Disponible'),
-                                (27,'Anillo en Oro ','Anillo en Oro 24Kilates','joyeria',250000,'/CVSystem/archivos/Anillo.jpg',4,'Disponible'),
-                                (28,'Reloj Cassino','Reloj de oro casiino','Relojeria',450000,'/CVSystem/archivos/reloj.jpg',2,'Separado'),
-                                (33,'Reloj Cassino','Reloj de oro casiino','Relojeria',450000,NULL,2,'Separado'),
-                                (34,'Bicicleta Cannondale','Bicicleta Todo Terreno','Deportes',4654650,'/CVSystem/archivos/Bicicleta3.jpg',2,'Disponible'),
-                                (70,'reloj morter','reloj deportivo morter','Relojeria',950000,'/CV-System/imagenes/descarga.jpg',2,'Disponible'),
-                                (76,'Laptop Asus','Computador Portatil Asus intel core i7 4ta generacion','Tecnologia',1855000,'/CV-System/imagenes/Portatil Asus.jpg',2,'Disponible'),
-                                (77,'Collar','Collar con esmeralda','Joyeria',8957460,'/CV-System/imagenes/Collar.jpg',2,'Disponible');
+INSERT INTO `productos` VALUES (78,'Bicicleta Cannondale','Bicicleta Todo Terreno Cannondale','Deportes',1650000,'imagenes\\Bicicleta1.jpg',2,'Separado'),(79,'Computador Portatil Asus','Computador Portatil Asus intel core i7 4ta generacion','Tecnologia',1350000,'imagenes\\Portatil Asus.jpg',2,'Disponible'),(81,'Balon Nike','Balon Nike Color Rojo','Deportes',125000,'imagenes\\Balonrojo.jpg',2,'Disponible'),(82,'Collar','Collar de oro con esmeralda','Joyeria',7560000,'imagenes\\Collar.jpg',2,'Disponible'),(84,'Xbox-One','Consola de video juegos xbox one','Tecnologia',650000,'imagenes\\Xbox One.jpg',2,'Disponible'),(85,'Play Station 3','Consola de video juegos Play station 3','Tecnologia',450000,'imagenes\\Ps3.jpg',2,'Disponible'),(86,'Nintendo Switch','Consola de video juegos Switch','Tecnologia',740000,'imagenes\\Nintendo Switch.jpg',2,'Disponible'),(87,'Xbox-360','Consola de video juegos xbox 360 ','Tecnologia',420000,'imagenes\\Xbox 360.jpg',2,'Disponible'),(88,'Bicicleta GT','Bicicleta Todo Terreno GT','Deportes',1600000,'imagenes\\Bicicleta1.jpg',2,'Disponible'),(89,'Televisor LG ','Televisor LG lcd 32´','Electrodomesticos',500000,'imagenes\\Televisor LG.jpg',2,'Separado'),(90,'Computador de escritorio ','computador de escritorio winwo','Tecnologia',760000,'imagenes\\pc escritorio2.jpg',2,'Disponible'),(91,'Computador Portatil MSI','Computador Portatil MSI intel core i7 7ta generacion','Tecnologia',2300000,'imagenes\\Portatil MSI.jpg',2,'Disponible'),(92,'Monitor Lenovo','Monitor de 21\" Lenovo LCD','Tecnologia',460000,'imagenes\\Monitor Lenovo.jpg',2,'Disponible'),(93,'Monitor Asus','Monitor de 21\" Asus LCD','Tecnologia',600000,'imagenes\\Monitor Asus.jpg',2,'Disponible'),(94,'Nevera LG','Nevera de 500l litros LG','Electrodomesticos',1300000,'imagenes\\Nevera.jpg',2,'Disponible'),(95,'SmartPhone Huawei a2','Celular huawei A2','Tecnologia',540000,'imagenes\\huawei.jpg',2,'Separado'),(96,'Reloj Digital Clony','Reloj Digital Clony Alfa-Epsilon','Relojeria',3500000,'imagenes\\reloj digitañ.jpg',2,'Separado'),(97,'Bicicleta Cannondale','Bicicleta Todo Terreno Cannondale','Deportes',1650000,'imagenes\\Bicicleta1.jpg',1,'Disponible'),(98,'Computador Portatil Asus','Computador Portatil Asus intel core i7 4ta generacion','Tecnologia',1350000,'imagenes\\Portatil Asus.jpg',1,'Disponible'),(99,'Balon Nike','Balon Nike Color Rojo','Deportes',125000,'imagenes\\Balonrojo.jpg',1,'Disponible'),(100,'Collar','Collar de oro con esmeralda','Joyeria',7560000,'imagenes\\Collar.jpg',1,'Disponible'),(101,'Xbox-One','Consola de video juegos xbox one','Tecnologia',650000,'imagenes\\Xbox One.jpg',1,'Disponible'),(102,'Play Station 3','Consola de video juegos Play station 3','Tecnologia',450000,'imagenes\\Ps3.jpg',1,'Disponible'),(103,'Nintendo Switch','Consola de video juegos Switch','Tecnologia',740000,'imagenes\\Nintendo Switch.jpg',1,'Disponible'),(104,'Xbox-360','Consola de video juegos xbox 360 ','Tecnologia',420000,'imagenes\\Xbox 360.jpg',1,'Disponible'),(105,'Bicicleta GT','Bicicleta Todo Terreno GT','Deportes',1600000,'imagenes\\Bicicleta1.jpg',1,'Disponible'),(106,'Televisor LG ','Televisor LG lcd 32´','Electrodomesticos',500000,'imagenes\\Televisor LG.jpg',1,'Disponible'),(107,'Computador de escritorio ','computador de escritorio winwo','Tecnologia',760000,'imagenes\\pc escritorio2.jpg',1,'Disponible'),(108,'Computador Portatil MSI','Computador Portatil MSI intel core i7 7ta generacion','Tecnologia',2300000,'imagenes\\Portatil MSI.jpg',1,'Disponible'),(109,'Monitor Lenovo','Monitor de 21\" Lenovo LCD','Tecnologia',460000,'imagenes\\Monitor Lenovo.jpg',1,'Disponible'),(110,'Monitor Asus','Monitor de 21\" Asus LCD','Tecnologia',600000,'imagenes\\Monitor Asus.jpg',1,'Disponible'),(111,'Nevera LG','Nevera de 500l litros LG','Electrodomesticos',1300000,'imagenes\\Nevera.jpg',1,'Disponible'),(112,'SmartPhone Huawei a2','Celular huawei A2','Tecnologia',540000,'imagenes\\huawei.jpg',1,'Disponible'),(113,'Reloj Digital Clony','Reloj Digital Clony Alfa-Epsilon','Relojeria',3500000,'imagenes\\reloj digitañ.jpg',1,'Disponible'),(114,'Telefono Antiguo','Telefono Antiguo ','Antiguedades',300000,'imagenes\\TelefonoAntiguo.jpg',2,'Disponible'),(115,'Maquina de escribir Antigua','Maquina de escribir Undewood','Antiguedades',450000,'imagenes\\Maquina de escribir.jpg',2,'Disponible');
 /*!40000 ALTER TABLE `productos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -246,11 +214,7 @@ CREATE TABLE `solicitud_compraventa` (
 
 LOCK TABLES `solicitud_compraventa` WRITE;
 /*!40000 ALTER TABLE `solicitud_compraventa` DISABLE KEYS */;
-INSERT INTO `solicitud_compraventa` VALUES 	(1,'Apple Series 3','tecnologia','Vendo excelente reloj de marca apple','venta',200000,'https://cvsystem.com/fotos/a58s6x1/','2017-08-10','','',0,2,2),
-											(2,'Balon nike','deportes','Empeño un balon nike a bajo precio','empeño',35000,'https://cvsystem.com/fotos/6a5s4da/','2017-12-20','Te acepto el empeño, traelo cuando puedas','aceptada',10,1,4),
-                                            (3,'Celular ZTE','tecnologia','Vendo excelente celular muy rapido y con buena capacidad','venta',1000000,'https://cvsystem.com/fotos/z6asd5f/','2018-01-02','No te lo acepto, está muy caro','rechazada',10,3,3),
-                                            (4,'Huawei','tecnologia','Estoy empeñando un huawei con muy buena resolución','empeño',570000,'https://cvsystem.com/fotos/h1463as/','2018-02-15','Ok te lo acepto, te espero','aceptada',9,3,1),
-                                            (5,'Monitor HP','tecnologia','Estoy empeñando un monitor marca HP de 32 pulgadas','empeño',325000,'https://cvsystem.com/fotos/m1sd1f5/','2018-02-20','csvfsdgfshfh','Respondido',1,1,2),(6,'Anillo de bronce','joyeria','Vendo un anillo de bronce a muy bajo precio','venta',20000,'https://cvsystem.com/fotos/a64nsd4/','2018-02-22','','',0,4,2),(8,'Mouse','Technology','Bonito','empeño',2342340,'https://cvsystem.com/fotos/fs31a5d/','2018-04-12','Hola',NULL,1,12,2),(9,'sdfsdf','dsfdsf','sdfsdf','sdfsdf',13546,'dgsdgsdg','2018-04-06',NULL,NULL,0,12,2),(10,'wetwet','gw','gwgwe','gwegwe',1234,'gdsgsg','2018-04-16','estoy interesado en el producto.\r\n\r\ncordialmente Jorge Amado',NULL,1,1,2);
+INSERT INTO `solicitud_compraventa` VALUES (1,'Apple Series 3','tecnologia','Vendo excelente reloj de marca apple','venta',200000,'https://cvsystem.com/fotos/a58s6x1/','2017-08-10','','',0,2,2),(2,'Balon nike','deportes','Empeño un balon nike a bajo precio','empeño',35000,'https://cvsystem.com/fotos/6a5s4da/','2017-12-20','Te acepto el empeño, traelo cuando puedas','aceptada',10,1,4),(3,'Celular ZTE','tecnologia','Vendo excelente celular muy rapido y con buena capacidad','venta',1000000,'https://cvsystem.com/fotos/z6asd5f/','2018-01-02','No te lo acepto, está muy caro','rechazada',10,3,3),(4,'Huawei','tecnologia','Estoy empeñando un huawei con muy buena resolución','empeño',570000,'https://cvsystem.com/fotos/h1463as/','2018-02-15','Ok te lo acepto, te espero','aceptada',9,3,1),(5,'Monitor HP','tecnologia','Estoy empeñando un monitor marca HP de 32 pulgadas','empeño',325000,'https://cvsystem.com/fotos/m1sd1f5/','2018-02-20','csvfsdgfshfh','Respondido',1,1,2),(6,'Anillo de bronce','joyeria','Vendo un anillo de bronce a muy bajo precio','venta',20000,'https://cvsystem.com/fotos/a64nsd4/','2018-02-22','','',0,4,2),(8,'Mouse','Technology','Bonito','empeño',2342340,'https://cvsystem.com/fotos/fs31a5d/','2018-04-12','Hola',NULL,1,12,2),(9,'sdfsdf','dsfdsf','sdfsdf','sdfsdf',13546,'dgsdgsdg','2018-04-06',NULL,NULL,0,12,2),(10,'wetwet','gw','gwgwe','gwegwe',1234,'gdsgsg','2018-04-16','estoy interesado en el producto.\r\n\r\ncordialmente Jorge Amado',NULL,1,1,2);
 /*!40000 ALTER TABLE `solicitud_compraventa` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -335,4 +299,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-05-23 20:46:59
+-- Dump completed on 2018-05-30  0:55:53
