@@ -78,9 +78,9 @@ public class UsuariosBean {
                 }
             }
         } catch (Exception e) {
-            System.err.println(e.getMessage());
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "¡Ups!", "Se ha presentado un error"));
-        }
+                System.err.println(e.getMessage());
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "¡Ups!", "Se ha presentado un error"));
+            }
         return null;
     }
     public void cambiarEstado() {

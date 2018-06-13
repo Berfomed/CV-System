@@ -33,4 +33,5 @@ public class UsuariosFacade extends AbstractFacade<Usuarios> {
         return em;
     }
     
+    
 }
