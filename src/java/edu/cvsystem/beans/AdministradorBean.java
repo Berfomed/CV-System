@@ -61,6 +61,8 @@ public class AdministradorBean implements Serializable {
     private ProductosFacade productofacade = new ProductosFacade();
     private Productos producto;
 
+   
+
     @EJB
     private CompraventaFacade compraventafacade = new CompraventaFacade();
     private Compraventa compraventa;
@@ -74,7 +76,14 @@ public class AdministradorBean implements Serializable {
     private String nombre1;
     private String pathReal1;
     
-    
+
+     public Productos getProducto() {
+        return producto;
+    }
+
+    public void setProducto(Productos producto) {
+        this.producto = producto;
+    }
     public String getContenido() {
         return contenido;
     }
@@ -173,6 +182,17 @@ public class AdministradorBean implements Serializable {
         return "editarCo?faces-redirect=true";
     }
 
+    public String editarInv(Productos item) {
+        this.producto = item;
+        return "editarIn?faces-redirect=true";
+    }
+    
+    public String editarInv() {
+        productofacade.edit(producto);
+        producto = new Productos();
+        return "Inventario";
+    }
+    
     public String editarCompraventa() {
         compraventafacade.edit(compraventa);
         compraventa = new Compraventa();
@@ -206,9 +226,8 @@ public class AdministradorBean implements Serializable {
         JasperExportManager.exportReportToPdfStream(jasperPrint, servletOutputStream);
         FacesContext.getCurrentInstance().responseComplete();
     }
- 
     
-       public String upload() {
+      public String upload() {
         String path1 = FacesContext.getCurrentInstance().getExternalContext().getRealPath("Archivos");
         path1 = path1.substring(0, path1.indexOf("\\build"));
         path1 = path1 + "\\web\\archivos\\";

@@ -35,10 +35,12 @@
                                 <h3 id="textNombre" >upload inventory</h3>
                             </figure>
                             <h:form enctype="multipart/form-data">
-                                <h:inputFile value="#{administradorBean.file1}" />
+                                <h:inputFile id="archivo" value="#{administradorBean.file1}" required="true" requiredMessage="ingresa archivo"/>
                                 <h:commandButton class="btn btn-dark" value="upload" action="#{administradorBean.upload()}" />
+                                <br/>
+                                <h:message for="archivo"/>
                             </h:form>
-                            
+
                         </div>
                     </div> 
                 </div>
@@ -74,12 +76,12 @@
                                             <h:outputLabel for="numeroidentificacion" value="Identification number"/>
                                             <h:inputText id="numeroidentificacion" value="#{compraventasBean.usuarios.numeroDocumento}" required="true" requiredMessage="ingresa un dato"/>
                                             <h:message for="numeroidentificacion"/>
-                                            <h:outputLabel for="genero" value="gender"/>
+                                            <h:outputLabel for="sexo" value="gender"/>
                                             <h:selectOneMenu id="sexo" value="#{compraventasBean.usuarios.sexo}">
                                                 <f:selectItem itemValue = "masculino" itemLabel = "male" /> 
                                                 <f:selectItem itemValue = "femenino" itemLabel = "Female" /> 
                                             </h:selectOneMenu>                                            
-                                            <h:message for="genero"/>
+                                            <h:message for="sexo"/>
                                             <h:outputLabel for="direccion" value="Address"/>
                                             <h:inputText id="direccion" value="#{compraventasBean.usuarios.direccion}" required="true" requiredMessage="ingresa un dato"/>
                                             <h:message for="direccion"/>
@@ -108,7 +110,7 @@
                                             <h:inputText id="telefonoc" value="#{compraventasBean.compraventa.telefono}" required="true" requiredMessage="ingresa un dato"/>
                                             <h:message for="telefonoc"/>
                                             <h:commandButton actionListener="#{compraventasBean.registrarCompraventa()}" value="Register"/>
-                                            
+
                                         </h:panelGrid>
                                     </h:form>
                                 </f:view>
@@ -129,38 +131,49 @@
                             <div class="modal-body">
                                 <f:view>
                                     <h:form>
-                                        <h:panelGrid columns="2">
+                                        <h:panelGrid columns="3">
                                             <h:outputLabel value="Name" for="nombre" />
                                             <h:inputText id="nombre" value="#{usuariosBean.usuario.nombre}" title="Nombre" required="true" requiredMessage="The Nombre field is required."/>
+                                            <h:message for="nombre"/>
                                             <h:outputLabel value="Last name:" for="apellido" />
                                             <h:inputText id="apellido" value="#{usuariosBean.usuario.apellido}" title="Apellido" required="true" requiredMessage="The Apellido field is required."/>
+                                            <h:message for="apellido"/>
                                             <h:outputLabel value="TypeDocument:" for="tipoDocumento" />
                                             <h:selectOneMenu id="tipoDocumento" value="#{usuariosBean.usuario.tipoDocumento}" title="tipoDocumento" required="true" requiredMessage="The Edad field is required.">
                                                 <f:selectItem itemValue = "cedula de ciudadania" itemLabel = "citizenship card" /> 
                                                 <f:selectItem itemValue = "cedula extranjera" itemLabel = "foreign cedula" /> 
                                                 <f:selectItem itemValue = "pasaporte" itemLabel = "passport" /> 
                                             </h:selectOneMenu>
+                                            <h:message for="tipoDocumento"/>
                                             <h:outputLabel value="Document Number:" for="numeroDocumento" />
                                             <h:inputText id="numeroDocumento" value="#{usuariosBean.usuario.numeroDocumento}" title="NumeroDocumento" required="true" requiredMessage="The NumeroDocumento field is required."/>
+                                            <h:message for="numeroDocumento"/>
                                             <h:outputLabel value="Age:" for="edad" />
                                             <h:inputText id="edad" value="#{usuariosBean.usuario.edad}" title="Edad" required="true" requiredMessage="The Edad field is required."/>
+                                            <h:message for="edad"/>
                                             <h:outputLabel value="Gender:" for="sexo" />
                                             <h:selectOneMenu id="sexo" value="#{usuariosBean.usuario.sexo}">
                                                 <f:selectItem itemValue = "masculino" itemLabel = "Male" /> 
                                                 <f:selectItem itemValue = "femenino" itemLabel = "Female" /> 
                                             </h:selectOneMenu>
+                                            <h:message for="sexo"/>
                                             <h:outputLabel value="Address:" for="direccion" />
                                             <h:inputText id="direccion" value="#{usuariosBean.usuario.direccion}" title="Direccion" required="true" requiredMessage="The Direccion field is required."/>
+                                            <h:message for="direccion"/>
                                             <h:outputLabel value="Phone:" for="telefono" />
                                             <h:inputText id="telefono" value="#{usuariosBean.usuario.telefono}" title="Telefono" required="true" requiredMessage="The Telefono field is required."/>
+                                            <h:message for="telefono"/>
                                             <h:outputLabel value="Cell phone:" for="celular" />
                                             <h:inputText id="celular" value="#{usuariosBean.usuario.celular}" title="Celular" required="true" requiredMessage="The Celular field is required."/>
+                                            <h:message for="celular"/>
                                             <h:outputLabel value="Email:" for="correoElectronico" />
                                             <h:inputText id="correoElectronico" value="#{usuariosBean.usuario.correoElectronico}" title="CorreoElectronico" required="true" requiredMessage="The CorreoElectronico field is required."/>
+                                            <h:message for="correoElectronico"/>
                                             <h:outputLabel value="Password:" for="contrasena" />
                                             <h:inputSecret id="contrasena" value="#{usuariosBean.usuario.contrasena}" title="Contrasena" required="true" requiredMessage="The Contrasena field is required."/>
-                                            <h:commandButton actionListener="#{usuariosBean.registrarUsuarioS()}" value="registrar"/>
+                                            <h:message for="contrasena"/>
                                         </h:panelGrid>
+                                        <h:commandButton actionListener="#{usuariosBean.registrarUsuarioS()}" value="registrar"/>
                                     </h:form>
 
                                 </f:view>

@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:body>
+        <ui:composition template="../WEB-INF/templates/template_administrador.xhtml">
+            <ui:define name="title">Inventory</ui:define>
+            <ui:define name="content">
+                <div class="container"> 
+                    <f:view>
+                        
+
+                        <h:form>
+                            <h1><h:outputText value="Inventory"/></h1>
+                            <p:dataTable value="#{serviciosBean.listarProductos()}" var="item" style="font-size: 10pt">
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Id Product"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idProducto}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Name"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.nombre}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Description"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.descripcion}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Category"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.categoria}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Price"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.precio}  $"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Status"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.estatus}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Id Pawn Shop"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idCompraventa.idCompraventa}=>#{item.idCompraventa.nombre}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Options"/>
+                                    </f:facet>
+                                    <h:commandButton action="#{administradorBean.editarInv(item)}" value="Editar" />
+                                </p:column>
+                            </p:dataTable>
+                        </h:form>
+                    </f:view>
+
+
+                </div>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

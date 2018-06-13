@@ -60,6 +60,10 @@ public class UsuariosBean {
         usuario = new Usuarios();
     }
 
+    /**
+     *
+     * @return
+     */
     public String iniciarSesion() {
         try {
             Query consulta = usuariosFacade.getEm().createQuery("SELECT u FROM Usuarios u WHERE u.correoElectronico = :correoElectronico AND u.contrasena = :contrasena");
