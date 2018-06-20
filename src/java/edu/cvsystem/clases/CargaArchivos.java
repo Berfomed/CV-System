@@ -316,6 +316,50 @@ public class CargaArchivos {
         this.gerente = gerente;
     }
     
+    //metodo para mostrar las fotos
+        public String[] getFotos(int idProducto) {
+        String context = FacesContext.getCurrentInstance().getExternalContext().getRealPath("resources/img/productos/Producto(" + idProducto + ")");
+        File file = new File(context);
+        for (String foto : file.list()) {
+            System.out.println(foto);
+        }
+        return file.list();
+    }
+        //metodo para cargar las fotos de michael
+        public String cargarImagen1(Part p, Integer id) {
+        try {
+//            String pathFolder = FacesContext.getCurrentInstance().getExternalContext()
+//                    .getRealPath("resources").concat("\\img\\solicitudes\\Solicitud(" + id + ")").replace("\\build", "");
+            String pathFolderBuild = FacesContext.getCurrentInstance().getExternalContext()
+                    .getRealPath("resources").concat("\\img\\productos\\Producto()(" + id + ")");
+
+            File folderBuild = new File(pathFolderBuild);
+            File folder = new File(pathFolderBuild.replace("\\build", ""));
+
+            folderBuild.mkdir();
+            folder.mkdir();
+
+            String pathFolder = folder.getPath() + "\\" + p.getSubmittedFileName();
+            pathFolderBuild += "\\" + p.getSubmittedFileName();
+
+            LoaderFiles.copiarArchivo(p.getInputStream(), pathFolder);
+            LoaderFiles.copiarArchivo(p.getInputStream(), pathFolderBuild);
+
+            pathFolder = pathFolder.substring(pathFolder.lastIndexOf("resources"));
+
+            return pathFolder;
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+        return "";
+    }
+        
+        //metodo para cargar las fotos de los productos
+    
+    
+    
+    
+    
     
     
 
