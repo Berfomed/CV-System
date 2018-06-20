@@ -3,76 +3,137 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui"> 
-    <h:body>
-        <ui:composition template="../WEB-INF/templates/template_gerente.xhtml">
-            <ui:define name="title">Register</ui:define>
-            <ui:define name="content">
-                <nav aria-label="breadcrumb" style="left: 0; margin-top: -2%; font-size: 10pt"
-                     class="position-absolute w-100 animated slideInRight">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><h:link value="Inicio" outcome="index" class="text-primary"/></li>
-                        <li class="breadcrumb-item active" aria-current="page">Registro</li>
-                    </ol>
-                </nav>
-                <f:view>
-                    <h:form enctype="multipart/form-data" style=" margin-left: 25%; width: 50%;font-family: garamond; font-size: 15pt; border: solid green 0.3px ;border-bottom: solid graytext 0.5px; border-bottom-left-radius: 20%; border-bottom-right-radius: 20%; border-top-left-radius: 20%; border-top-right-radius: 20%; margin-top: 2%">
-                        <h1 align="center"><h:outputText value="Add New Product" class="titulo_footer text-success text-center" style="font-size: 50pt"/></h1>
-                        <h:panelGrid class="form-group row" style="margin-left: 20%">
-                            <!--                             <div class="form-group row" >
-                                                        <h:outputLabel  value="Product Code" for="idproducto" class="col-12 col-form-label" />
-                                                        <h:inputText  class="form-control-sm col-12" id="idProducto" value="#{cargaarchivos.producto.idProducto}" title="Nombre" required="true" requiredMessage="The Nombre field is required."/>
-                                                        </div>-->
-                            <div class="form-group row" >
-                                <h:outputLabel  value="Product Name" for="nombre" class="col-12 col-form-label" />
-                                <h:inputText  class="form-control-sm col-12" id="nombre" value="#{cargaarchivos.producto.nombre}" title="Nombre" required="true" requiredMessage="The Nombre field is required." />
-                            </div>
-                            <div class="form-group row" >
-                                <h:outputLabel value="Description" for="descripcion" class="col-2 col-form-label"/>
-                                <h:inputText class="form-control-sm col-12" id="descripcion" value="#{cargaarchivos.producto.descripcion}" title="Descripcion" required="true" requiredMessage="The Descripcion field is required."/>
-                            </div>
-                            <div class="form-group row" >
-                                <h:outputLabel value="Category" for="categoria" class="col-2 col-form-label"/>                            
-                                <h:selectOneMenu  class="form-control-sm col-12" value="#{cargaarchivos.producto.categoria}" title="Categoria" required="true" requiredMessage="The description field is required">   
-                                    <f:selectItem itemValue="" itemLabel=""/>
-                                    <f:selectItem itemValue="Antiguedades" itemLabel="Antiguedades"/>
-                                    <f:selectItem itemValue="Computacion" itemLabel="Computacion"/>
-                                    <f:selectItem itemValue="Deportes" itemLabel="Deportes"/>
-                                    <f:selectItem itemValue="Electrodomesticos" itemLabel="Electrodomesticos"/>
-                                    <f:selectItem itemValue="Industria" itemLabel="Industry"/>
-                                    <f:selectItem itemValue="Inmuebles" itemLabel="Inmuebles"/>
-                                    <f:selectItem itemValue="Joyeria" itemLabel="Joyeria"/>
-                                    <f:selectItem itemValue="Jugueteria" itemLabel="Jugueteria"/>
-                                    <f:selectItem itemValue="Muebles" itemLabel="Muebles"/>
-                                    <f:selectItem itemValue="Relojeria" itemLabel="Relojeria"/>
-                                    <f:selectItem itemValue="Tecnologia" itemLabel="Tecnologia"/>
-                                    <f:selectItem itemValue="Vehiculos" itemLabel="Vehiculos"/>
-                                    <f:selectItem itemValue="Arte" itemLabel="Arte"/>
-                                </h:selectOneMenu>                           
-                                <!--<h:inputText class="form-control-sm col-12" id="categoria" value="#{cargaarchivos.producto.categoria}" title="Categoria" required="true" requiredMessage="The Categoria field is required."/>-->
-                            </div>
-                            <div class="form-group row" >
-                                <h:outputLabel value="Price" for="precio" class="col-2 col-form-label"/>
-                                <h:inputText class="form-control-sm col-12" id="precio" value="#{cargaarchivos.producto.precio}" title="Precio" label="$" required="true" requiredMessage="The Precio field is required."/>
-                            </div>
-                            <div class="form-group row" >
-                                <h:outputLabel value="Images" for="fotos" class="col-2 col-form-label"/>
-                                <h:inputFile class="form-control-sm col-12 btn-outline-dark" id="fotos" value="#{cargaarchivos.file}" title="Fotos" />
-                            </div>
-                            <div>
-                            </div>
-                            <div>
-                                <h:commandButton value="Add Product" action="#{cargaarchivos.upload()}" class="btn-outline-success" style=" margin-top: 10%; margin-bottom: 2%; float:left"/> 
+      xmlns:f="http://xmlns.jcp.org/jsf/core"> 
+  <h:body>
+    <ui:composition template="../WEB-INF/templates/template_gerente.xhtml">
+      <ui:define name="title">Register</ui:define>
+      <ui:define name="content">
+        <nav aria-label="breadcrumb" style="left: 0; margin-top: -2%; font-size: 10pt"
+             class="position-absolute w-100 animated slideInRight">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><h:link value="Inicio" outcome="index" class="text-primary"/></li>
+            <li class="breadcrumb-item active" aria-current="page">Registro</li>
+          </ol>
+        </nav>
+        <f:view>
+          <h:form enctype="multipart/form-data" style=" margin-left: 25%; width: 50%;font-family: garamond; font-size: 15pt; border: solid green 0.3px ;border-bottom: solid graytext 0.5px; border-bottom-left-radius: 20%; border-bottom-right-radius: 20%; border-top-left-radius: 20%; border-top-right-radius: 20%; margin-top: 2%">
+            <h1 align="center"><h:outputText value="Add New Product" class="titulo_footer text-success text-center" style="font-size: 50pt"/></h1>
+            <h:panelGrid class="form-group row" style="margin-left: 20%">
+              <!--                             <div class="form-group row" >
+                                          <h:outputLabel  value="Product Code" for="idproducto" class="col-12 col-form-label" />
+                                          <h:inputText  class="form-control-sm col-12" id="idProducto" value="#{cargaarchivos.producto.idProducto}" title="Nombre" required="true" requiredMessage="The Nombre field is required."/>
+                                          </div>-->
+              <div class="form-group row" >
+                <h:outputLabel  value="Product Name" for="nombre" class="col-12 col-form-label" />
+                <h:inputText  class="form-control-sm col-12" id="nombre" value="#{cargaarchivos.producto.nombre}" title="Nombre" required="true" requiredMessage="The Nombre field is required." />
+              </div>
+              <div class="form-group row" >
+                <h:outputLabel value="Description" for="descripcion" class="col-12 col-form-label"/>
+                <h:inputText class="form-control-sm col-12" id="descripcion" value="#{cargaarchivos.producto.descripcion}" title="Descripcion" required="true" requiredMessage="The Descripcion field is required."/>
+              </div>
+              <div class="form-group row" >
+                <h:outputLabel value="Category" for="categoria" class="col-12 col-form-label"/>                            
+                <h:selectOneMenu  class="form-control-sm col-12" value="#{cargaarchivos.producto.categoria}" title="Categoria" required="true" requiredMessage="The description field is required">   
+                  <f:selectItem itemValue="" itemLabel=""/>
+                  <f:selectItem itemValue="Antiguedades" itemLabel="Antiguedades"/>
+                  <f:selectItem itemValue="Computacion" itemLabel="Computacion"/>
+                  <f:selectItem itemValue="Deportes" itemLabel="Deportes"/>
+                  <f:selectItem itemValue="Electrodomesticos" itemLabel="Electrodomesticos"/>
+                  <f:selectItem itemValue="Industria" itemLabel="Industry"/>
+                  <f:selectItem itemValue="Inmuebles" itemLabel="Inmuebles"/>
+                  <f:selectItem itemValue="Joyeria" itemLabel="Joyeria"/>
+                  <f:selectItem itemValue="Jugueteria" itemLabel="Jugueteria"/>
+                  <f:selectItem itemValue="Muebles" itemLabel="Muebles"/>
+                  <f:selectItem itemValue="Relojeria" itemLabel="Relojeria"/>
+                  <f:selectItem itemValue="Tecnologia" itemLabel="Tecnologia"/>
+                  <f:selectItem itemValue="Vehiculos" itemLabel="Vehiculos"/>
+                  <f:selectItem itemValue="Arte" itemLabel="Arte"/>
+                </h:selectOneMenu>                           
+                <!--<h:inputText class="form-control-sm col-12" id="categoria" value="#{cargaarchivos.producto.categoria}" title="Categoria" required="true" requiredMessage="The Categoria field is required."/>-->
+              </div>
+              <div class="form-group row" >
+                <h:outputLabel value="Price" for="precio" class="col-12 col-form-label"/>
+                <h:inputText class="form-control-sm col-12" id="precio" value="#{cargaarchivos.producto.precio}" title="Precio" label="$" required="true" requiredMessage="The Precio field is required." size="50"/>
+              </div>
+            </h:panelGrid>                        
+            <br/>
+            <div style="width: 80%; margin: auto">
+              <div id="carouselImgs" class="carousel slide bg-dark rounded" data-ride="carousel" style="height: 120px">
+                <ol class="carousel-indicators">
+                  <li data-target="#carouselImgs" data-slide-to="0" class="active"></li>
+                  <li data-target="#carouselImgs" data-slide-to="1"></li>
+                  <li data-target="#carouselImgs" data-slide-to="2"></li>
+                  <li data-target="#carouselImgs" data-slide-to="3"></li>
+                  <li data-target="#carouselImgs" data-slide-to="4"></li>
+                  <li data-target="#carouselImgs" data-slide-to="5"></li>
+                </ol>
+                <div class="carousel-inner" align="center">
+                  <div class="carousel-item active">
+                    <div class="w-75">
+                      <h:outputLabel value="Image 1" for="foto1" class="col-4 col-form-label text-light"/>
+                      <h:inputFile class="form-control-sm col-12 btn-dark" required="true"
+                                   id="foto1" value="#{cargaarchivos.file1}" title="Foto 1" />
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <div class="w-75" >
+                      <h:outputLabel value="Image 2" for="foto2" class="col-4 col-form-label text-light"/>
+                      <h:inputFile class="form-control-sm col-12 btn-dark" 
+                                   id="foto2" value="#{cargaarchivos.file2}" title="Foto 2" />
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <div class="w-75" >
+                      <h:outputLabel value="Image 3" for="foto3" class="col-4 col-form-label text-light"/>
+                      <h:inputFile class="form-control-sm col-12 btn-dark" 
+                                   id="foto3" value="#{cargaarchivos.file3}" title="Foto 3" />
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <div class="w-75" >
+                      <h:outputLabel value="Image 4" for="foto4" class="col-4 col-form-label text-light"/>
+                      <h:inputFile class="form-control-sm col-12 btn-dark" 
+                                   id="foto4" value="#{cargaarchivos.file4}" title="Foto 4" />
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <div class="w-75" >
+                      <h:outputLabel value="Image 5" for="foto5" class="col-4 col-form-label text-light"/>
+                      <h:inputFile class="form-control-sm col-12 btn-dark" 
+                                   id="foto5" value="#{cargaarchivos.file5}" title="Foto 5" />
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <div class="w-75" >
+                      <h:outputLabel value="Image 6" for="foto6" class="col-4 col-form-label text-light"/>
+                      <h:inputFile class="form-control-sm col-12 btn-dark" 
+                                   id="foto6" value="#{cargaarchivos.file6}" title="Foto 6" />
+                    </div>
+                  </div>
+                </div>
+                <a class="carousel-control-prev" href="#carouselImgs" role="button" data-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselImgs" role="button" data-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Next</span>
+                </a>
+              </div>
+            </div>
+            <br/><br/>
 
-                            </div>
-                        </h:panelGrid>                        
-                    </h:form>      
-                    <h:form style="margin-top: -4.8%">
-                        <h:commandButton value="Cancel" action="catalogoG" class="btn-outline-danger" style="margin-left: 50%; width: 150px; height: 38px; font-size: 15pt"/>                   
-                    </h:form>
-                </f:view>
-            </ui:define>
-        </ui:composition>
-    </h:body>
+            <div class="w-75" align="center" style="margin-top: -4.8%; line-height: 1.7em; height: 62px">
+              <h:commandButton value="Add Product" action="#{cargaarchivos.upload()}" 
+                               class="btn-outline-success"/> 
+            </div>
+          </h:form>      
+          <h:form style="margin-top: -4.8%">
+            <h:commandButton value="Cancel" action="catalogoG" class="btn-outline-danger" 
+                             style="margin-left: 50%; width: 150px; height: 38px; font-size: 15pt"/>                   
+          </h:form>
+        </f:view>
+      </ui:define>
+    </ui:composition>
+  </h:body>
 </html>
