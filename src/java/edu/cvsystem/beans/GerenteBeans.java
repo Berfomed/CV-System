@@ -244,7 +244,6 @@ public class GerenteBeans implements Serializable {
 
   public String editarSolicitud(SolicitudCompraventa item) {
     solicitud = item;
-    solicitud.setRespuesta("Respondido");
 //        Mailler.enviarCorreo(solicitud.getTitulo(), "", usuario.getCorreoElectronico());
     return "respondercorreo";
   }
@@ -543,6 +542,15 @@ public class GerenteBeans implements Serializable {
     return consulta.getResultList();
   }
 
+  
+  public List<SolicitudCompraventa>listarEmpeños()
+  {
+      Query consulta = solicitudfacade.getEm().createQuery("SELECT s FROM SolicitudCompraventa s WHERE s.tipo = :tipo");
+      consulta.setParameter("tipo", "empeño");
+      List<SolicitudCompraventa> empeñados = consulta.getResultList();
+      return empeñados;
+      
+  }
   public List<ProductoEmpeno> listarEmpeñados() {
     Query consulta = productoempenofacade.getEm().createQuery("SELECT p FROM ProductoEmpeno p WHERE p.idCompraventa = :idCompraventa");
 

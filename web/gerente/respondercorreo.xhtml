@@ -23,7 +23,7 @@
                             <div id="cont_productos" align="center">                          
                             </div>
                             <div class="card-body">
-                                <h:graphicImage class="card-img-top" library="img" name="Request #{gerenteBeans.solicitud.fotos}"/>
+                              
                                 <h5 class="card-title font-weight-bold">#{gerenteBeans.solicitud.descripcion}</h5>                                   
                                 <p class="card-text">Precio:  $#{gerenteBeans.solicitud.precio}</p>  
                             </div>
@@ -45,6 +45,15 @@
                                         <h:outputText value="Message" style="margin-bottom: 1%"/>
                                         <h:inputTextarea value="#{gerenteBeans.solicitud.respuestaMsg}" style="height: 190px; width:100%;"/>
                                     </div>
+                                    <div class="col-10">
+                                        <h:outputText value="Estado" style="margin-bottom: 2%"/>
+                                        <h:selectOneMenu  class="form-control-sm col-12" value="#{gerenteBeans.solicitud.respuesta}" title="Categoria" required="true" requiredMessage="The description field is required">   
+                                            <f:selectItem itemValue="" itemLabel=""/>
+                                            <f:selectItem itemValue="Aceptado" itemLabel="Aceptado"/>
+                                            <f:selectItem itemValue="Rechazado" itemLabel="Rechazado"/>                                            
+                                        </h:selectOneMenu>
+                                    </div>
+
                                     <div class="modal-footer">
                                         <h:commandButton value="Cancel" action="solicitudes.xhtml" class="btn btn-outline-warning"/>
                                         <h:commandButton  value="Send" action="#{gerenteBeans.editarSolicitud()}" class="btn btn-outline-success"/>

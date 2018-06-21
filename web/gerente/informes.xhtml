@@ -16,65 +16,66 @@
                         <li class="breadcrumb-item active" aria-current="page">Pawns</li>
                     </ol>
                 </nav>
+           
                 <f:view>
-                    <h:form style="margin-top:5%">
-                        <h1><h:outputText value="Pawns Status" /></h1>
-                        <h:dataTable value="#{gerenteBeans.listarEmpeñados()}" var="item" style="width: 90%; margin-left: 5%">
+
+                    <div style="margin-left: 10%; margin-top: 5%">
+                    <h:form>
+                        <h1><h:outputText value="Pawns"/></h1>
+                        <h:dataTable value="#{gerenteBeans.listarEmpeños()}" var="item" style="width: 100%">
                             <h:column>
                                 <f:facet name="header">
-                                    <h:outputText value="Pawn Code"/>
+                                    <h:outputText value="Codigo"/>
                                 </f:facet>
-                                <h:outputText value="#{item.idProductoEmpeno}" style="margin-left: 20%"/>
+                                <h:outputText value="#{item.idSolicitudCompraventa}"/>
                             </h:column>
                             <h:column>
                                 <f:facet name="header">
-                                    <h:outputText value="Pawn Date"/>
+                                    <h:outputText value="Producto"/>
                                 </f:facet>
-                                <h:outputText value="#{item.fechaInicio}">
+                                <h:outputText value="#{item.titulo}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Categoria"/>
+                                </f:facet>
+                                <h:outputText value="#{item.categoria}"/>
+                            </h:column>
+                           
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Tipo"/>
+                                </f:facet>
+                                <h:outputText value="#{item.tipo}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Precio"/>
+                                </f:facet>
+                                <h:outputText value="#{item.precio}"/>
+                            </h:column>
+                            
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="FechaEnvio"/>
+                                </f:facet>
+                                <h:outputText value="#{item.fechaEnvio}">
                                     <f:convertDateTime pattern="MM/dd/yyyy" />
                                 </h:outputText>
                             </h:column>
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Date" style="margin-left: 20%"/>
-                                </f:facet>
-                                <h:outputText value="#{item.fechaFinal}">
-                                    <f:convertDateTime pattern="MM/dd/yyyy" />
-                                </h:outputText>
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Status"/>
-                                </f:facet>
-                                <h:outputText value="#{item.estado}"/>
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Price"/>
-                                </f:facet>
-                                <h:outputText value="#{item.precioapagar}"/>
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Tax"/>
-                                </f:facet>
-                                <h:outputText value="#{item.interes}"/>
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Pawn Days"/>
-                                </f:facet>
-                                <h:outputText value="#{item.dias}"/>
-                            </h:column>                           
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Customer"/>
-                                </f:facet>
-                                <h:outputText value="#{item.idUsuario.nombre}"/>
-                            </h:column>
+                          
+                        
                        
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="IdUsuario"/>
+                                </f:facet>
+                                <h:outputText value="#{item.idUsuario.apellido}"/>
+                            </h:column>
+                         
                         </h:dataTable>
                     </h:form>
+                        </div>
                 </f:view>
 
 <!--                <div style="margin-bottom: -300px">
