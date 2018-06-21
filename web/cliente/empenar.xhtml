@@ -45,18 +45,7 @@
                                 <f:selectItem itemValue="Watches" itemLabel="Watches"/>
                             </h:selectOneMenu>                  
                             <h:message for="category"/>
-                            
-                             <h:outputLabel value="Initial Date:" for="iDate" />
-                             <h:inputText id="iDate" value="#{solicitudVentaBean.empeno.fechaInicio}" title="Initial Date" required="true" requiredMessage="The Category field is required.">
-                              <f:convertDateTime pattern="yyyy-MM-dd"/>  
-                             </h:inputText>
-                            <h:message for="iDate"/>  
-                            
-                            <h:outputLabel value="Finall Date:" for="fDate" />
-                            <h:inputText id="fDate" value="#{solicitudVentaBean.empeno.fechaFinal}" title="Final Date" required="true" requiredMessage="The Category field is required.">
-                              <f:convertDateTime pattern="yyyy-MM-dd"/>  
-                             </h:inputText>
-                            <h:message for="fDate"/>  
+
 
                             <h:outputLabel value="Price:" for="price" class="form-group"/>
                             <h:inputText id="price" value="#{solicitudVentaBean.solicitud.precio}" title="Price" required="true" requiredMessage="The Price field is required."/>
